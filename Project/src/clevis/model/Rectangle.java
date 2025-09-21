@@ -3,6 +3,7 @@ package clevis.model;
 import java.util.Arrays;
 
 import static clevis.model.ComputingGeometry.eps;
+import static clevis.model.ComputingGeometry.sign;
 import static java.lang.Math.abs;
 
 public class Rectangle extends Shape{
@@ -24,10 +25,7 @@ public class Rectangle extends Shape{
         lines[2] = new Line(points[2], points[3]);
         lines[3] = new Line(points[3], points[0]);
     }
-    Rectangle(String _name, Point p, double _w, double _h) {
-        this(p,  _w, _h);
-        name = _name;
-    }
+    Rectangle(String _name, Point p, double _w, double _h) { this(p,  _w, _h); name = _name; }
     Rectangle(Rectangle o) {
         name = o.name;
         width = o.width;
@@ -36,6 +34,14 @@ public class Rectangle extends Shape{
         lines = Arrays.copyOf(o.lines, 4);
     }
     Rectangle(Rectangle o, String _name) { this(o); name = _name; }
+
+    boolean intersects(Line l) { return ComputingGeometry.intersects(l, this); }
+
+    boolean intersects(Rectangle o) { return ComputingGeometry.intersects(this, o); }
+
+    boolean intersects(Circle c) {
+        return  ComputingGeometry.intersects(this, c);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,11 +66,6 @@ public class Rectangle extends Shape{
             ret = ret + "\n" + lines[i].toString();
         }
         return ret;
-    }
-
-    @Override
-    public void printInfo() {
-        System.out.println(this.toString());
     }
 
     @Override
