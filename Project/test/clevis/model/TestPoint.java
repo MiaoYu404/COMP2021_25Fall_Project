@@ -1,7 +1,6 @@
 package clevis.model;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 import static com.google.common.truth.Truth.assertThat;
 
 public class TestPoint {
