@@ -4,6 +4,7 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 ## 要求（编辑中）：
 - 命令行交互（CLI）
 - 用户可以创建并编辑向量图形，包括线段、圆、矩形、正方形。
+- 所有的数字都是 `double`，输出时保留两位小数 2 decimal places。
 
 ### 启动
 1. 所有的指令需通过两个文件。
@@ -15,12 +16,13 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 
 ### 图形
 1. 你需要创建一个矩形 `n x y w h`
-
+    - 创建一个名称为 n 的矩形，top-left 角的坐标是 $(x, y)$，宽 $w$，高 $h$。
 2. 你需要创建一个线段 `line n x1 y1 x2 y2`
-
+    - 创建一个名称为 n 的线段，两端点分别是 $(x1, y1)$，$(x2, y2)$。
 3. 你需要创建一个圆 `circle n x y r`
-
+    - 创建一个名称为 n 的圆，圆心是 $(x, y)$，半径是 $r$。
 4. 你需要创建一个方形 `square n x y l`
+    - 创建一个名称是 n 的正方形，中心是 $(x, y)$，边长为 $l$。
 
 ### 工具
 
