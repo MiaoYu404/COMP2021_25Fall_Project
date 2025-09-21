@@ -5,6 +5,7 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 - 命令行交互（CLI）
 - 用户可以创建并编辑向量图形，包括线段、圆、矩形、正方形。
 - 所有的数字都是 `double`，输出时保留两位小数 2 decimal places。
+- 导入 COMP2021_PROJECT.xml 到 Intellij IDEA 以检查代码格式要求。
 
 ### 启动
 1. 所有的指令需通过两个文件。
@@ -27,6 +28,8 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 ### 工具
 
 1. 你需要实现为非空的图形集合创建一个组（group）。 `group n n1 n2`
+   - 相当于创建一个名为 "n" 的图形。
+   - 成员 n1, n2 等图形都**不能执行**操作 $3$ ~ $8$。
 2. 你需要实现将一个组解散（ungroup）。 `ungroup n`
 3. 你需要实现删除（delete）一个图形。 `delete n`
 4. 你需要实现计算一个图形的最小 boundingBox。 `boundingbox n`
