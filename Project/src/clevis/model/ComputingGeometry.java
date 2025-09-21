@@ -5,5 +5,9 @@ public class ComputingGeometry {
 
     public static int sign(double a) { return a < -eps ? -1 : ( a > eps ? 1 : 0); }
 
-    public static boolean intersection() { return false; }
+    public static boolean intersection() {
+        // TODO: write an intersection function can be used for any two shape;
+
+        return false;
+    }
 }
