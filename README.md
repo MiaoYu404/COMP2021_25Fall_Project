@@ -18,7 +18,7 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 1. 你需要创建一个矩形 `n x y w h`
     - 创建一个名称为 n 的矩形，top-left 角的坐标是 $(x, y)$，宽 $w$，高 $h$。
 2. 你需要创建一个线段 `line n x1 y1 x2 y2`
-    - 创建一个名称为 n 的线段，两端点分别是 $(x1, y1)$，$(x2, y2)$。
+    - 创建一个名称为 n 的线段，两端点分别是 $(x1, y1)$, $(x2, y2)$。
 3. 你需要创建一个圆 `circle n x y r`
     - 创建一个名称为 n 的圆，圆心是 $(x, y)$，半径是 $r$。
 4. 你需要创建一个方形 `square n x y l`
