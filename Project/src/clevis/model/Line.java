@@ -14,21 +14,34 @@ public class Line extends Shape{
     // return the direction of the vector
     Point direction() { return Points.minus(points[1], points[0]); }
 
-    // point is on the line ?
-    boolean include (Point p) {
-        return sign(direction().det(
-                Points.minus(p, points[0])
-        )) > 0;
+    double det(Line l) { return direction().det(l.direction()); }
+
+    Line reverse() { return new Line(points[1],  points[0]); }
+
+    boolean inside(Shape s) {
+        // TODO line inside any Shape
+        if (s instanceof Circle) {
+            return points[0].inside((Circle)s) &&  points[1].inside((Circle)s);
+        }
+        for (Point p : points) {
+            if (!p.inside(s)) return false;
+        }
+        return true;
+    }
+
+    boolean intersects(Line l) { return Lines.intersects(this, l); }
+    boolean intersects(Rectangle r) { return ComputingGeometry.intersects(this, r); }
+    boolean intersects(Circle c) { return ComputingGeometry.intersects(this, c); }
+
+    @Override
+    public boolean equals(Object o) {
+        // TODO: two identical line to be equal.
+        return false;
     }
 
     @Override
     public String toString() {
         return points[0].toString() + " -> " + points[1].toString();
-    }
-
-    @Override
-    public void printInfo() {
-        System.out.println(this);
     }
 
     @Override
