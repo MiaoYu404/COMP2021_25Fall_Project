@@ -1,27 +1,84 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.eps;
+import static clevis.model.ComputingGeometry.EPS;
 import static clevis.model.ComputingGeometry.sign;
 
+/**
+ * class of Point
+ */
 public class Point {
-    double x, y;
+    private double x, y;
 
-    Point() { this(0.0, 0.0); }
-    Point(double _x, double _y) { this.x = _x; this.y = _y; }
-    Point(Point _point) { this.x = _point.x; this.y = _point.y; }
+    /**
+     * construct with no parameter
+     */
+    Point() { }
 
-    // add
-    void add(Point p) { add(p.x, p.y); }
-    void add(double _x, double _y) { x += _x; y += _y; }
+    /**
+     * @param _x x coordinate
+     * @param _y y coordinate
+     */
+    Point(double _x, double _y) {
+        this.x = _x;
+        this.y = _y;
+    }
 
-    // minus
-    void minus(Point p) { minus(p.x, p.y); }
-    void minus(double _x, double _y) { x -= _x; y -= _y; }
+    /**
+     * @param _point Point need to be copied.
+     */
+    Point(Point _point) {
+        this.x = _point.x();
+        this.y = _point.y();
+    }
 
-    // multiply by #
+    /**
+     * return the value of x
+     * @return x coordinate of this point.
+     */
+    public double x() {return x; }
+
+    /**
+     * return the value of y
+     * @return y coordinate of this point.
+     */
+    public double y() { return y; }
+
+    /**
+     * add this point by a vector.
+     * @param p vector
+     */
+    void add(Point p) { add(p.x(), p.y()); }
+
+    /**
+     * add this point by a vector (represented by two values)
+     * @param dx change in x
+     * @param dy change in y
+     */
+    void add(double dx, double dy) { x += dx; y += dy; }
+
+    /**
+     * reduce this point by a vector.
+     * @param p vector
+     */
+    void minus(Point p) { minus(p.x(), p.y()); }
+
+    /**
+     * reduce this point by a vector (represented by two values)
+     * @param dx change in x
+     * @param dy change in y
+     */
+    void minus(double dx, double dy) { x -= dx; y -= dy; }
+
+    /**
+     * multiply this point by a constant.
+     * @param c constant
+     */
     void multiply(double c) { x *= c; y *= c; }
 
-    // divide by #
+    /**
+     * divide this point by a constant.
+     * @param c constant
+     */
     void divide(double c) {
         if (c == 0.0) throw new ArithmeticException("Division by zero.");
         x /= c; y /= c;
@@ -32,49 +89,62 @@ public class Point {
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Point p) {
-            return Math.abs(x - p.x) < eps && Math.abs(y - p.y) < eps;
+            return Math.abs(x - p.x()) < EPS && Math.abs(y - p.y()) < EPS;
         }
         return false;
     }
 
-    // dot product
-    double dot(Point p) { return x * p.x + y * p.y; }
+    /**
+     * calculate dot product with other vector
+     * @param p other vector
+     * @return the dot product
+     */
+    double dot(Point p) { return x * p.x() + y * p.y(); }
 
-    // det product
-    double det(Point p) { return x * p.y - y * p.x; }
+    /**
+     * calculate det product with other vector
+     * @param p other product
+     * @return the det product
+     */
+    double det(Point p) { return x * p.y() - y * p.x(); }
 
-    // return the distance from this point to point p;
+    /**
+     * distance between two points.
+     * @param p other point
+     * @return the distance
+     */
     double distance(Point p) { return Points.minus(this, p).abs(); }
 
-    // abs from origin
+    /**
+     * @return absolute value of the distance of the vector pointing origin.
+     */
     double abs() { return Math.sqrt(abs2()); }
+
+    /**
+     * @return square of value of the distance of the vector pointing origin.
+     */
     double abs2() { return x * x + y * y; }
 
+    /**
+     * @param l the line
+     * @return whether the point is on the given line.
+     */
     boolean onSegment(Line l) {
-        Point p1 = l.points[0], p2 = l.points[1];
+        Point p1 = l.from(), p2 = l.to();
         return sign(Points.minus(p1, this).det(Points.minus(p2, this))) == 0
-                && sign((p1.x - this.x) * (p2.x - this.x)) <= 0
-                && sign((p1.y - this.y) * (p2.y - this.y)) <= 0;
+                && sign((p1.x() - x) * (p2.x() - x)) <= 0
+                && sign((p1.y() - y) * (p2.y() - y)) <= 0;
     }
 
+    /**
+     * @param s shape
+     * @return whether the point is inside the shape.
+     */
     boolean inside(Shape s) {
-        if (s instanceof Circle c) {
-            return sign(Points.minus(c.points[0], this).abs() - c.r) <= 0;
-        }
-        double angle = 0;
-        Point p1, p2; Point v1, v2;
-        for (int i = 0, j = s.points.length - 1; i < s.points.length; j = i++) {
-            p1 = s.points[i]; p2 = s.points[j];
-            if (onSegment(new Line(p1, p2))) return true;
-
-            v1 = Points.minus(p1, this);
-            v2 = Points.minus(p2, this);
-            double res = Math.atan2(v2.y, v2.x) - Math.atan2(v1.y, v1.x);
-            res = Math.abs(res);
-            if (sign(res - Math.PI) > 0) res = 2 * Math.PI - res;
-            angle += res;
-        }
-        return sign(2 * Math.PI - angle) == 0;
+        Rectangle bb = (Rectangle) s.boundingBox();
+        double minX = bb.points()[1].x(), minY = bb.points()[1].y();
+        double maxX = bb.points()[3].x(), maxY = bb.points()[3].y();
+        return sign(x - minX) >= 0 && sign(maxX - x) >= 0 && sign(y - minY) >= 0 && sign(maxY - y) >= 0;
     }
 
     @Override
@@ -82,10 +152,14 @@ public class Point {
         return "(" +  x + "," + y + ")";
     }
 
-    // rotate 90 degree anticlockwise
+    /**
+     * @return return a point which can be got from rotate this point by 90 degree anticlockwise.
+     */
     Point rot90() { return new Point(-y, x); }
 
-    // unit vector
+    /**
+     * @return unit vector of the this.
+     */
     Point unit() {
         Point p = new Point();
         p.divide(p.abs());

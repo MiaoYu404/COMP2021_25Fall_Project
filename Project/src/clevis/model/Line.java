@@ -2,36 +2,91 @@ package clevis.model;
 
 import static clevis.model.ComputingGeometry.sign;
 
-public class Line extends Shape{
+/**
+ * class of Line
+ */
+public class Line implements Shape{
+    private String name;
+    private Point from, to;
 
+    /**
+     * construct with no parameter
+     */
     Line() { }
-    Line(Point from, Point to) {
-        points = new Point[]{from, to};
+
+    /**
+     * @param _from point from
+     * @param _to point to
+     */
+    Line(Point _from, Point _to) {
+        from = new Point(_from);
+        to = new Point(_to);
     }
-    Line(String _name, Point from, Point to) { this(from, to); name = _name; }
-    Line(Line o) { this(o.name, o.points[0], o.points[1]); }
 
-    // return the direction of the vector
-    Point direction() { return Points.minus(points[1], points[0]); }
+    /**
+     * @param _name name of the line
+     * @param _from point from
+     * @param _to point to
+     */
+    Line(String _name, Point _from, Point _to) {
+        this(_from, _to);
+        name = _name;
+    }
 
+    /**
+     * @param o Line need to be copied
+     */
+    Line(Line o) {
+        this(o.name(), o.from(), o.to());
+    }
+
+    /**
+     * @return name.
+     */
+    String name() { return name; }
+
+    /**
+     * @return from point
+     */
+    Point from() { return new Point(from); }
+
+    /**
+     * @return to point
+     */
+    Point to() { return to; }
+
+    /**
+     * @return Direction vector of the line.
+     */
+    Point direction() { return Points.minus(to, from); }
+
+    /**
+     * @param l the other line.
+     * @return det product
+     */
     double det(Line l) { return direction().det(l.direction()); }
 
-    Line reverse() { return new Line(points[1],  points[0]); }
+    /**
+     * @return vector in reverse direction
+     */
+    Line reverse() { return new Line(to, from); }
 
+    /**
+     * @param s shape
+     * @return whether line is inside the shape's bounding box.
+     */
     boolean inside(Shape s) {
         // TODO line inside any Shape
-        if (s instanceof Circle) {
-            return points[0].inside((Circle)s) &&  points[1].inside((Circle)s);
-        }
-        for (Point p : points) {
-            if (!p.inside(s)) return false;
-        }
-        return true;
+        return from.inside(s) && to.inside(s);
     }
 
-    boolean intersects(Line l) { return Lines.intersects(this, l); }
-    boolean intersects(Rectangle r) { return ComputingGeometry.intersects(this, r); }
-    boolean intersects(Circle c) { return ComputingGeometry.intersects(this, c); }
+    /**
+     * @param s other shape
+     * @return whether intersects
+     */
+    public boolean intersects(Shape s) {
+        return ComputingGeometry.intersects(this, s);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -41,14 +96,19 @@ public class Line extends Shape{
 
     @Override
     public String toString() {
-        return points[0].toString() + " -> " + points[1].toString();
+        return from.toString() + " -> " + to.toString();
+    }
+
+    @Override
+    public void move(double dx, double dy) {
+
     }
 
     @Override
     public Rectangle boundingBox() {
-        Point topLeft = new Point(Math.min(points[0].x, points[1].x), Math.max(points[0].y, points[1].y));
-        double width = Math.abs(points[0].x - points[1].x);
-        double height = Math.abs(points[0].y - points[1].y);
+        Point topLeft = new Point(Math.min(from.x(), to.x()), Math.max(from.y(), to.y()));
+        double width = Math.abs(from.x() - to.x());
+        double height = Math.abs(from.y() - to.y());
         String bbName = "Bounding Box of '" + name + "'";
         return new Rectangle(bbName, topLeft, width, height);
     }

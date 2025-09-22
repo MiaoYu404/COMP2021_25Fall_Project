@@ -2,42 +2,97 @@ package clevis.model;
 
 import static clevis.model.ComputingGeometry.sign;
 
-public class Circle extends Shape{
-    public double r;
+/**
+ * class of Circle.
+ */
+public class Circle implements Shape{
+    private String name;
+    private Point center;
+    private double r;
 
-    Circle() { this(new Point(0, 0), 1); }
+    /**
+     * construct with no parameters
+     */
+    Circle() {
+        this(new Point(0, 0), 1);
+    }
+
+    /**
+     * @param _center center point of the circle
+     * @param _r radius of the circle
+     * Create a circle with center `_center` and radius of `_r`.
+     */
     Circle(Point _center, double _r) {
-        points = new Point[]{_center};
+        center = new Point(_center);
         r = _r;
     }
+
+    /**
+     * @param _name name of the circle
+     * @param _center center point of the circle
+     * @param _r radius of the circle
+     */
     Circle(String _name, Point _center, double _r) {
         this(_center, _r);
         name = _name;
     }
+
+    /**
+     * @param o circle need to be copied;
+     * Construct with a given circle. Make a copy of the given circle.
+     */
     Circle(Circle o) {
-        this(o.name, o.points[0], o.r);
+        this(o.name(), o.center(), o.r());
     }
 
-    boolean intersects(Line l) { return ComputingGeometry.intersects(l, this); }
-    boolean intersects(Rectangle r) { return  ComputingGeometry.intersects(r, this); }
-    boolean intersects(Circle o) { return ComputingGeometry.intersects(o, this); }
+    /**
+     * @return name
+     */
+    public String name() { return name; }
+
+    /**
+     * @return center point.
+     */
+    public Point center() { return center; }
+
+    /**
+     * @return r, raidus
+     */
+    public double r() { return r; }
+
+    /**
+     * @param s other shape
+     * @return whether intersects
+     */
+    public boolean intersects(Shape s) {
+        return ComputingGeometry.intersects(this, s);
+    }
 
     @Override
     public boolean equals(Object o) {
-        // TODO: two identical circle to be equal.
+        if (o == this) return true;
+        if (o == null) return false;
+        if (o instanceof Circle c) {
+            return sign(r - c.r()) == 0 && center.equals(c.center());
+        }
         return false;
     }
 
     @Override
     public String toString() {
         String rsl = "\"" + name + "\"<Circle>:";
-        rsl += "\nCenter:" + points[0] + "\nRadius:" + r;
+        rsl += "\nCenter:" + center + "\nRadius:" + r;
         return rsl;
+    }
+
+    @Override
+    public void move(double dx, double dy) {
+        center.add(dx, dy);
     }
 
     @Override
     public Rectangle boundingBox() {
         String bbName = "Bounding Box of '" + name + "'";
-        return new Rectangle(bbName, Points.add(points[0], new Point(r * -1, r)), r * 2, r * 2);
+        return new Rectangle(bbName, Points.add(center, new Point(r * -1, r)), r * 2, r * 2);
     }
 }
