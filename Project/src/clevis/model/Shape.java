@@ -1,28 +1,26 @@
 package clevis.model;
 
-public class Shape {
-    String name = "(untitled)";
-    Point[] points;
-    Line[] lines;
+/**
+ * class of Shape
+ */
+public interface Shape {
+    /**
+     * this method is not supported by Shape
+     * @param dx change in x
+     * @param dy change in y
+     */
+    void move(double dx, double dy);
 
-    public void move(double dx, double dy) {
-        for (Point p : points) { p.add(dx, dy); }
-        for (Line l : lines) { l.move(dx, dy); }
-    }
+    /**
+     * this method is not supported by Shape
+     * @return the bounding box of the shape.
+     */
+    Shape boundingBox();
 
-    // print the info of this shape
-    public void printInfo() {
+    /**
+     * print infomation about this shape.
+     */
+    default void printInfo() {
         System.out.println(this);
-    }
-
-    // output a boundingBox
-    public Rectangle boundingBox() {
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        String ret = "\"" + name + "\"<NO TYPE>";
-        return ret;
     }
 }
