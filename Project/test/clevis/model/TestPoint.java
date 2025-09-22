@@ -19,14 +19,14 @@ public class TestPoint {
         try {
             assertThat(Points.divide(p1, 0));
         } catch (ArithmeticException e) {
-
+            // nothing here.
         }
     }
 
     @Test
     public void testEps() {
         Point p1 = new Point(-1.0, 0.0);
-        System.out.println("Test 1 cmp to " + new Point(-0.49999999999, 0.0).toString() + ".");
+        System.out.println("Test 1 cmp to " + new Point(-0.49999999999, 0.0) + ".");
         Point rsl = Points.minus( Points.divide(p1, 2), new Point(-0.49999999999, 0.0));
         System.out.println("Calculation result is x: " + rsl.x() + ", y: " + rsl.y() + ".");
         assertThat(Points.divide(p1, 2)).isEqualTo(new Point(-0.49999999999, 0.0));

@@ -2,9 +2,24 @@ package clevis.model;
 
 import java.util.Arrays;
 
+/**
+ * class of Square
+ */
 public class Square extends Rectangle {
+    private String name;
     private double width, height;
+    private Point[] points;
+    private Line[] lines;
+
+    /**
+     * construct without parameter
+     */
     Square() { this(new Point(0, 0), 1); }
+
+    /**
+     * @param p mid-point
+     * @param _side side length
+     */
     Square(Point p, double _side) {
         width = height = _side;
 
@@ -20,15 +35,39 @@ public class Square extends Rectangle {
         lines[2] = new Line(points[2], points[3]);
         lines[3] = new Line(points[3], points[0]);
     }
-    Square(String _name, Point p, double _side) { this(p, _side); name = _name; }
-    Square(Square o) {
-        name = o.name;
-        width = height = o.width();
 
-        points = Arrays.copyOf(o.points, 4);
-        lines = Arrays.copyOf(o.lines, 4);
+    /**
+     * @param _name name
+     * @param p mid-point
+     * @param _side side length
+     */
+    Square(String _name, Point p, double _side) {
+        this(p, _side);
+        name = _name;
     }
+
+    /**
+     * make a copy
+     * @param o square need to be copied.
+     */
+    Square(Square o) {
+        name = o.name();
+        width = height = o.side();
+
+        points = Arrays.copyOf(o.points(), 4);
+        lines = Arrays.copyOf(o.lines(), 4);
+    }
+
+    /**
+     * @param o square need to be copied
+     * @param _name name
+     */
     Square(Square o, String _name) { this(o); name = _name; }
+
+    /**
+     * @return side;
+     */
+    public double side() { return width; }
 
     @Override
     public String toString() {

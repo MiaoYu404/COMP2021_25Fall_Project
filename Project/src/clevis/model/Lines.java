@@ -2,13 +2,21 @@ package clevis.model;
 
 import static clevis.model.ComputingGeometry.sign;
 
+/**
+ * functions between lines.
+ */
 public class Lines {
 
+    /**
+     * @param l1 line 1
+     * @param l2 line 2
+     * @return whether two lines intersects
+     */
     public static boolean intersects (Line l1, Line l2) {
-        double x1 = l1.points[0].x(), y1 = l1.points[0].y();
-        double x2 = l1.points[1].x(), y2 = l1.points[1].y();
-        double x3 = l2.points[0].x(), y3 = l2.points[0].y();
-        double x4 = l2.points[1].x(), y4 = l2.points[1].y();
+        double x1 = l1.from().x(), y1 = l1.from().y();
+        double x2 = l1.to().x(), y2 = l1.to().y();
+        double x3 = l2.from().x(), y3 = l2.from().y();
+        double x4 = l2.to().x(), y4 = l2.to().y();
         if (Double.max(x1, x2) < Double.min(x3, x4)
                 || Double.max(y1, y2) < Double.min(y3, y4)
                 || Double.max(x3, x4) < Double.min(x1, x2)

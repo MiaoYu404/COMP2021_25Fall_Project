@@ -37,6 +37,7 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 6. 你需要实现找到最顶上的图形。 `shapeAt x y`
    - 图形根据渲染的顺序会有叠加关系。对于一个坐标 $x, y$，请输出在这一点最顶上的图形。
 7. 你需要判断两个图形是否相交。 `intersect n1 n2`
+   - 相交取决于两图形的 bounding box 是否有重合部分。
 8. 它可以列出图形的基本信息。 `list n`
 9. 它可以列出目前已绘制的所有图形。 `listAll`
 10. 用户可以退出 CLEVIS。`quit`
