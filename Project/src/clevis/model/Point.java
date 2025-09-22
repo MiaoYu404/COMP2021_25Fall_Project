@@ -1,21 +1,23 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.eps;
+import static clevis.model.ComputingGeometry.EPS;
 import static clevis.model.ComputingGeometry.sign;
 
 public class Point {
-    double x, y;
+    private double x, y;
 
     Point() { this(0.0, 0.0); }
     Point(double _x, double _y) { this.x = _x; this.y = _y; }
-    Point(Point _point) { this.x = _point.x; this.y = _point.y; }
+    Point(Point _point) { this.x = _point.x(); this.y = _point.y(); }
 
+    public double x() { return x; }
+    public double y() { return y; }
     // add
-    void add(Point p) { add(p.x, p.y); }
+    void add(Point p) { add(p.x(), p.y()); }
     void add(double _x, double _y) { x += _x; y += _y; }
 
     // minus
-    void minus(Point p) { minus(p.x, p.y); }
+    void minus(Point p) { minus(p.x(), p.y()); }
     void minus(double _x, double _y) { x -= _x; y -= _y; }
 
     // multiply by #
@@ -32,16 +34,16 @@ public class Point {
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Point p) {
-            return Math.abs(x - p.x) < eps && Math.abs(y - p.y) < eps;
+            return Math.abs(x - p.x()) < EPS && Math.abs(y - p.y()) < EPS;
         }
         return false;
     }
 
     // dot product
-    double dot(Point p) { return x * p.x + y * p.y; }
+    double dot(Point p) { return x * p.x() + y * p.y(); }
 
     // det product
-    double det(Point p) { return x * p.y - y * p.x; }
+    double det(Point p) { return x * p.y() - y * p.x(); }
 
     // return the distance from this point to point p;
     double distance(Point p) { return Points.minus(this, p).abs(); }
@@ -53,13 +55,13 @@ public class Point {
     boolean onSegment(Line l) {
         Point p1 = l.points[0], p2 = l.points[1];
         return sign(Points.minus(p1, this).det(Points.minus(p2, this))) == 0
-                && sign((p1.x - this.x) * (p2.x - this.x)) <= 0
-                && sign((p1.y - this.y) * (p2.y - this.y)) <= 0;
+                && sign((p1.x() - x) * (p2.x() - x)) <= 0
+                && sign((p1.y() - y) * (p2.y() - y)) <= 0;
     }
 
     boolean inside(Shape s) {
         if (s instanceof Circle c) {
-            return sign(Points.minus(c.points[0], this).abs() - c.r) <= 0;
+            return sign(Points.minus(c.points[0], this).abs() - c.r()) <= 0;
         }
         double angle = 0;
         Point p1, p2; Point v1, v2;
@@ -69,7 +71,7 @@ public class Point {
 
             v1 = Points.minus(p1, this);
             v2 = Points.minus(p2, this);
-            double res = Math.atan2(v2.y, v2.x) - Math.atan2(v1.y, v1.x);
+            double res = Math.atan2(v2.y(), v2.x()) - Math.atan2(v1.y(), v1.x());
             res = Math.abs(res);
             if (sign(res - Math.PI) > 0) res = 2 * Math.PI - res;
             angle += res;

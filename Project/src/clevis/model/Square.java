@@ -3,6 +3,7 @@ package clevis.model;
 import java.util.Arrays;
 
 public class Square extends Rectangle {
+    private double width, height;
     Square() { this(new Point(0, 0), 1); }
     Square(Point p, double _side) {
         width = height = _side;
@@ -22,7 +23,7 @@ public class Square extends Rectangle {
     Square(String _name, Point p, double _side) { this(p, _side); name = _name; }
     Square(Square o) {
         name = o.name;
-        width = height = o.width;
+        width = height = o.width();
 
         points = Arrays.copyOf(o.points, 4);
         lines = Arrays.copyOf(o.lines, 4);

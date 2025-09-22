@@ -5,20 +5,22 @@ public class Shape {
     Point[] points;
     Line[] lines;
 
+    public String name() { return name;}
+    public Point[] points() { return points; }
+    public Line[] lines() { return lines; }
+
     public void move(double dx, double dy) {
         for (Point p : points) { p.add(dx, dy); }
         for (Line l : lines) { l.move(dx, dy); }
     }
 
-    // print the info of this shape
-    public void printInfo() {
-        System.out.println(this);
-    }
+    /**
+     * print the info of this shape
+     */
+    public void printInfo() { System.out.println(this); }
 
     // output a boundingBox
-    public Rectangle boundingBox() {
-        return null;
-    }
+    public Rectangle boundingBox() { return null; }
 
     @Override
     public String toString() {

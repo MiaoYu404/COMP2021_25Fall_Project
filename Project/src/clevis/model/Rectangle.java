@@ -2,12 +2,11 @@ package clevis.model;
 
 import java.util.Arrays;
 
-import static clevis.model.ComputingGeometry.eps;
-import static clevis.model.ComputingGeometry.sign;
+import static clevis.model.ComputingGeometry.EPS;
 import static java.lang.Math.abs;
 
 public class Rectangle extends Shape{
-    double width, height;
+    private double width, height;
 
     Rectangle() { this(new Point(-0.5, 0.5), 1.0, 1.0); }
     Rectangle(Point p, double _w, double _h) {
@@ -28,12 +27,15 @@ public class Rectangle extends Shape{
     Rectangle(String _name, Point p, double _w, double _h) { this(p,  _w, _h); name = _name; }
     Rectangle(Rectangle o) {
         name = o.name;
-        width = o.width;
-        height = o.height;
+        width = o.width();
+        height = o.height();
         points = Arrays.copyOf(o.points, 4);
         lines = Arrays.copyOf(o.lines, 4);
     }
     Rectangle(Rectangle o, String _name) { this(o); name = _name; }
+
+    double width() { return width; }
+    double height() { return height; }
 
     boolean intersects(Line l) { return ComputingGeometry.intersects(l, this); }
 
@@ -48,7 +50,7 @@ public class Rectangle extends Shape{
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Rectangle r) {
-            return abs(width - r.width) < eps && abs(height - r.height) < eps && points[0].equals(r.points[0]);
+            return abs(width - r.width()) < EPS && abs(height - r.height()) < EPS && points[0].equals(r.points[0]);
         }
         return false;
     }

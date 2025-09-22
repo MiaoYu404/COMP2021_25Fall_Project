@@ -3,7 +3,6 @@ package clevis.model;
 import static clevis.model.ComputingGeometry.sign;
 
 public class Line extends Shape{
-
     Line() { }
     Line(Point from, Point to) {
         points = new Point[]{from, to};
@@ -20,8 +19,8 @@ public class Line extends Shape{
 
     boolean inside(Shape s) {
         // TODO line inside any Shape
-        if (s instanceof Circle) {
-            return points[0].inside((Circle)s) &&  points[1].inside((Circle)s);
+        if (s instanceof Circle c) {
+            return points[0].inside(c) &&  points[1].inside(c);
         }
         for (Point p : points) {
             if (!p.inside(s)) return false;
@@ -46,9 +45,9 @@ public class Line extends Shape{
 
     @Override
     public Rectangle boundingBox() {
-        Point topLeft = new Point(Math.min(points[0].x, points[1].x), Math.max(points[0].y, points[1].y));
-        double width = Math.abs(points[0].x - points[1].x);
-        double height = Math.abs(points[0].y - points[1].y);
+        Point topLeft = new Point(Math.min(points[0].x(), points[1].x()), Math.max(points[0].y(), points[1].y()));
+        double width = Math.abs(points[0].x() - points[1].x());
+        double height = Math.abs(points[0].y() - points[1].y());
         String bbName = "Bounding Box of '" + name + "'";
         return new Rectangle(bbName, topLeft, width, height);
     }

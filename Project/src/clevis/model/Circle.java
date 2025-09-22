@@ -3,7 +3,7 @@ package clevis.model;
 import static clevis.model.ComputingGeometry.sign;
 
 public class Circle extends Shape{
-    public double r;
+    private double r;
 
     Circle() { this(new Point(0, 0), 1); }
     Circle(Point _center, double _r) {
@@ -15,13 +15,14 @@ public class Circle extends Shape{
         name = _name;
     }
     Circle(Circle o) {
-        this(o.name, o.points[0], o.r);
+        this(o.name, o.points[0], o.r());
     }
 
     boolean intersects(Line l) { return ComputingGeometry.intersects(l, this); }
     boolean intersects(Rectangle r) { return  ComputingGeometry.intersects(r, this); }
     boolean intersects(Circle o) { return ComputingGeometry.intersects(o, this); }
 
+    public double r() { return r; }
     @Override
     public boolean equals(Object o) {
         // TODO: two identical circle to be equal.

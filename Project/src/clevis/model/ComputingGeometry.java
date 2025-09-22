@@ -3,9 +3,17 @@ package clevis.model;
 import static java.lang.Math.min;
 
 public class ComputingGeometry {
-    public static double eps = 1e-9;
+    /**
+     * Machine epsilon, the smallest positive floating-point number that represents the gap between 1 and the next
+     * representable floating-point number.
+     */
+    public static final double EPS = 1e-9;
 
-    public static int sign(double a) { return a < -eps ? -1 : ( a > eps ? 1 : 0); }
+    /**
+     * @param val the number need to be sign.
+     * @return -1 if the number is smaller than 0.0; 1 if greater than 0.0; 0 if equals to 0.0.
+     */
+    public static int sign(double val) { return val < -EPS ? -1 : ( val > EPS ? 1 : 0); }
 
     public static boolean intersects(Line l1, Line l2) {
         return Lines.intersects(l1, l2);
@@ -34,7 +42,7 @@ public class ComputingGeometry {
         distance = min(distance, uC.abs());
         distance = min(distance, vC.abs());
 
-        return sign(distance - c.r) <= 0;
+        return sign(distance - c.r()) <= 0;
     }
 
     public static boolean intersects(Rectangle r1, Rectangle r2) {
@@ -53,6 +61,6 @@ public class ComputingGeometry {
     }
 
     public static boolean intersects(Circle c1, Circle c2) {
-        return sign(Points.minus(c1.points[0], c2.points[0]).abs() - c1.r - c2.r) <= 0;
+        return sign(Points.minus(c1.points[0], c2.points[0]).abs() - c1.r() - c2.r()) <= 0;
     }
 }
