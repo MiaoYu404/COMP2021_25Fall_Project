@@ -14,6 +14,8 @@ public class Rectangle implements Shape{
     private Point[] points;
     private Line[] lines;
 
+    private Shape father;
+
     /**
      * construct with no parameter;
      */
@@ -92,6 +94,17 @@ public class Rectangle implements Shape{
     public Line[] lines() { return Arrays.copyOf(lines, 4); }
 
     /**
+     * @return father shape
+     */
+    public Shape father() { return father; }
+
+    /**
+     * set father shape
+     * @param _father new father
+     */
+    public void setFather(Shape _father) { father = _father; }
+
+    /**
      * @return minX
      */
     public double minX() { return points[1].x(); }
@@ -124,7 +137,10 @@ public class Rectangle implements Shape{
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Rectangle r) {
-            return abs(width - r.width()) < EPS && abs(height - r.height()) < EPS && points[0].equals(r.points()[0]);
+            return abs(width - r.width()) < EPS
+                    && abs(height - r.height()) < EPS
+                    && points[0].equals(r.points()[0])
+                    && name.equals(r.name());
         }
         return false;
     }
@@ -146,7 +162,12 @@ public class Rectangle implements Shape{
 
     @Override
     public void move(double dx, double dy) {
-
+        for (Point p : points) {
+            p.add(dx, dy);
+        }
+        for (Line l : lines) {
+            l.move(dx, dy);
+        }
     }
 
     @Override

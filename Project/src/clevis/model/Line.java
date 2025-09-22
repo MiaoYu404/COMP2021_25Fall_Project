@@ -9,6 +9,8 @@ public class Line implements Shape{
     private String name;
     private Point from, to;
 
+    private Shape father;
+
     /**
      * construct with no parameter
      */
@@ -56,6 +58,17 @@ public class Line implements Shape{
     Point to() { return to; }
 
     /**
+     * @return father shape
+     */
+    public Shape father() { return father; }
+
+    /**
+     * set father shape
+     * @param _father new father
+     */
+    public void setFather(Shape _father) { father = _father; }
+
+    /**
      * @return Direction vector of the line.
      */
     Point direction() { return Points.minus(to, from); }
@@ -90,7 +103,11 @@ public class Line implements Shape{
 
     @Override
     public boolean equals(Object o) {
-        // TODO: two identical line to be equal.
+        if (this == o) return true;
+        if (o == null) return false;
+        if (o instanceof Line l) {
+            return from.equals(l.from()) && to.equals(l.to()) && name.equals(l.name());
+        }
         return false;
     }
 
@@ -101,7 +118,8 @@ public class Line implements Shape{
 
     @Override
     public void move(double dx, double dy) {
-
+        // TODO: move
+        from.add(dx, dy); to.add(dx, dy);
     }
 
     @Override

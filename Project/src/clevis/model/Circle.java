@@ -10,6 +10,8 @@ public class Circle implements Shape{
     private Point center;
     private double r;
 
+    private Shape father;
+
     /**
      * construct with no parameters
      */
@@ -61,6 +63,17 @@ public class Circle implements Shape{
     public double r() { return r; }
 
     /**
+     * @return father shape
+     */
+    public Shape father() { return father; }
+
+    /**
+     * set father shape
+     * @param _father new father
+     */
+    public void setFather(Shape _father) { father = _father; }
+
+    /**
      * @param s other shape
      * @return whether intersects
      */
@@ -73,7 +86,7 @@ public class Circle implements Shape{
         if (o == this) return true;
         if (o == null) return false;
         if (o instanceof Circle c) {
-            return sign(r - c.r()) == 0 && center.equals(c.center());
+            return sign(r - c.r()) == 0 && center.equals(c.center()) && name.equals(c.name());
         }
         return false;
     }
