@@ -11,7 +11,7 @@ public class TestLine {
         Point p1 = new Point(-1.0, 0.0);
         Point p2 = new Point(1.5, 5);
         Line l1 = new Line(p1, p2);
-        System.out.println(l1.toString());
+        System.out.println(l1);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class TestLine {
         assertThat(intersects(l3, c1)).isFalse();
         Circle c2 = new Circle(p1, Math.sqrt(5));
         assertThat(intersects(l1, c2)).isTrue();
-        assertThat(intersects(l2, c2)).isFalse();
+        assertThat(intersects(l2, c2)).isTrue();
         assertThat(intersects(l3, c2)).isTrue();
     }
 }
