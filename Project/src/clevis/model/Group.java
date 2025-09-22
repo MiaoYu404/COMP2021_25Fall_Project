@@ -9,13 +9,6 @@ public class Group implements Shape{
     private String name;
     private Shape[] shapes;
 
-    /**
-     *
-     */
-    public void ungroup() {
-        // TODO: ungroup
-    }
-
     @Override
     public void move(double dx, double dy) {
         for (Shape s : shapes) {
