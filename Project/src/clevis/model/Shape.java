@@ -5,6 +5,26 @@ package clevis.model;
  */
 public interface Shape {
     /**
+     * @return name of the shape
+     */
+    public String name();
+
+    /**
+     * @return father pointer
+     */
+    Shape getFather();
+
+    /**
+     * @param _shape new father
+     */
+    void setFather(Shape _shape);
+
+    /**
+     * @return whether this shape have father.
+     */
+    boolean haveFather();
+
+    /**
      * this method is not supported by Shape
      * @param dx change in x
      * @param dy change in y
