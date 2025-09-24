@@ -32,12 +32,18 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
    - 成员 n1, n2 等图形都**不能执行**操作 $3$ ~ $8$。
 2. 你需要实现将一个组解散（ungroup）。 `ungroup n`
 3. 你需要实现删除（delete）一个图形。 `delete n`
+   - 如果要删除的是一个 group，他**所有的成员**也将被删除。
 4. 你需要实现计算一个图形的最小 boundingBox。 `boundingbox n`
+   - 以 "x, y, w, h" 的格式输出。如矩形定义那样。
 5. 你需要实现移动一个图形。 `move n dx dy`
 6. 你需要实现找到最顶上的图形。 `shapeAt x y`
    - 图形根据渲染的顺序会有叠加关系。对于一个坐标 $x, y$，请输出在这一点最顶上的图形。
+   - 对于一个点 $(x, y)$，如果它在一个图形外，并且距离其外边框的最短距离 $\le 0.05$，则称它被该图形覆盖，可以作为 shapeAt 的输出。
+      - 对于一个 group，其外边框为所有成员图形的外边框。
 7. 你需要判断两个图形是否相交。 `intersect n1 n2`
-   - 相交取决于两图形的 bounding box 是否有重合部分。
+   - 相交取决于两图形的最小 bounding box 是否有重合部分。
 8. 它可以列出图形的基本信息。 `list n`
+   - 需包含构建该图形所用的所有信息。
 9. 它可以列出目前已绘制的所有图形。 `listAll`
+   - 以图层顺序从最前到最后。
 10. 用户可以退出 CLEVIS。`quit`
