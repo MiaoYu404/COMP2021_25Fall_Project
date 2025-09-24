@@ -48,7 +48,7 @@ public class Rectangle implements Shape{
      * @param _w width
      * @param _h height
      */
-    Rectangle(String _name, Point p, double _w, double _h) { this(p,  _w, _h); name = _name; }
+    public Rectangle(String _name, Point p, double _w, double _h) { this(p,  _w, _h); name = _name; }
 
     /**
      * @param o rectangle need to be copied.
@@ -71,6 +71,7 @@ public class Rectangle implements Shape{
     /**
      * @return name
      */
+    @Override
     public String name() { return name; }
 
     /**
@@ -98,11 +99,18 @@ public class Rectangle implements Shape{
      */
     public Shape father() { return father; }
 
+    @Override
+    public Shape getFather() { return father; }
+
     /**
      * set father shape
      * @param _father new father
      */
+    @Override
     public void setFather(Shape _father) { father = _father; }
+
+    @Override
+    public boolean haveFather() { return father != null; }
 
     /**
      * @return minX
