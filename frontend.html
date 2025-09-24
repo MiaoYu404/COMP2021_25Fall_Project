@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLEVIS 向量图形编辑器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CLEVIS 向量图形编辑器</h1>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="tool-section">
+                    <h2>创建形状</h2>
+                    <button id="create-rectangle">矩形</button>
+                    <button id="create-line">线条</button>
+                    <button id="create-circle">圆形</button>
+                    <button id="create-square">正方形</button>
+                </div>
+                
+                <div class="tool-section">
+                    <h2>形状操作</h2>
+                    <button id="group-shapes">分组</button>
+                    <button id="ungroup-shape">解组</button>
+                    <button id="delete-shape">删除</button>
+                    <button id="move-shape">移动</button>
+                </div>
+                
+                <div class="tool-section">
+                    <h2>查询操作</h2>
+                    <button id="show-boundingbox">边界框</button>
+                    <button id="check-intersect">检查相交</button>
+                    <button id="list-shape">查看形状</button>
+                    <button id="list-all">查看所有</button>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="drawing-canvas"></canvas>
+                <div id="canvas-info" class="canvas-info">
+                    <p>点击画布创建或选择形状</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dialog-overlay" id="dialog-overlay">
+            <div class="dialog" id="dialog">
+                <h3 id="dialog-title">操作对话框</h3>
+                <div id="dialog-content"></div>
+                <div class="dialog-buttons">
+                    <button id="dialog-confirm">确定</button>
+                    <button id="dialog-cancel">取消</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="log-section">
+                <h2>操作日志</h2>
+                <div id="log-container"></div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
