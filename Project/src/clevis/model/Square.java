@@ -14,13 +14,13 @@ public class Square extends Rectangle {
     /**
      * construct without parameter
      */
-    Square() { this(new Point(0, 0), 1); }
+    public Square() { this(new Point(0, 0), 1); }
 
     /**
      * @param p mid-point
      * @param _side side length
      */
-    Square(Point p, double _side) {
+    public Square(Point p, double _side) {
         width = height = _side;
 
         points = new Point[4];
@@ -41,7 +41,7 @@ public class Square extends Rectangle {
      * @param p mid-point
      * @param _side side length
      */
-    Square(String _name, Point p, double _side) {
+    public Square(String _name, Point p, double _side) {
         this(p, _side);
         name = _name;
     }
@@ -50,7 +50,7 @@ public class Square extends Rectangle {
      * make a copy
      * @param o square need to be copied.
      */
-    Square(Square o) {
+    public Square(Square o) {
         name = o.name();
         width = height = o.side();
 
@@ -62,7 +62,7 @@ public class Square extends Rectangle {
      * @param o square need to be copied
      * @param _name name
      */
-    Square(Square o, String _name) { this(o); name = _name; }
+    public Square(Square o, String _name) { this(o); name = _name; }
 
     /**
      * @return side;
