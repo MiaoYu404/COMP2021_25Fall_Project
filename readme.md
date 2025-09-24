@@ -31,17 +31,15 @@ groupproject/
 │       └── BoundingBox.java      # 边界框工具类
 ```
 ## 编译指南
-1. 1.
+1. 
    确保已安装 JDK24 或更高版本
-2. 2.
+2. 
    打开命令行终端
-3. 3.
+3. 
    导航到项目根目录
-4. 4.
+4. 
    执行以下编译命令：
 ```
-cd 
-c:\Users\huang\OneDrive\Desktop\groupproject\src\hk\edu\polyu\comp\comp2021\clevis\
 javac -d bin *.java model\*.java util\*.java
 ```
 ## 运行指南
@@ -49,9 +47,11 @@ javac -d bin *.java model\*.java util\*.java
 
 ```
 java -cp bin Application -html <html_log_path> -txt <txt_log_path>
+or
+java -cp bin Application
 ```
 参数说明 ：
-
+### 如果不指定 -html 和 -txt 参数，程序将在log文件夹中生成默认的 log.html 和 log.txt 文件。
 - -html <html_log_path> : 指定 HTML 日志文件路径，用于以表格形式记录所有命令
 - -txt <txt_log_path> : 指定 TXT 日志文件路径，用于按顺序记录所有命令
 示例 ：
@@ -306,13 +306,13 @@ delete rect1
 quit
 ```
 ## 注意事项
-1. 1.
+1. 
    所有命令中的参数需要按照指定顺序输入
-2. 2.
+2. 
    图形名称区分大小写
-3. 3.
+3. 
    确保日志文件路径具有写入权限
-4. 4.
+4. 
    导入 COMP2021_PROJECT.xml 到 IntelliJ IDEA 可以检查代码格式要求
 ## 开发说明
 该项目使用标准 Java 开发，遵循面向对象设计原则：
@@ -321,6 +321,3 @@ quit
 - 通过继承实现不同类型的具体图形类
 - 使用组合模式实现图形组功能
 - 采用管理器模式统一管理所有图形操作
-CLEVIS Vector Graphics Editor - 版权所有 © 2021
-
-请按照上述指南使用 CLEVIS 向量图形编辑器，如有任何问题或建议，请联系开发团队。
