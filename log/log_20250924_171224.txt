@@ -1,0 +1,3 @@
+n rect1 10.0 20.0 50.0 30.0
+ListAll
+quit
