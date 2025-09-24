@@ -10,6 +10,9 @@ public class Circle implements Shape{
     private Point center;
     private double r;
 
+    /**
+     * father (don't know if it can hold multiple fathers) pointer.
+     */
     private Shape father;
 
     /**
@@ -34,7 +37,7 @@ public class Circle implements Shape{
      * @param _center center point of the circle
      * @param _r radius of the circle
      */
-    Circle(String _name, Point _center, double _r) {
+    public Circle(String _name, Point _center, double _r) {
         this(_center, _r);
         name = _name;
     }
@@ -50,6 +53,7 @@ public class Circle implements Shape{
     /**
      * @return name
      */
+    @Override
     public String name() { return name; }
 
     /**
@@ -62,16 +66,14 @@ public class Circle implements Shape{
      */
     public double r() { return r; }
 
-    /**
-     * @return father shape
-     */
-    public Shape father() { return father; }
+    @Override
+    public Shape getFather() { return father; }
 
-    /**
-     * set father shape
-     * @param _father new father
-     */
+    @Override
     public void setFather(Shape _father) { father = _father; }
+
+    @Override
+    public boolean haveFather() { return father != null; }
 
     /**
      * @param s other shape
