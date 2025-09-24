@@ -10,6 +10,11 @@ public class ComputingGeometry {
     public static final double EPS = 1e-9;
 
     /**
+     * minimum distance from outline of the shape to be covered.
+     */
+    public static final double COVERED = 0.05;
+
+    /**
      * @param a value
      * @return considering epsilon, 1 if `a` is greater than 0; 0 if equals to 0; -1 if less than 0;
      */
