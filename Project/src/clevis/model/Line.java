@@ -14,13 +14,13 @@ public class Line implements Shape{
     /**
      * construct with no parameter
      */
-    Line() { }
+    public Line() { }
 
     /**
      * @param _from point from
      * @param _to point to
      */
-    Line(Point _from, Point _to) {
+    public Line(Point _from, Point _to) {
         from = new Point(_from);
         to = new Point(_to);
     }
@@ -30,7 +30,7 @@ public class Line implements Shape{
      * @param _from point from
      * @param _to point to
      */
-    Line(String _name, Point _from, Point _to) {
+    public Line(String _name, Point _from, Point _to) {
         this(_from, _to);
         name = _name;
     }
@@ -38,14 +38,15 @@ public class Line implements Shape{
     /**
      * @param o Line need to be copied
      */
-    Line(Line o) {
+    public Line(Line o) {
         this(o.name(), o.from(), o.to());
     }
 
     /**
      * @return name.
      */
-    String name() { return name; }
+    @Override
+    public String name() { return name; }
 
     /**
      * @return from point
@@ -62,11 +63,18 @@ public class Line implements Shape{
      */
     public Shape father() { return father; }
 
+    @Override
+    public Shape getFather() { return father; }
+
     /**
      * set father shape
      * @param _father new father
      */
+    @Override
     public void setFather(Shape _father) { father = _father; }
+
+    @Override
+    public boolean haveFather() { return father != null; }
 
     /**
      * @return Direction vector of the line.
