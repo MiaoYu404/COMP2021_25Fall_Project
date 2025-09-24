@@ -141,7 +141,6 @@ public class Point {
      * @return whether the point is inside the shape.
      */
     public boolean inside(Shape s) {
-        // TODO: rewrite inside method.
         Rectangle bb = (Rectangle) s.boundingBox();
         double minX = bb.points()[1].x(), minY = bb.points()[1].y();
         double maxX = bb.points()[3].x(), maxY = bb.points()[3].y();
@@ -153,7 +152,6 @@ public class Point {
      * @return whether the min distance from the "outline" of the shape is less than 0.05;
      */
     public boolean coveredBy(Shape s) {
-        // TODO: complete this method
         boolean flag = false;
         switch (s.getClass().getSimpleName()) {
             case "Rectangle":
