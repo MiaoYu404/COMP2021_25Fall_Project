@@ -1,7 +1,7 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.EPS;
-import static clevis.model.ComputingGeometry.sign;
+import static clevis.model.ComputingGeometry.*;
+import static java.lang.Math.min;
 
 /**
  * class of Point
@@ -12,13 +12,13 @@ public class Point {
     /**
      * construct with no parameter
      */
-    Point() { }
+    public Point() { }
 
     /**
      * @param _x x coordinate
      * @param _y y coordinate
      */
-    Point(double _x, double _y) {
+    public Point(double _x, double _y) {
         this.x = _x;
         this.y = _y;
     }
@@ -26,7 +26,7 @@ public class Point {
     /**
      * @param _point Point need to be copied.
      */
-    Point(Point _point) {
+    public Point(Point _point) {
         this.x = _point.x();
         this.y = _point.y();
     }
@@ -47,7 +47,7 @@ public class Point {
      * add this point by a vector.
      * @param p vector
      */
-    void add(Point p) { add(p.x(), p.y()); }
+    public void add(Point p) { add(p.x(), p.y()); }
 
     /**
      * add this point by a vector (represented by two values)
@@ -140,11 +140,54 @@ public class Point {
      * @param s shape
      * @return whether the point is inside the shape.
      */
-    boolean inside(Shape s) {
+    public boolean inside(Shape s) {
+        // TODO: rewrite inside method.
         Rectangle bb = (Rectangle) s.boundingBox();
         double minX = bb.points()[1].x(), minY = bb.points()[1].y();
         double maxX = bb.points()[3].x(), maxY = bb.points()[3].y();
         return sign(x - minX) >= 0 && sign(maxX - x) >= 0 && sign(y - minY) >= 0 && sign(maxY - y) >= 0;
+    }
+
+    /**
+     * @param s the shape
+     * @return whether the min distance from the "outline" of the shape is less than 0.05;
+     */
+    public boolean coveredBy(Shape s) {
+        // TODO: complete this method
+        boolean flag = false;
+        switch (s.getClass().getSimpleName()) {
+            case "Rectangle":
+                Rectangle r = (Rectangle) s;
+                flag = inside(new Rectangle(Points.add(r.points()[0], new Point(COVERED * -1, COVERED)), r.width() + 2 * COVERED, r.height() + 2 * COVERED));
+                break;
+            case "Circle":
+                Circle c = (Circle) s;
+                flag = sign(distance(c.center()) - c.r() - COVERED) <= 0;
+                break;
+            case "Line":
+                Line l = (Line) s;
+                Point u = l.from(), v = l.to();
+
+                Point uC = Points.minus(this, u), uv = l.direction();
+                Point vC = Points.minus(this, v), vu = l.reverse().direction();
+
+                double distance = Double.MAX_VALUE;
+                if (sign(uC.dot(uv) * vC.dot(vu)) > 0) {
+//                    distance = min(distance, vu.det(this) + v.det(u) / uv.abs());
+                    distance = min(distance, Math.abs(uC.det(uv)) / uv.abs());
+                }
+                distance = min(distance, uC.abs());
+                distance = min(distance, vC.abs());
+
+                flag |= sign(distance - COVERED) <= 0;
+                break;
+            case "Group":
+                Group g = (Group) s;
+                for (Shape member : g.shapes()) {
+                    flag |= coveredBy(member);
+                }
+        }
+        return flag;
     }
 
     @Override
