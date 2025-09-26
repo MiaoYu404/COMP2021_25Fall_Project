@@ -58,11 +58,6 @@ public class Line implements Shape{
      */
     Point to() { return to; }
 
-    /**
-     * @return father shape
-     */
-    public Shape father() { return father; }
-
     @Override
     public Shape getFather() { return father; }
 
@@ -88,7 +83,7 @@ public class Line implements Shape{
     double det(Line l) { return direction().det(l.direction()); }
 
     /**
-     * @return vector in reverse direction
+     * @return a line in reverse direction
      */
     Line reverse() { return new Line(to, from); }
 
@@ -126,7 +121,6 @@ public class Line implements Shape{
 
     @Override
     public void move(double dx, double dy) {
-        // TODO: move
         from.add(dx, dy); to.add(dx, dy);
     }
 

@@ -31,15 +31,15 @@ public class Rectangle implements Shape{
 
         points = new Point[4];
         points[0] = p;
-        points[1] = Points.add(p, new Point(0.0, _h * -1.0));
-        points[2] = Points.add(p, new Point(_w, _h * -1.0));
-        points[3] = Points.add(p, new Point(_w, 0.0));
+        points[1] = Points.add(p, new Point(0.0, _h * -1.0));   // down-left
+        points[2] = Points.add(p, new Point(_w, _h * -1.0));        // down-right
+        points[3] = Points.add(p, new Point(_w, 0.0));              // top-right
 
         lines = new Line[4];
-        lines[0] = new Line(points[0], points[1]);
-        lines[1] = new Line(points[1], points[2]);
-        lines[2] = new Line(points[2], points[3]);
-        lines[3] = new Line(points[3], points[0]);
+        lines[0] = new Line(points[0], points[1]);  // left
+        lines[1] = new Line(points[1], points[2]);  // down
+        lines[2] = new Line(points[2], points[3]);  // right
+        lines[3] = new Line(points[3], points[0]);  // top
     }
 
     /**
@@ -94,10 +94,6 @@ public class Rectangle implements Shape{
      */
     public Line[] lines() { return Arrays.copyOf(lines, 4); }
 
-    /**
-     * @return father shape
-     */
-    public Shape father() { return father; }
 
     @Override
     public Shape getFather() { return father; }

@@ -142,8 +142,8 @@ public class Point {
      */
     public boolean inside(Shape s) {
         Rectangle bb = (Rectangle) s.boundingBox();
-        double minX = bb.points()[1].x(), minY = bb.points()[1].y();
-        double maxX = bb.points()[3].x(), maxY = bb.points()[3].y();
+        double minX = bb.minX(), minY = bb.minY();
+        double maxX = bb.maxX(), maxY = bb.maxY();
         return sign(x - minX) >= 0 && sign(maxX - x) >= 0 && sign(y - minY) >= 0 && sign(maxY - y) >= 0;
     }
 

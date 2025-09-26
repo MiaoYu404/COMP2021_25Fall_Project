@@ -21,19 +21,7 @@ public class Square extends Rectangle {
      * @param _side side length
      */
     public Square(Point p, double _side) {
-        width = height = _side;
-
-        points = new Point[4];
-        points[0] = Points.add(p, new Point(_side / -2, _side / 2));
-        points[1] =  Points.add(p, new Point(_side / -2, _side / -2));
-        points[2] =  Points.add(p, new Point(_side / 2, _side / -2));
-        points[3] =  Points.add(p, new Point(_side / 2, _side / 2));
-
-        lines = new Line[4];
-        lines[0] = new Line(points[0], points[1]);
-        lines[1] = new Line(points[1], points[2]);
-        lines[2] = new Line(points[2], points[3]);
-        lines[3] = new Line(points[3], points[0]);
+        super(Points.add(p, new Point(_side / -2, _side / 2)), _side, _side);
     }
 
     /**
