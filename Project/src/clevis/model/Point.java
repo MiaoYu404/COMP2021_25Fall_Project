@@ -152,18 +152,13 @@ public class Point {
      * @return whether the min distance from the "outline" of the shape is less than 0.05;
      */
     public boolean coveredBy(Shape s) {
-        boolean flag = false;
-        switch (s.getClass().getSimpleName()) {
-            case "Rectangle":
-                return coveredBy((Rectangle) s);
-            case "Circle":
-                return coveredBy((Circle) s);
-            case "Line":
-                return coveredBy((Line) s);
-            case "Group":
-                return coveredBy((Group) s);
-        }
-        throw new IllegalArgumentException("Not implemented yet.");
+        return switch (s.getClass().getSimpleName()) {
+            case "Rectangle" -> coveredBy((Rectangle) s);
+            case "Circle" -> coveredBy((Circle) s);
+            case "Line" -> coveredBy((Line) s);
+            case "Group" -> coveredBy((Group) s);
+            default -> throw new IllegalArgumentException("Not implemented yet.");
+        };
     }
 
     /**
