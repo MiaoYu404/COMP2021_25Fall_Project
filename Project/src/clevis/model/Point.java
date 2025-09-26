@@ -54,32 +54,32 @@ public class Point {
      * @param dx change in x
      * @param dy change in y
      */
-    void add(double dx, double dy) { x += dx; y += dy; }
+    public void add(double dx, double dy) { x += dx; y += dy; }
 
     /**
      * reduce this point by a vector.
      * @param p vector
      */
-    void minus(Point p) { minus(p.x(), p.y()); }
+    public void minus(Point p) { minus(p.x(), p.y()); }
 
     /**
      * reduce this point by a vector (represented by two values)
      * @param dx change in x
      * @param dy change in y
      */
-    void minus(double dx, double dy) { x -= dx; y -= dy; }
+    public void minus(double dx, double dy) { x -= dx; y -= dy; }
 
     /**
      * multiply this point by a constant.
      * @param c constant
      */
-    void multiply(double c) { x *= c; y *= c; }
+    public void multiply(double c) { x *= c; y *= c; }
 
     /**
      * divide this point by a constant.
      * @param c constant
      */
-    void divide(double c) {
+    public void divide(double c) {
         if (c == 0.0) throw new ArithmeticException("Division by zero.");
         x /= c; y /= c;
     }
@@ -99,37 +99,37 @@ public class Point {
      * @param p other vector
      * @return the dot product
      */
-    double dot(Point p) { return x * p.x() + y * p.y(); }
+    public double dot(Point p) { return x * p.x() + y * p.y(); }
 
     /**
      * calculate det product with other vector
      * @param p other product
      * @return the det product
      */
-    double det(Point p) { return x * p.y() - y * p.x(); }
+    public double det(Point p) { return x * p.y() - y * p.x(); }
 
     /**
      * distance between two points.
      * @param p other point
      * @return the distance
      */
-    double distance(Point p) { return Points.minus(this, p).abs(); }
+    public double distance(Point p) { return Points.minus(this, p).abs(); }
 
     /**
      * @return absolute value of the distance of the vector pointing origin.
      */
-    double abs() { return Math.sqrt(abs2()); }
+    public double abs() { return Math.sqrt(abs2()); }
 
     /**
      * @return square of value of the distance of the vector pointing origin.
      */
-    double abs2() { return x * x + y * y; }
+    public double abs2() { return x * x + y * y; }
 
     /**
      * @param l the line
      * @return whether the point is on the given line.
      */
-    boolean onSegment(Line l) {
+    public boolean onSegment(Line l) {
         Point p1 = l.from(), p2 = l.to();
         return sign(Points.minus(p1, this).det(Points.minus(p2, this))) == 0
                 && sign((p1.x() - x) * (p2.x() - x)) <= 0
@@ -155,37 +155,65 @@ public class Point {
         boolean flag = false;
         switch (s.getClass().getSimpleName()) {
             case "Rectangle":
-                Rectangle r = (Rectangle) s;
-                flag = inside(new Rectangle(Points.add(r.points()[0], new Point(COVERED * -1, COVERED)), r.width() + 2 * COVERED, r.height() + 2 * COVERED));
-                break;
+                return coveredBy((Rectangle) s);
             case "Circle":
-                Circle c = (Circle) s;
-                flag = sign(distance(c.center()) - c.r() - COVERED) <= 0;
-                break;
+                return coveredBy((Circle) s);
             case "Line":
-                Line l = (Line) s;
-                Point u = l.from(), v = l.to();
-
-                Point uC = Points.minus(this, u), uv = l.direction();
-                Point vC = Points.minus(this, v), vu = l.reverse().direction();
-
-                double distance = Double.MAX_VALUE;
-                if (sign(uC.dot(uv) * vC.dot(vu)) > 0) {
-//                    distance = min(distance, vu.det(this) + v.det(u) / uv.abs());
-                    distance = min(distance, Math.abs(uC.det(uv)) / uv.abs());
-                }
-                distance = min(distance, uC.abs());
-                distance = min(distance, vC.abs());
-
-                flag |= sign(distance - COVERED) <= 0;
-                break;
+                return coveredBy((Line) s);
             case "Group":
-                Group g = (Group) s;
-                for (Shape member : g.shapes()) {
-                    flag |= coveredBy(member);
-                }
+                return coveredBy((Group) s);
         }
+        throw new IllegalArgumentException("Not implemented yet.");
+    }
+
+    /**
+     * @param c the circle.
+     * @return whether this point covered by a circle.
+     */
+    public boolean coveredBy(Circle c) {
+        return sign(distance(c.center()) - c.r() - COVERED) <= 0;
+    }
+
+    /**
+     * @param l the line.
+     * @return whether this point covered by a line.
+     */
+    public boolean coveredBy(Line l) {
+        Point u = l.from(), v = l.to();
+
+        Point uC = Points.minus(this, u), uv = l.direction();
+        Point vC = Points.minus(this, v), vu = l.reverse().direction();
+
+        double distance = Double.MAX_VALUE;
+        if (sign(uC.dot(uv) * vC.dot(vu)) > 0) {
+            distance = min(distance, Math.abs(uC.det(uv)) / uv.abs());
+        }
+        distance = min(distance, uC.abs());
+        distance = min(distance, vC.abs());
+
+        return sign(distance - COVERED) <= 0;
+    }
+
+    /**
+     * @param r the rectangle.
+     * @return whether this point covered by a rectangle.
+     */
+    public boolean coveredBy(Rectangle r) {
+        boolean flag = inside(r);
+        for (Line l : r.lines())
+            flag |=  coveredBy(l);
         return flag;
+    }
+
+    /**
+     * @param g the group.
+     * @return whether this point covered by a group.
+     */
+    public boolean coveredBy(Group g) {
+        boolean ret = false;
+        for (Shape member : g.shapes())
+            ret |= coveredBy(member);
+        return ret;
     }
 
     @Override
