@@ -21,7 +21,7 @@ public class Group implements Shape{
      */
     public Group(String _name, ArrayList<Shape> _shapes) {
         name = _name;
-        shapes = new ArrayList<Shape>(_shapes);
+        shapes = new ArrayList<>(_shapes);
     }
 
     /**
@@ -69,6 +69,7 @@ public class Group implements Shape{
             double maxX = Math.max(r.maxX(), tmp.maxX());
             double maxY = Math.max(r.maxY(), tmp.maxY());
             r = new Rectangle(new Point(minX, maxY), Math.abs(maxX -  minX), Math.abs(maxY - minY));
+            // TODO: why does abs being used here?
         }
         return new Rectangle(r, "Bounding Box of \"" + name + "\"<Group>");
     }

@@ -11,6 +11,7 @@ import java.util.List;
  * class of Console
  */
 public class Console {
+    // TODO: Question: how to deal with different shapes with the same name
     private List<String> shapes;
     private HashMap<String, Shape> name2Shape;
     private HashMap<Shape, String> shape2Name;
@@ -31,20 +32,20 @@ public class Console {
     public void add(String[] args) {
         Shape s = null;
         switch(args[0]) {
-            case "Line":
+            case "rectangle":
+                Point tl = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
+                s = new Rectangle(args[1], tl, Double.valueOf(args[4]), Double.valueOf(args[5]));
+                break;
+            case "line":
                 Point from = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
                 Point to = new Point(Double.valueOf(args[4]), Double.valueOf(args[5]));
                 s = new Line(args[1], from, to);
                 break;
-            case "Rectangle":
-                Point tl = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
-                s = new Rectangle(args[1], tl, Double.valueOf(args[4]), Double.valueOf(args[5]));
-                break;
-            case "Circle":
+            case "circle":
                 Point center = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
                 s = new Circle(args[1], center, Double.valueOf(args[4]));
                 break;
-            case "Square":
+            case "square":
                 Point midPoint = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
                 s = new Square(args[1], midPoint, Double.valueOf(args[4]));
                 break;
@@ -189,6 +190,7 @@ public class Console {
                 return s;
         }
         return null;
+        // TODO: question for haveFather() use
     }
 
     /**

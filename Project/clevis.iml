@@ -29,5 +29,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="library-su25" level="project" />
   </component>
 </module>

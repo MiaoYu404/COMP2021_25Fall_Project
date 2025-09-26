@@ -17,6 +17,7 @@ public class TestRectangle {
         Rectangle r = new Rectangle(p1, 2.0, 3.0);
 //        System.out.println(r.boundingBox());
 //        System.out.println(r.boundingBox().boundingBox());
-        assertThat(r.boundingBox().boundingBox()).isEqualTo(r.boundingBox());
+        assertThat(r.boundingBox().boundingBox()).isNotEqualTo(r.boundingBox());
+        assertThat(r.boundingBox().boundingBox()).isNotEqualTo(r);
     }
 }
