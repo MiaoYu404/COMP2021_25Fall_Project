@@ -8,15 +8,16 @@ PolyU COMP 2411 25 Fall Group Project: A Command Line Vector Graphics Software
 - 导入 COMP2021_PROJECT.xml 到 Intellij IDEA 以检查代码格式要求。
 
 ### 启动
-1. (4 points) 所有的指令需通过两个文件。
-   1. HTML 文件，指令以表格形式记录，每行有两列。
-      1. 第一列是指令下标（index）；
+1. (4 points) 在Clevis会话期间执行的所有操作都应记录到两个文件中：
+   1. HTML 文件，指令以表格形式记录，表格每行包含两列:
+      1. 第一列是操作序号（index）；
       2. 第二列是指令内容。
-   2. TXT 文件，存储指令的执行顺序。每行一条指令。
-   3. 运行示例：`java hk.edu.polyu.comp.comp2021.clevis.Application -html d:\log.html -txt d:\log.txt`。
+   2. TXT 文件，命令按执行顺序记录。每行一条指令。
+   3. 这两个文件的名称应在启动Clevis工具时作为参数输入
+   4. 运行示例：`java hk.edu.polyu.comp.comp2021.clevis.Application -html d:\log.html -txt d:\log.txt`。
 
 ### 图形
-1. (1.5 points) 你需要创建一个矩形 `n x y w h`
+1. (1.5 points) 你需要创建一个矩形 `rectangle n x y w h`
     - 创建一个名称为 n 的矩形，top-left 角的坐标是 $(x, y)$，宽 $w$，高 $h$。
 2. (1.5 points) 你需要创建一个线段 `line n x1 y1 x2 y2`
     - 创建一个名称为 n 的线段，两端点分别是 $(x1, y1)$, $(x2, y2)$。
