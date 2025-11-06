@@ -7,8 +7,8 @@ import static clevis.model.ComputingGeometry.sign;
  */
 public class Circle implements Shape{
     private String name;
-    private Point center;
-    private double r;
+    private final Point center;
+    private final double r;
 
     /**
      * father (don't know if it can hold multiple fathers) pointer.
@@ -18,7 +18,7 @@ public class Circle implements Shape{
     /**
      * construct with no parameters
      */
-    Circle() {
+    public Circle() {
         this(new Point(0, 0), 1);
     }
 
@@ -27,7 +27,7 @@ public class Circle implements Shape{
      * @param _r radius of the circle
      * Create a circle with center `_center` and radius of `_r`.
      */
-    Circle(Point _center, double _r) {
+    public Circle(Point _center, double _r) {
         center = new Point(_center);
         r = _r;
     }
@@ -46,7 +46,7 @@ public class Circle implements Shape{
      * @param o circle need to be copied;
      * Construct with a given circle. Make a copy of the given circle.
      */
-    Circle(Circle o) {
+    public Circle(Circle o) {
         this(o.name(), o.center(), o.r());
     }
 
