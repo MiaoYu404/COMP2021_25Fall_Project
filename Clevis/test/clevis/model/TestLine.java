@@ -1,7 +1,7 @@
 package clevis.model;
 
 import org.junit.Test;
-import static clevis.model.ComputingGeometry.intersects;
+import static clevis.model.Geometry.intersects;
 
 import static com.google.common.truth.Truth.assertThat;
 

@@ -234,7 +234,7 @@ public class Console {
         if (haveFather(s1) || haveFather(s2))
             throw new IllegalArgumentException(s1 + " or " + s2 + " is inside an existing group.");
 
-        return ComputingGeometry.intersects(name2Shape.get(s1), name2Shape.get(s2));
+        return Geometry.intersects(name2Shape.get(s1), name2Shape.get(s2));
     }
 
     /**

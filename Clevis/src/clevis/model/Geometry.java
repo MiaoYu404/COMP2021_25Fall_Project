@@ -3,7 +3,7 @@ package clevis.model;
 /**
  * functions about Computing Geometry
  */
-public class ComputingGeometry {
+public class Geometry {
     /**
      * Machine Epsilon
      */

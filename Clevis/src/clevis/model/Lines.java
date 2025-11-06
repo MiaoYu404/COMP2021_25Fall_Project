@@ -1,6 +1,6 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.sign;
+import static clevis.model.Geometry.sign;
 
 /**
  * functions between lines.

@@ -1,7 +1,5 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.sign;
-
 /**
  * class of Line
  */
@@ -101,7 +99,7 @@ public class Line implements Shape{
      * @return whether intersects
      */
     public boolean intersects(Shape s) {
-        return ComputingGeometry.intersects(this, s);
+        return Geometry.intersects(this, s);
     }
 
     @Override

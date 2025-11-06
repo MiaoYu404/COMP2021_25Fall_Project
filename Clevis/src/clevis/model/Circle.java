@@ -1,6 +1,6 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.sign;
+import static clevis.model.Geometry.sign;
 
 /**
  * class of Circle.
@@ -80,7 +80,7 @@ public class Circle implements Shape{
      * @return whether intersects
      */
     public boolean intersects(Shape s) {
-        return ComputingGeometry.intersects(this, s);
+        return Geometry.intersects(this, s);
     }
 
     @Override

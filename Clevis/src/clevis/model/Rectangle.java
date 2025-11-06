@@ -2,7 +2,7 @@ package clevis.model;
 
 import java.util.Arrays;
 
-import static clevis.model.ComputingGeometry.EPS;
+import static clevis.model.Geometry.EPS;
 import static java.lang.Math.abs;
 
 /**
@@ -133,7 +133,7 @@ public class Rectangle implements Shape{
      * @return whether intersects
      */
     public boolean intersects(Shape s) {
-        return ComputingGeometry.intersects(this, s);
+        return Geometry.intersects(this, s);
     }
 
     @Override

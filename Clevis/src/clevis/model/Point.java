@@ -1,6 +1,6 @@
 package clevis.model;
 
-import static clevis.model.ComputingGeometry.*;
+import static clevis.model.Geometry.*;
 import static java.lang.Math.min;
 
 /**
