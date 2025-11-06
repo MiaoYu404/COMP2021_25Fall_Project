@@ -1,7 +1,12 @@
 package clevis.model;
 
+import clevis.sql.Lines;
+import clevis.util.Circle;
+import clevis.util.Line;
+import clevis.util.Point;
+import clevis.util.Rectangle;
 import org.junit.Test;
-import static clevis.model.Geometry.intersects;
+import static clevis.sql.Geometry.intersects;
 
 import static com.google.common.truth.Truth.assertThat;
 

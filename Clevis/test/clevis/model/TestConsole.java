@@ -13,15 +13,15 @@ public class TestConsole {
         Console console = new Console();
 
         String op;
-        op = "Circle A 1 7 3";
+        op = "circle A 1 7 3";
         console.add(op.split(" "));
         console.list("A");
 
-        op = "Line B 2 3 5 6";
+        op = "line B 2 3 5 6";
         console.add(op.split(" "));
         assertThat(console.intersects("A", "B")).isTrue();
 
-        op = "Rectangle C 3 10 2 3";
+        op = "rectangle C 3 10 2 3";
         console.add(op.split(" "));
         assertThat(console.intersects("B", "C")).isFalse();
         console.group("G1", List.of("A", "C"));
@@ -35,7 +35,7 @@ public class TestConsole {
         console.ungroup("G1");
         assertThat(console.intersects("B", "C")).isFalse();
 
-        op = "Line D -2 9 5 9";
+        op = "line D -2 9 5 9";
         console.add(op.split(" "));
         assertThat(console.shapeAt(3.2, 9.0).name()).isEqualTo("D");
         assertThat(console.shapeAt(3.2, 8.0).name()).isEqualTo("C");
