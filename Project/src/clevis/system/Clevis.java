@@ -8,6 +8,5 @@ public class Clevis {
     /**
      * constructor
      */
-    public Clevis(){}
-	
+    public Clevis() {}
 }
