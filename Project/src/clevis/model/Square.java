@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class Square extends Rectangle {
     private String name;
-    private double width, height;
+    private double side;
     private Point[] points;
     private Line[] lines;
 
@@ -40,7 +40,7 @@ public class Square extends Rectangle {
      */
     public Square(Square o) {
         name = o.name();
-        width = height = o.side();
+        side = o.side();
 
         points = Arrays.copyOf(o.points(), 4);
         lines = Arrays.copyOf(o.lines(), 4);
@@ -55,7 +55,7 @@ public class Square extends Rectangle {
     /**
      * @return side;
      */
-    public double side() { return width; }
+    public double side() { return side; }
 
     @Override
     public String toString() {
