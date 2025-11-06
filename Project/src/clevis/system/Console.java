@@ -1,7 +1,6 @@
 package clevis.system;
 
 import clevis.model.*;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,29 +29,59 @@ public class Console {
      * @param args arguments
      */
     public void add(String[] args) {
-        Shape s = null;
-        switch(args[0]) {
-            case "rectangle":
-                Point tl = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
-                s = new Rectangle(args[1], tl, Double.valueOf(args[4]), Double.valueOf(args[5]));
-                break;
-            case "line":
-                Point from = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
-                Point to = new Point(Double.valueOf(args[4]), Double.valueOf(args[5]));
-                s = new Line(args[1], from, to);
-                break;
-            case "circle":
-                Point center = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
-                s = new Circle(args[1], center, Double.valueOf(args[4]));
-                break;
-            case "square":
-                Point midPoint = new Point(Double.valueOf(args[2]), Double.valueOf(args[3]));
-                s = new Square(args[1], midPoint, Double.valueOf(args[4]));
-                break;
-            default:
-                throw new IllegalArgumentException("Argument is illegal");
-        }
+        Shape s = switch (args[0]) {
+            case "rectangle" -> addRectangle(args);
+            case "line" -> addLine(args);
+            case "circle" -> addCircle(args);
+            case "square" -> addSquare(args);
+            default -> throw new IllegalArgumentException("Not implemented Shape type.");
+        };
         push(args[1], s);
+    }
+
+    /**
+     * @param args arguments.
+     * @return a Rectangle.
+     */
+    public Shape addRectangle(String[] args) {
+        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
+        double w = Double.valueOf(args[4]), h = Double.valueOf(args[5]);
+        Point top_left = new Point(x, y);
+        return new Rectangle(args[1], top_left, w, h);
+    }
+
+    /**
+     * @param args arguments.
+     * @return a Line.
+     */
+    public Shape addLine(String[] args) {
+        double x1 =  Double.valueOf(args[2]), y1 = Double.valueOf(args[3]);
+        double x2 =  Double.valueOf(args[4]), y2 = Double.valueOf(args[5]);
+        Point from = new Point(x1, y2);
+        Point to = new Point(x2, y2);
+        return new Line(args[1], from, to);
+    }
+
+    /**
+     * @param args arguments.
+     * @return a Circle.
+     */
+    public Shape addCircle(String[] args) {
+        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
+        double r = Double.valueOf(args[4]);
+        Point center = new Point(x, y);
+        return new Circle(args[1], center, r);
+    }
+
+    /**
+     * @param args arguments.
+     * @return a Square.
+     */
+    public Shape addSquare(String[] args) {
+        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
+        double side = Double.valueOf(args[4]);
+        Point midPoint = new Point(x, y);
+        return new Square(args[1], midPoint, side);
     }
 
     /**
@@ -219,6 +248,7 @@ public class Console {
 
         if (haveFather(name))
             throw new IllegalArgumentException(name + " is inside an existing group.");
+        System.out.println(name2Shape.get(name).toString());
         return name2Shape.get(name).toString();
     }
 
