@@ -8,7 +8,7 @@ public class TestRectangle {
     public void test2String() {
         Point p1 =  new Point(0, 0);
         Rectangle r = new Rectangle(p1, 2.0, 3.0);
-        System.out.println(r.toString());
+        System.out.println(r);
     }
 
     @Test

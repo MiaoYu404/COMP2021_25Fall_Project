@@ -1,8 +1,5 @@
 package clevis.model;
 
-import org.w3c.dom.css.Rect;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

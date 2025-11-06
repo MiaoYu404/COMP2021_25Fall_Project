@@ -3,7 +3,6 @@ package clevis.model;
 import clevis.system.Console;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -13,7 +12,7 @@ public class TestConsole {
     public void test() {
         Console console = new Console();
 
-        String op = "";
+        String op;
         op = "Circle A 1 7 3";
         console.add(op.split(" "));
         console.list("A");
