@@ -1,8 +1,11 @@
-package clevis.model;
+package clevis.util;
+
+import clevis.sql.Points;
+import clevis.sql.Geometry;
 
 import java.util.Arrays;
 
-import static clevis.model.Geometry.EPS;
+import static clevis.sql.Geometry.EPS;
 import static java.lang.Math.abs;
 
 /**
@@ -19,14 +22,14 @@ public class Rectangle implements Shape{
     /**
      * construct with no parameter;
      */
-    Rectangle() { }
+    public Rectangle() { }
 
     /**
      * @param p top-left point
      * @param _w width
      * @param _h height
      */
-    Rectangle(Point p, double _w, double _h) {
+    public Rectangle(Point p, double _w, double _h) {
         width = _w; height = _h;
 
         points = new Point[4];

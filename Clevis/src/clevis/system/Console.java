@@ -1,6 +1,7 @@
 package clevis.system;
 
-import clevis.model.*;
+import clevis.sql.Geometry;
+import clevis.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

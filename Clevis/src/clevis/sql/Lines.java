@@ -1,6 +1,9 @@
-package clevis.model;
+package clevis.sql;
 
-import static clevis.model.Geometry.sign;
+import clevis.util.Line;
+import clevis.util.Point;
+
+import static clevis.sql.Geometry.sign;
 
 /**
  * functions between lines.

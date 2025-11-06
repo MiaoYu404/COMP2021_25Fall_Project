@@ -1,6 +1,8 @@
-package clevis.model;
+package clevis.util;
 
-import static clevis.model.Geometry.*;
+import clevis.sql.Points;
+
+import static clevis.sql.Geometry.*;
 import static java.lang.Math.min;
 
 /**

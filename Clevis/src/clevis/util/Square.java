@@ -1,4 +1,6 @@
-package clevis.model;
+package clevis.util;
+
+import clevis.sql.Points;
 
 import java.util.Arrays;
 

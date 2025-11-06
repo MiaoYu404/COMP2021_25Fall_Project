@@ -1,4 +1,4 @@
-package clevis.model;
+package clevis.util;
 
 import java.util.ArrayList;
 import java.util.List;

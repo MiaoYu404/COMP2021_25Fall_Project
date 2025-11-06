@@ -1,4 +1,7 @@
-package clevis.model;
+package clevis.util;
+
+import clevis.sql.Points;
+import clevis.sql.Geometry;
 
 /**
  * class of Line
@@ -49,12 +52,12 @@ public class Line implements Shape{
     /**
      * @return from point
      */
-    Point from() { return new Point(from); }
+    public Point from() { return new Point(from); }
 
     /**
      * @return to point
      */
-    Point to() { return to; }
+    public Point to() { return to; }
 
     @Override
     public Shape getFather() { return father; }
@@ -72,24 +75,24 @@ public class Line implements Shape{
     /**
      * @return Direction vector of the line.
      */
-    Point direction() { return Points.minus(to, from); }
+    public Point direction() { return Points.minus(to, from); }
 
     /**
      * @param l the other line.
      * @return det product
      */
-    double det(Line l) { return direction().det(l.direction()); }
+    public double det(Line l) { return direction().det(l.direction()); }
 
     /**
      * @return a line in reverse direction
      */
-    Line reverse() { return new Line(to, from); }
+    public Line reverse() { return new Line(to, from); }
 
     /**
      * @param s shape
      * @return whether line is inside the shape's bounding box.
      */
-    boolean inside(Shape s) {
+    public boolean inside(Shape s) {
         // TODO line inside any Shape
         return from.inside(s) && to.inside(s);
     }
