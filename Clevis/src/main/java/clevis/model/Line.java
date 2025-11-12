@@ -1,7 +1,7 @@
-package clevis.util;
+package clevis.model;
 
-import clevis.sql.Points;
-import clevis.sql.Geometry;
+import clevis.util.Geometry;
+import clevis.util.Points;
 
 /**
  * class of Line

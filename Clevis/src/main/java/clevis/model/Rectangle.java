@@ -1,11 +1,11 @@
-package clevis.util;
+package clevis.model;
 
-import clevis.sql.Points;
-import clevis.sql.Geometry;
+import clevis.util.Geometry;
+import clevis.util.Points;
 
 import java.util.Arrays;
 
-import static clevis.sql.Geometry.EPS;
+import static clevis.util.Geometry.EPS;
 import static java.lang.Math.abs;
 
 /**

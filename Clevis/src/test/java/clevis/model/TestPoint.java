@@ -1,8 +1,6 @@
 package clevis.model;
 
-import clevis.sql.Points;
-import clevis.util.Point;
-import clevis.util.Rectangle;
+import clevis.util.Points;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 

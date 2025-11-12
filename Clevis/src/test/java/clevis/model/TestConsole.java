@@ -11,8 +11,8 @@ public class TestConsole {
     @Test
     public void test() {
         Console console = new Console();
-
         String op;
+
         op = "circle A 1 7 3";
         console.add(op.split(" "));
         console.list("A");

@@ -1,8 +1,8 @@
-package clevis.sql;
+package clevis.util;
 
-import clevis.util.Point;
-import clevis.util.Rectangle;
-import clevis.util.Shape;
+import clevis.model.Point;
+import clevis.model.Rectangle;
+import clevis.model.Shape;
 
 /**
  * functions about Computing Geometry

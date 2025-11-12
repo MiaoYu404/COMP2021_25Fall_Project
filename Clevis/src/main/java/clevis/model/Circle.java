@@ -1,9 +1,9 @@
-package clevis.util;
+package clevis.model;
 
-import clevis.sql.Points;
-import clevis.sql.Geometry;
+import clevis.util.Geometry;
+import clevis.util.Points;
 
-import static clevis.sql.Geometry.sign;
+import static clevis.util.Geometry.sign;
 
 /**
  * class of Circle.

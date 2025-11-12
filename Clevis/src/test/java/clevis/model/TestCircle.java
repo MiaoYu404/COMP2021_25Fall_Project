@@ -1,7 +1,5 @@
 package clevis.model;
 
-import clevis.util.Circle;
-import clevis.util.Point;
 import org.junit.Test;
 
 public class TestCircle {
