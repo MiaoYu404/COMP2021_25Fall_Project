@@ -153,17 +153,17 @@ public class Rectangle implements Shape{
     @Override
     public String toString() {
         // TODO: 加入长宽
-        String ret = "";
-        if (name != null) { ret += "\"" + name + "\"";}
-        ret += "<" + this.getClass() + ">:";
+        StringBuilder ret = new StringBuilder();
+        if (name != null) { ret.append("\"").append(name).append("\"");}
+        ret.append("<").append(this.getClass()).append(">:");
 
-        ret += "\nPoints:";
-        for (int i = 0; i < 4; i++) ret = ret + "\n" + points[i].toString();
+        ret.append("\nPoints:");
+        for (int i = 0; i < 4; i++) ret.append("\n").append(points[i].toString());
 
-        ret = ret + "\nLines:";
-        for (int i = 0; i < 4; i++) ret = ret + "\n" + lines[i].toString();
+        ret.append("\nLines:");
+        for (int i = 0; i < 4; i++) ret.append("\n").append(lines[i].toString());
 
-        return ret;
+        return ret.toString();
     }
 
     @Override
