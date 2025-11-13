@@ -45,8 +45,8 @@ public class Console {
      * @return a Rectangle.
      */
     public Shape addRectangle(String[] args) {
-        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
-        double w = Double.valueOf(args[4]), h = Double.valueOf(args[5]);
+        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
+        double w = Double.parseDouble(args[4]), h = Double.parseDouble(args[5]);
         Point top_left = new Point(x, y);
         return new Rectangle(args[1], top_left, w, h);
     }
@@ -56,8 +56,8 @@ public class Console {
      * @return a Line.
      */
     public Shape addLine(String[] args) {
-        double x1 =  Double.valueOf(args[2]), y1 = Double.valueOf(args[3]);
-        double x2 =  Double.valueOf(args[4]), y2 = Double.valueOf(args[5]);
+        double x1 =  Double.parseDouble(args[2]), y1 = Double.parseDouble(args[3]);
+        double x2 =  Double.parseDouble(args[4]), y2 = Double.parseDouble(args[5]);
         Point from = new Point(x1, y1);
         Point to = new Point(x2, y2);
         return new Line(args[1], from, to);
@@ -68,8 +68,8 @@ public class Console {
      * @return a Circle.
      */
     public Shape addCircle(String[] args) {
-        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
-        double r = Double.valueOf(args[4]);
+        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
+        double r = Double.parseDouble(args[4]);
         Point center = new Point(x, y);
         return new Circle(args[1], center, r);
     }
@@ -79,8 +79,8 @@ public class Console {
      * @return a Square.
      */
     public Shape addSquare(String[] args) {
-        double x = Double.valueOf(args[2]), y = Double.valueOf(args[3]);
-        double side = Double.valueOf(args[4]);
+        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
+        double side = Double.parseDouble(args[4]);
         Point midPoint = new Point(x, y);
         return new Square(args[1], midPoint, side);
     }
