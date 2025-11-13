@@ -56,7 +56,7 @@ public class Rectangle implements Shape{
     /**
      * @param o rectangle need to be copied.
      */
-    Rectangle(Rectangle o) {
+    public Rectangle(Rectangle o) {
         name = o.name();
         width = o.width();
         height = o.height();
@@ -69,7 +69,7 @@ public class Rectangle implements Shape{
      * @param o rectangle need to be copied
      * @param _name new name
      */
-    Rectangle(Rectangle o, String _name) { this(o); name = _name; }
+    public Rectangle(Rectangle o, String _name) { this(o); name = _name; }
 
     /**
      * @return name
@@ -180,6 +180,6 @@ public class Rectangle implements Shape{
     @Override
     public Rectangle boundingBox() {
         String bbName = "Bounding Box of '" + name + "'";
-        return new Rectangle(this, bbName);
+        return new Rectangle(this, bbName); //bounding box name 与原矩形的name一致？
     }
 }

@@ -221,12 +221,12 @@ public class Point {
     /**
      * @return return a point which can be got from rotate this point by 90 degree anticlockwise.
      */
-    Point rot90() { return new Point(-y, x); }
+    public Point rot90() { return new Point(-y, x); }
 
     /**
      * @return unit vector of the this.
      */
-    Point unit() {
+    public Point unit() {
         Point p = new Point();
         p.divide(p.abs());
         return p;
