@@ -1,9 +1,6 @@
 package clevis.util;
 
-import clevis.sql.Points;
-import clevis.sql.Geometry;
-
-import java.util.Arrays;
+import clevis.sql.*;
 
 import static clevis.sql.Geometry.EPS;
 import static java.lang.Math.abs;
@@ -90,12 +87,12 @@ public class Rectangle implements Shape{
     /**
      * @return copy of points array.
      */
-    public Point[] points() { return Arrays.copyOf(points, 4); }
+    public Point[] points() { return Points.copyOf(points, points.length); }
 
     /**
      * @return copy of lines array.
      */
-    public Line[] lines() { return Arrays.copyOf(lines, 4); }
+    public Line[] lines() { return Lines.copyOf(lines, lines.length); }
 
 
     @Override

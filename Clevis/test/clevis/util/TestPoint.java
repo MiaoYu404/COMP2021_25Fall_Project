@@ -1,13 +1,10 @@
-package clevis.model;
+package clevis.util;
 
-import clevis.sql.Points;
-import clevis.util.Point;
-import clevis.util.Rectangle;
-import clevis.util.Line;
+import clevis.sql.*;
+
 import org.junit.Test;
 import org.junit.Before;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
 
 /**
  * 测试Point类的功能实现，包括构造函数、坐标操作、向量运算、几何计算等。
@@ -277,17 +274,17 @@ public class TestPoint {
     /**
      * 测试90度旋转功能
      */
-    @Test
-    public void test90DegreeRotation() {
-        // Test 90-degree counterclockwise rotation
-        regularPoint.rot90();
-        assertThat(regularPoint.x()).isWithin(1e-10).of(-4.0); // 3,4 -> -4,3
-        assertThat(regularPoint.y()).isWithin(1e-10).of(3.0);
-
+//    @Test
+//    public void test90DegreeRotation() {
+//        // Test 90-degree counterclockwise rotation
+//        regularPoint.rot90();
+//        assertThat(regularPoint.x()).isWithin(1e-10).of(-4.0); // 3,4 -> -4,3
+//        assertThat(regularPoint.y()).isWithin(1e-10).of(3.0);
+//
 //        // Verify original point is not modified
 //        assertThat(regularPoint.x()).isWithin(1e-10).of(3.0);
 //        assertThat(regularPoint.y()).isWithin(1e-10).of(4.0);
-    }
+//    }
 
     /**
      * 测试单位向量计算

@@ -1,14 +1,8 @@
-package clevis.model;
+package clevis.util;
 
-import clevis.util.Point;
-import clevis.util.Rectangle;
-import clevis.util.Line;
-import clevis.util.Shape;
 import org.junit.Test;
 import org.junit.Before;
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
-import java.util.Arrays;
 
 /**
  * 测试Rectangle类的功能实现，包括构造函数、坐标计算、移动操作、父子关系等。
@@ -487,34 +481,34 @@ public class TestRectangle {
     /**
      * 测试点数组的不变性
      */
-//    @Test
-//    public void testPointsArrayImmutability() {
-//        // Get a copy of the points array
-//        Point[] originalPoints = regularRect.points();
-//
-//        // Modify the copied array
-//        originalPoints[0].add(100.0, 100.0);
-//
-//        // Verify the original rectangle's points were not affected
-//        Point[] currentPoints = regularRect.points();
-//        assertThat(currentPoints[0].x()).isWithin(1e-10).of(1.0);
-//        assertThat(currentPoints[0].y()).isWithin(1e-10).of(5.0);
-//    }
+    @Test
+    public void testPointsArrayImmutability() {
+        // Get a copy of the points array
+        Point[] originalPoints = regularRect.points();
+
+        // Modify the copied array
+        originalPoints[0].add(100.0, 100.0);
+
+        // Verify the original rectangle's points were not affected
+        Point[] currentPoints = regularRect.points();
+        assertThat(currentPoints[0].x()).isWithin(1e-10).of(1.0);
+        assertThat(currentPoints[0].y()).isWithin(1e-10).of(5.0);
+    }
     
     /**
      * 测试线段数组的不变性
      */
-//    @Test
-//    public void testLinesArrayImmutability() {
-//        // Get a copy of the lines array
-//        Line[] originalLines = regularRect.lines();
-//
-//        // Modify the copied array's points
-//        originalLines[0].move(100.0, 100.0);
-//
-//        // Verify the original rectangle's lines were not affected
-//        Line[] currentLines = regularRect.lines();
-//        assertThat(currentLines[0].from().x()).isWithin(1e-10).of(1.0);
-//        assertThat(currentLines[0].from().y()).isWithin(1e-10).of(5.0);
-//    }
+    @Test
+    public void testLinesArrayImmutability() {
+        // Get a copy of the lines array
+        Line[] originalLines = regularRect.lines();
+
+        // Modify the copied array's points
+        originalLines[0].move(100.0, 100.0);
+
+        // Verify the original rectangle's lines were not affected
+        Line[] currentLines = regularRect.lines();
+        assertThat(currentLines[0].from().x()).isWithin(1e-10).of(1.0);
+        assertThat(currentLines[0].from().y()).isWithin(1e-10).of(5.0);
+    }
 }

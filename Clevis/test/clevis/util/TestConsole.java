@@ -1,10 +1,10 @@
-package clevis.model;
+package clevis.util;
 
 import clevis.system.Console;
-import org.junit.Test;
 
 import java.util.List;
 
+import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
 public class TestConsole {

@@ -1,7 +1,6 @@
 package clevis.sql;
 
-import clevis.util.Line;
-import clevis.util.Point;
+import clevis.util.*;
 
 import static clevis.sql.Geometry.sign;
 
@@ -34,5 +33,35 @@ public class Lines {
         ) return false;
 
         return true;
+    }
+
+    /**
+     * copy of
+     * @param original original
+     * @param size size
+     * @return copy
+     */
+    public static Line[] copyOf(Line[] original, int size) {
+        if (original == null) throw new NullPointerException();
+        if (original.length < size) throw new IllegalArgumentException();
+        Line[] ret = new Line[size];
+        for (int i = 0; i < size; i++) ret[i] = new Line(original[i]);
+        return ret;
+    }
+
+    /**
+     * copy of range
+     * @param original original
+     * @param from from
+     * @param to to
+     * @return copy of range
+     */
+    public static Line[] copyOfRange(Line[] original, int from, int to) {
+        if (original == null) throw new NullPointerException();
+        if (original.length < to) throw new IllegalArgumentException();
+        if (from > to) throw new IllegalArgumentException();
+        Line[] ret = new Line[to - from];
+        for (int i = from; i < to; i++) ret[i - from] = new Line(original[i]);
+        return ret;
     }
 }

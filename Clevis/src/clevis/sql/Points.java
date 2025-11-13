@@ -1,6 +1,6 @@
 package clevis.sql;
 
-import clevis.util.Point;
+import clevis.util.*;
 
 /**
  * functions between points
@@ -35,5 +35,35 @@ public class Points {
     public static Point divide(Point p, double c) {
         if (c == 0.0) throw new ArithmeticException("Division by zero.");
         return new  Point(p.x() / c, p.y() / c);
+    }
+
+    /**
+     * copy of a size
+     * @param original original array
+     * @param size size
+     * @return copy
+     */
+    public static Point[] copyOf(Point[] original, int size) {
+        if (original == null) throw new NullPointerException();
+        if (original.length < size) throw new IllegalArgumentException();
+        Point[] ret = new Point[size];
+        for (int i = 0; i < size; i++) ret[i] = new Point(original[i]);
+        return ret;
+    }
+
+    /**
+     * copy of a range
+     * @param original the array
+     * @param from from index
+     * @param to to index
+     * @return copy of range
+     */
+    public static Point[] copyOfRange(Point[] original, int from, int to) {
+        if (original == null) throw new NullPointerException();
+        if (original.length < to || original.length < from) throw new IllegalArgumentException();
+        if (from > to) throw new IllegalArgumentException();
+        Point[] ret = new Point[to - from];
+        for (int i = from; i < to; i++) ret[i - from] = new Point(original[i]);
+        return ret;
     }
 }
