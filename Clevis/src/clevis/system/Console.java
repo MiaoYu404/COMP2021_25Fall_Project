@@ -1,6 +1,6 @@
 package clevis.system;
 
-import clevis.sql.Geometry;
+import clevis.sql.*;
 import clevis.util.*;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class Console {
     public Shape addLine(String[] args) {
         double x1 =  Double.valueOf(args[2]), y1 = Double.valueOf(args[3]);
         double x2 =  Double.valueOf(args[4]), y2 = Double.valueOf(args[5]);
-        Point from = new Point(x1, y2);
+        Point from = new Point(x1, y1);
         Point to = new Point(x2, y2);
         return new Line(args[1], from, to);
     }
