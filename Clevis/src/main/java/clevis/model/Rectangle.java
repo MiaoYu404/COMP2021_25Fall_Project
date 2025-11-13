@@ -155,15 +155,17 @@ public class Rectangle implements Shape{
     // override toString function
     @Override
     public String toString() {
-        String ret = "\"" + name + "\"<Rectangle>:";
+        // TODO: 加入长宽
+        String ret = "";
+        if (name != null) { ret += "\"" + name + "\"";}
+        ret += "<" + this.getClass() + ">:";
+
         ret += "\nPoints:";
-        for (int i = 0; i < 4; i++) {
-            ret = ret + "\n" + points[i].toString();
-        }
+        for (int i = 0; i < 4; i++) ret = ret + "\n" + points[i].toString();
+
         ret = ret + "\nLines:";
-        for (int i = 0; i < 4; i++) {
-            ret = ret + "\n" + lines[i].toString();
-        }
+        for (int i = 0; i < 4; i++) ret = ret + "\n" + lines[i].toString();
+
         return ret;
     }
 

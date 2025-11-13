@@ -98,9 +98,12 @@ public class Circle implements Shape{
 
     @Override
     public String toString() {
-        String rsl = "\"" + name + "\"<Circle>:";
-        rsl += "\nCenter:" + center + "\nRadius:" + r;
-        return rsl;
+        String ret = "";
+        if (name != null) { ret += "\"" + name + "\"";}
+        ret += "<" + this.getClass() + ">:";
+
+        ret += "\nCenter:" + center + "\nRadius:" + r;
+        return ret;
     }
 
     @Override
