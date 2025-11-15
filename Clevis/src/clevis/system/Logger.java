@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * class who in charge the IO
  */
-public class IO {
+public class Logger {
     private String html;
     private File txt;
     private ArrayList<String> htmlTable;
@@ -20,7 +20,7 @@ public class IO {
      * @param htmlAddress the address of html
      * @param txtAddress the address of txt
      */
-    public IO(String htmlAddress, String txtAddress){
+    public Logger(String htmlAddress, String txtAddress){
         this.html = htmlAddress;
         this.txt = new File(txtAddress);
         this.htmlTable = new ArrayList<>();
@@ -129,7 +129,7 @@ public class IO {
         // TODO: Qusetion for the address input
 //        IO io = new IO("Project/clevis.iml",
 //                "-txt d:\\log.txt");
-        IO io = new IO("Project/test/test reading.html", "Project/test/test.txt");
+        Logger io = new Logger("Project/test/test reading.html", "Project/test/test.txt");
         io.readHtml();
         io.readTxt();
         System.out.println(io.getHtmlTable());
