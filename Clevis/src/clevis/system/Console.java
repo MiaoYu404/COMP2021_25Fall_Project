@@ -6,6 +6,7 @@ import clevis.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * class of Console
@@ -15,6 +16,7 @@ public class Console {
     private List<String> shapes;
     private HashMap<String, Shape> name2Shape;
     private HashMap<Shape, String> shape2Name;
+    private Stack<String[]> ops;
 
     /**
      * construct with no para
@@ -23,6 +25,7 @@ public class Console {
         shapes = new ArrayList<>();
         name2Shape = new HashMap<>();
         shape2Name = new HashMap<>();
+        ops = new Stack<>();
     }
 
     /**
@@ -37,7 +40,8 @@ public class Console {
             case "square" -> addSquare(args);
             default -> throw new IllegalArgumentException("Not implemented Shape type.");
         };
-        push(args[1], s);
+        push(args[1], s);       // args[1] is the name of the Shape.
+        storeOperation(args);
     }
 
     /**
@@ -45,10 +49,11 @@ public class Console {
      * @return a Rectangle.
      */
     public Shape addRectangle(String[] args) {
+        String name = args[1];
         double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
         double w = Double.parseDouble(args[4]), h = Double.parseDouble(args[5]);
         Point top_left = new Point(x, y);
-        return new Rectangle(args[1], top_left, w, h);
+        return new Rectangle(name, top_left, w, h);
     }
 
     /**
@@ -56,11 +61,12 @@ public class Console {
      * @return a Line.
      */
     public Shape addLine(String[] args) {
+        String name = args[1];
         double x1 =  Double.parseDouble(args[2]), y1 = Double.parseDouble(args[3]);
         double x2 =  Double.parseDouble(args[4]), y2 = Double.parseDouble(args[5]);
         Point from = new Point(x1, y1);
         Point to = new Point(x2, y2);
-        return new Line(args[1], from, to);
+        return new Line(name, from, to);
     }
 
     /**
@@ -68,10 +74,11 @@ public class Console {
      * @return a Circle.
      */
     public Shape addCircle(String[] args) {
+        String name = args[1];
         double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
         double r = Double.parseDouble(args[4]);
         Point center = new Point(x, y);
-        return new Circle(args[1], center, r);
+        return new Circle(name, center, r);
     }
 
     /**
@@ -79,10 +86,11 @@ public class Console {
      * @return a Square.
      */
     public Shape addSquare(String[] args) {
+        String name = args[1];
         double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
         double side = Double.parseDouble(args[4]);
         Point midPoint = new Point(x, y);
-        return new Square(args[1], midPoint, side);
+        return new Square(name, midPoint, side);
     }
 
     /**
@@ -299,11 +307,35 @@ public class Console {
     }
 
     /**
+     * undo an operation
+     */
+    public void undo() {
+        // TODO: undo method.
+
+    }
+
+    /**
+     * redo an operation.
+     */
+    public void redo() {
+        // TODO: redo method.
+    }
+
+    /**
      * @param name name of the shape
      * @return whether the shape exists.
      */
     public boolean exists(String name) {
         // TODO: check the shape whether exists.
         return shapes.contains(name);
+    }
+
+    /**
+     * helper method. Store the operation.
+     * @param op operation
+     */
+    public void storeOperation(String[] op) {
+        if (op == null) throw new IllegalArgumentException("Null operator.");
+        ops.push(op);
     }
 }
