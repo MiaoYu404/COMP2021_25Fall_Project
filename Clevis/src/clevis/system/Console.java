@@ -50,15 +50,8 @@ public class Console {
      * @param args arguments
      */
     public void add(String[] args) {
-        Shape s = switch (args[0]) {
-            case "rectangle" -> addRectangle(args);
-            case "line" -> addLine(args);
-            case "circle" -> addCircle(args);
-            case "square" -> addSquare(args);
-            default -> throw new IllegalArgumentException("Not implemented Shape type.");
-        };
-        push(args[1], s);       // args[1] is the name of the Shape.
-        storeOperation(args);
+        Operation op = new OpAdd(args, data);
+        op.call();
     }
 
     /**
