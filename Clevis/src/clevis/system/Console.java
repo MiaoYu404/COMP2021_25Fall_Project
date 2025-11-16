@@ -58,12 +58,11 @@ public class Console {
      * group operation call with argument input in line.
      * @param args          arguemnts
      */
-    public Shape addRectangle(String[] args) {
-        String name = args[1];
-        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
-        double w = Double.parseDouble(args[4]), h = Double.parseDouble(args[5]);
-        Point top_left = new Point(x, y);
-        return new Rectangle(name, top_left, w, h);
+    public void group(String[] args) {
+        String groupName = args[1];
+        List<String> members = new ArrayList<>();
+        for (int i = 2; i < args.length; i++) members.add(args[i]);
+        group(groupName, members);
     }
 
     /**
