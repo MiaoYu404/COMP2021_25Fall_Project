@@ -1,4 +1,4 @@
-package clevis.util;
+package clevis.util.shape;
 
 import java.util.ArrayList;
 import java.util.List;
