@@ -17,44 +17,60 @@ public class TestConsole {
      */
     @Test
     public void test() {
-        Console console = new Console();
+        Application app = new Application();
+        Console console = app.console();
 
         String op;
         op = "circle A 1 7 3";
-        console.add(op.split(" "));
-        console.list("A");
+        console.readOperation(op);
+
+        op = "list A";
+        console.readOperation(op);
 
         op = "line B 2 3 5 6";
-        console.add(op.split(" "));
+        console.readOperation(op);
         assertThat(console.intersects("A", "B")).isTrue();
 
         op = "rectangle C 3 10 2 3";
-        console.add(op.split(" "));
+        console.readOperation(op);
         assertThat(console.intersects("B", "C")).isFalse();
-        console.group("G1", List.of("A", "C"));
+
+        op = "group G1 A C";
+        console.readOperation(op);
         assertThat(console.intersects("B", "G1")).isTrue();
         try {
-            console.move("C", 1.5, -0.5);
+            op = "move C 1.5 -0.5";
+            console.readOperation(op);
         } catch (Exception e) {
             // success
             System.out.println("illegal move catched.");
         }
-        console.ungroup("G1");
+        op = "ungroup G1";
+        console.readOperation(op);
         assertThat(console.intersects("B", "C")).isFalse();
 
         op = "line D -2 9 5 9";
-        console.add(op.split(" "));
+        console.readOperation(op);
         assertThat(console.shapeAt(3.2, 9.0).name()).isEqualTo("D");
         assertThat(console.shapeAt(3.2, 8.0).name()).isEqualTo("C");
         assertThat(console.shapeAt(2, 8).name()).isEqualTo("A");
 
-        console.move("B", -0.8, 0);
+        op = "move B -0.8 0";
+        console.readOperation(op);
         assertThat(console.shapeAt(3, 4.8).name()).isEqualTo("B");
-        console.group("G2", List.of("A", "C"));
+
+        op = "group G2 A C";
+        console.readOperation(op);
         assertThat(console.shapeAt(3, 4.8).name()).isEqualTo("G2");
-        console.getBoundingBox("G2");
-        console.move("G2", -1, 0);
-        console.getBoundingBox("G2");
+
+        op = "boundingbox G2";
+        console.readOperation(op);
+
+        op = "move G2 -1 0";
+        console.readOperation(op);
+
+        op = "boundingbox G2";
+        console.readOperation(op);
     }
 
     /**
