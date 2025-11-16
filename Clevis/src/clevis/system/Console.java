@@ -11,7 +11,6 @@ import java.util.List;
  * class of Console
  */
 public class Console {
-    // TODO: Question: how to deal with different shapes with the same name
     private final Data data;
 
     /**
