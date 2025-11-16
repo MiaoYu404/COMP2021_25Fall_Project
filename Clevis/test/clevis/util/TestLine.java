@@ -1,10 +1,10 @@
 package clevis.model;
 
 import clevis.sql.Lines;
-import clevis.util.Circle;
-import clevis.util.Line;
-import clevis.util.Point;
-import clevis.util.Rectangle;
+import clevis.util.shape.Circle;
+import clevis.util.shape.Line;
+import clevis.util.shape.Point;
+import clevis.util.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import static clevis.sql.Geometry.intersects;
