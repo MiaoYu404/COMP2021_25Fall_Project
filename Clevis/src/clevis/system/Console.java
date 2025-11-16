@@ -168,9 +168,11 @@ public class Console {
     public void boundingBox(String[] args) {
         String shapeName = args[1];
 
-        Shape s = name2Shape.get(name);
-        if (s instanceof Group g) {
-            for (Shape shape : g.shapes()) delete(shape.name());
+        String info = boundingBox(shapeName);
+        if (info == null) {
+            printInfo("bounding box query failed.");
+        } else {
+            printInfo(info);
         }
         shape2Name.remove(s);
         name2Shape.remove(name);
