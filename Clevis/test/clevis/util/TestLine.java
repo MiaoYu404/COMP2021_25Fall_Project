@@ -3,6 +3,7 @@ package clevis.util;
 import clevis.sql.Lines;
 import static clevis.sql.Geometry.intersects;
 
+import clevis.util.shape.*;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
