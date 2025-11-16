@@ -269,15 +269,11 @@ public class Console {
      * @param dy move along y
      */
     public void move(String name, double dx, double dy) {
-        // TODO: move by a vector;
-        if (!exists(name))
-            throw new IllegalArgumentException(name + " does not exist.");
+        String[] args = new String[4];
+        args[0] = "move"; args[1] = name; args[2] = String.valueOf(dx); args[3] = String.valueOf(dy);
 
-        if (haveFather(name))
-            throw new IllegalArgumentException(name + " is inside an existing group.");
-
-        Shape s = name2Shape.get(name);
-        s.move(dx, dy);
+        Operation op = new OpMove(args, data);
+        op.call();
     }
 
     /**
