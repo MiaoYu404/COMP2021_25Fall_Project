@@ -3,8 +3,6 @@ package clevis.util;
 import clevis.Application;
 import clevis.system.Console;
 
-import java.util.List;
-
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
