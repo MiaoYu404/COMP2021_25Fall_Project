@@ -64,54 +64,6 @@ public class Console {
         for (int i = 2; i < args.length; i++) members.add(args[i]);
         group(groupName, members);
     }
-
-    /**
-     * @param args arguments.
-     * @return a Line.
-     */
-    public Shape addLine(String[] args) {
-        String name = args[1];
-        double x1 =  Double.parseDouble(args[2]), y1 = Double.parseDouble(args[3]);
-        double x2 =  Double.parseDouble(args[4]), y2 = Double.parseDouble(args[5]);
-        Point from = new Point(x1, y1);
-        Point to = new Point(x2, y2);
-        return new Line(name, from, to);
-    }
-
-    /**
-     * @param args arguments.
-     * @return a Circle.
-     */
-    public Shape addCircle(String[] args) {
-        String name = args[1];
-        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
-        double r = Double.parseDouble(args[4]);
-        Point center = new Point(x, y);
-        return new Circle(name, center, r);
-    }
-
-    /**
-     * @param args arguments.
-     * @return a Square.
-     */
-    public Shape addSquare(String[] args) {
-        String name = args[1];
-        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
-        double side = Double.parseDouble(args[4]);
-        Point midPoint = new Point(x, y);
-        return new Square(name, midPoint, side);
-    }
-
-    /**
-     * @param name name of the shape
-     * @param shape the shape object
-     */
-    public void push(String name, Shape shape) {
-        shapes.add(name);
-        name2Shape.put(name, shape);
-        shape2Name.put(shape, name);
-    }
-
     /**
      * group a list of shapes
      * @param groupName     name of the shape
@@ -207,16 +159,24 @@ public class Console {
      * @return the front shape at this point, or null means no shape at this point.
      */
     public Shape shapeAt (double x, double y) {
-        for (int i = shapes.size() - 1; i >= 0; i--) {
-            Shape s = name2Shape.get(shapes.get(i));
-            if (s.haveFather())
-                continue;
+        for (int i = data.size() - 1; i >= 0; i--) {
+            Shape s = data.get(i);
+            if (s.haveFather())  continue;          // if this is a group, it will not be count in shapeAt() method.
+
             Point p = new Point(x, y);
-            if (p.coveredBy(s))
-                return s;
+            if (p.coveredBy(s)) return s;
         }
-        return null;
-        // TODO: question for haveFather() use
+        return null;                                // no shape at this point.
+    }
+
+    /**
+     * @param args      arguments
+     */
+    public void intersects(String[] args) {
+        String shape1 = args[1];
+        String shape2 = args[2];
+        if (intersects(shape1, shape2)) System.out.println(shape1 + " intersects " + shape2);
+        else System.out.println(shape1 + " does not intersects " + shape2);
     }
 
     /**
@@ -231,7 +191,16 @@ public class Console {
         if (haveFather(s1) || haveFather(s2))
             throw new IllegalArgumentException(s1 + " or " + s2 + " is inside an existing group.");
 
-        return Geometry.intersects(name2Shape.get(s1), name2Shape.get(s2));
+        return Geometry.intersects(data.get(s1), data.get(s2));
+    }
+
+    /**
+     * list the information
+     * @param args      arguments
+     */
+    public void list(String[] args) {
+        String shapeName = args[1];
+        System.out.println(list(shapeName));
     }
 
     /**
@@ -245,21 +214,44 @@ public class Console {
 
         if (haveFather(name))
             throw new IllegalArgumentException(name + " is inside an existing group.");
-        System.out.println(name2Shape.get(name).toString());
-        return name2Shape.get(name).toString();
+        System.out.println(data.get(name).toString());
+        return data.get(name).toString();
     }
 
     /**
-     * @return info about all shapes in Z decreasing order
+     * list the information of the shape
+     * @param shape     the shape Object
+     * @return          the information of the shape.
      */
-    public String listAll() {
-        if (shapes.isEmpty())
-            return "";
+    public String list(Shape shape) {
+        // TODO: make Group List more format.
+        return shape.toString();
+    }
 
-        String ret = list(shapes.get(shapes.size() - 1));
-        for (int i = shapes.size() - 2; i >= 0; i--)
-            ret += "\n" + list(shapes.get(i));
-        return ret;
+    /**
+     * list all shapes
+     */
+    public void listAll() {
+        // TODO: add "nothing" when data is empty.
+        if (data.isEmpty())
+            return ;
+
+        String ret = list(data.get(data.size() - 1));
+        for (int i = data.size() - 2; i >= 0; i--)
+            ret += "\n" + list(data.get(i));
+
+        printInfo(ret);
+    }
+
+    /**
+     * move by a vector
+     * @param args      arguments
+     */
+    public void move(String[] args) {
+        String name = args[1];
+        double dx = Double.parseDouble(args[2]);
+        double dy = Double.parseDouble(args[3]);
+        move(name, dx, dy);
     }
 
     /**
