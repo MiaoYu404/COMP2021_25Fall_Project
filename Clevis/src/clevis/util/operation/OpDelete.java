@@ -42,7 +42,7 @@ public class OpDelete extends Operation{
             }
             undoOperation = new OpGroup(name, members, data);
         } else {
-            undoOperation = new OpAdd(shape, index, data);
+            undoOperation = new OpAdd(name, shape, index, data);
         }
 
         data.remove(name);
