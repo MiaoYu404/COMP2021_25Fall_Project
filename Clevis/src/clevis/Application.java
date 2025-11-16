@@ -29,5 +29,4 @@ public class Application {
     public Console console() {
         return console;
     }
-
 }
