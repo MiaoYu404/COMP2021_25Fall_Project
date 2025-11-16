@@ -6,7 +6,6 @@ import clevis.util.operation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * class of Console
