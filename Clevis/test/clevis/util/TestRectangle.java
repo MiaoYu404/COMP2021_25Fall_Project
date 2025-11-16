@@ -1,5 +1,6 @@
 package clevis.util;
 
+import clevis.util.shape.*;
 import org.junit.Test;
 import org.junit.Before;
 import static com.google.common.truth.Truth.assertThat;
