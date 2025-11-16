@@ -12,10 +12,7 @@ import java.util.List;
  */
 public class Console {
     // TODO: Question: how to deal with different shapes with the same name
-    private List<String> shapes;
-    private HashMap<String, Shape> name2Shape;
-    private HashMap<Shape, String> shape2Name;
-    private Stack<String[]> ops;
+    private final Data data;
 
     /**
      * construct with no para
