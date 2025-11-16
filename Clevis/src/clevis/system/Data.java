@@ -1,7 +1,6 @@
 package clevis.system;
 
 import clevis.util.operation.Operation;
-import clevis.util.operation.Undoable;
 import clevis.util.shape.*;
 
 import java.util.*;
@@ -52,8 +51,9 @@ public class Data {
      * @param shape     the shape Object
      * @param position  the position where it would love to be insert
      */
-    public void insertShape(String name, Shape shape, int position) {
-        shapes.add(name);
+    public void insertShape(String name, Shape shape, int index) {
+        // TODO: insert the Shape to particular position.
+        shapes.add(index, name);
         name2Shape.put(name, shape);
     }
 
