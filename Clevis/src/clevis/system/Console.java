@@ -1,5 +1,6 @@
 package clevis.system;
 
+import clevis.Application;
 import clevis.sql.*;
 import clevis.util.shape.*;
 import clevis.util.operation.*;
@@ -13,12 +14,14 @@ import java.util.List;
  */
 public class Console {
     private final Data data;
+    private final Logger logger;
 
     /**
      * construct with no para
      */
     public Console() {
         data = new Data(this);
+        logger = Application.logger();
     }
 
     /**
@@ -170,7 +173,7 @@ public class Console {
         double y = Double.parseDouble(args[2]);
         Shape res = shapeAt(x, y);
         if (res == null) System.out.println("Shape at " + x + ", " + y + " not found.");
-        else list(res);
+        else list(res.name());              // here, use name.
     }
 
     /**
@@ -333,7 +336,13 @@ public class Console {
      * quit anytime;
      */
     public void quit() {
-        System.exit(0);
+        try {
+            if (logger != null) {
+                logger.close();
+            }
+        } finally {
+            System.exit(0);
+        }
     }
 
     /* --- helper methods --- */
