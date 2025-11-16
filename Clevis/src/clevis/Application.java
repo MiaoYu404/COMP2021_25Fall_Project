@@ -8,7 +8,7 @@ import java.util.Scanner;
  * reading two files
  */
 public class Application {
-    private static Console console = new Console();
+    private final static Console console = new Console();
 
     /**
      * @param args input arguments
