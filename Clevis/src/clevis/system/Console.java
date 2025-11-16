@@ -184,8 +184,21 @@ public class Console {
         if (!exists(name))
             throw new IllegalArgumentException(name + " does not exist.");
 
-        Rectangle r = (Rectangle) name2Shape.get(name).boundingBox();
-        System.out.println("Bounding box: " + r.points()[0] +  ", " + r.width() + ", " + r.height() + ".");
+        Rectangle r = (Rectangle) data.get(name).boundingBox();
+        if (r == null) return null;
+        return ("Bounding box: " + r.points()[0] +  ", " + r.width() + ", " + r.height() + ".");
+    }
+
+    /**
+     * list the shape at some coordinate
+     * @param args      arguments
+     */
+    public void shapeAt (String[] args) {
+        double x = Double.parseDouble(args[1]);
+        double y = Double.parseDouble(args[2]);
+        Shape res = shapeAt(x, y);
+        if (res == null) System.out.println("Shape at " + x + ", " + y + " not found.");
+        else list(res);
     }
 
     /**
