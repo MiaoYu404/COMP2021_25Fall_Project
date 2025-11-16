@@ -298,9 +298,17 @@ public class Console {
      * @param name name of the shape
      * @return whether the shape exists.
      */
-    public boolean exists(String name) {
-        // TODO: check the shape whether exists.
-        return shapes.contains(name);
+    public boolean exists(String name) { return data.exists(name); }
+
+    /**
+     * @param name name of the shape
+     * @return whether the shape have father
+     */
+    public boolean haveFather(String name) {
+        if (!exists(name))
+            throw new IllegalArgumentException(name + " not found");
+
+        return data.name2Shape().get(name).haveFather();
     }
 
     /**
