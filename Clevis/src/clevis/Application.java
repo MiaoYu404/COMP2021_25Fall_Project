@@ -1,6 +1,5 @@
 package clevis;
 
-import clevis.system.Clevis;
 import clevis.system.Console;
 
 import java.util.Arrays;
