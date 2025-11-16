@@ -55,8 +55,8 @@ public class Console {
     }
 
     /**
-     * @param args arguments.
-     * @return a Rectangle.
+     * group operation call with argument input in line.
+     * @param args          arguemnts
      */
     public Shape addRectangle(String[] args) {
         String name = args[1];
