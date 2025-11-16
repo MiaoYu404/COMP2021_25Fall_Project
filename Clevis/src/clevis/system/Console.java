@@ -304,8 +304,8 @@ public class Console {
     }
 
     /**
-     * helper method. Store the operation.
-     * @param op operation
+     * output information
+     * @param content       the content
      */
     public void printInfo(String content) {
         // TODO: maybe logger or output to some terminal.
