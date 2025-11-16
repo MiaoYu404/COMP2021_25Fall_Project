@@ -49,4 +49,40 @@ public class TestConsole {
         console.move("G2", -1, 0);
         console.getBoundingBox("G2");
     }
+
+    /**
+     *  test undo & redo
+     */
+    @Test
+    public void testUndo() {
+        Application app = new Application();
+        Console console = app.console();
+        String op;
+
+        op = "listAll";
+        console.readOperation(op);
+
+        op = "rectangle A -1 1 2 2";
+        console.readOperation(op);
+        op = "circle C 0 0 1";
+        console.readOperation(op);
+
+        op = "listAll";
+        console.readOperation(op);
+
+        op = "undo";
+        console.readOperation(op);
+
+        try {
+            op = "list C";
+            console.readOperation(op);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        };
+
+        op = "redo";
+        console.readOperation(op);
+        op = "list C";
+        console.readOperation(op);
+    }
 }
