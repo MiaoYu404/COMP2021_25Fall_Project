@@ -19,18 +19,15 @@ public class Application {
 		Scanner scanner = new Scanner(System.in);
         while (true) {
             String inp = scanner.nextLine();
-            String[] line = inp.split(" ");
-            switch (line[0]) {
-                case "add":
-                    console.add(Arrays.copyOfRange(line, 1, line.length));
-                    break;
-                case "list":
-                    console.list(line[1]);
-                    break;
-                case "quit":
-                    console.quit();
-            }
+            console.readOperation(inp);
         }
+    }
+
+    /**
+     * @return              the console
+     */
+    public Console console() {
+        return console;
     }
 
 }
