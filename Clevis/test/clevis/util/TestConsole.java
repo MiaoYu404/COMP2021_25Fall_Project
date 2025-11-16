@@ -8,6 +8,9 @@ import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
 public class TestConsole {
+    /**
+     * basic test
+     */
     @Test
     public void test() {
         Console console = new Console();
