@@ -307,8 +307,8 @@ public class Console {
      * helper method. Store the operation.
      * @param op operation
      */
-    public void storeOperation(String[] op) {
-        if (op == null) throw new IllegalArgumentException("Null operator.");
-        ops.push(op);
+    public void printInfo(String content) {
+        // TODO: maybe logger or output to some terminal.
+        System.out.println(content);
     }
 }
