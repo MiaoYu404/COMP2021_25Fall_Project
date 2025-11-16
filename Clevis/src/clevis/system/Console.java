@@ -279,15 +279,7 @@ public class Console {
     /**
      * quit anytime;
      */
-    public void quit() {
-        System.exit(0);
-    }
-
-    /**
-     * undo an operation
-     */
-    public void undo() {
-        // TODO: undo method.
+    public void quit() { System.exit(0); }
 
     }
 
