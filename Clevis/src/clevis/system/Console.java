@@ -180,7 +180,7 @@ public class Console {
      * @param name name of the shape
      * @return the information of the boudning box.
      */
-    public void getBoundingBox(String name) {
+    public String boundingBox(String name) {
         if (!exists(name))
             throw new IllegalArgumentException(name + " does not exist.");
 
