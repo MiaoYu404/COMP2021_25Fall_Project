@@ -161,8 +161,12 @@ public class Console {
         op.call();
     }
 
-        if (haveFather(name))
-            throw new IllegalArgumentException(name + " is inside an existing group.");
+    /**
+     * query the bounding box
+     * @param args      arguements
+     */
+    public void boundingBox(String[] args) {
+        String shapeName = args[1];
 
         Shape s = name2Shape.get(name);
         if (s instanceof Group g) {
