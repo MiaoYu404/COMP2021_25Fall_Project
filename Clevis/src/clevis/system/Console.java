@@ -288,6 +288,22 @@ public class Console {
     public void move(String name, Point v) { move(name, v.x(), v.y()); }
 
     /**
+     * undo an operation (if possible)
+     */
+    public void undo() {
+        // TODO: implement this method
+        data.undo();
+    }
+
+    /**
+     * redo an operation (is possible)
+     */
+    public void redo() {
+        // TODO: implement this method
+        data.redo();
+    }
+
+    /**
      * quit anytime;
      */
     public void quit() { System.exit(0); }
