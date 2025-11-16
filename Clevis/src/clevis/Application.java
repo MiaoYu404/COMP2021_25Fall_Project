@@ -14,8 +14,7 @@ public class Application {
      * @param args input arguments
      */
     public static void main(String[] args){
-        Clevis clevis = new Clevis();
-        Console console = new Console();
+
         // Initialize and utilize the system
 		Scanner scanner = new Scanner(System.in);
         while (true) {
