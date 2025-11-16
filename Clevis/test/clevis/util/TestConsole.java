@@ -111,6 +111,21 @@ public class TestConsole {
         console.readOperation(op);
     }
 
+    /**
+     * test if we enter the operation in wrong format.
+     */
+    @Test
+    public void testIncorrectFormat() {
+        Application app = new Application();
+        Console console = app.console();
+        String op = "rectangle";
+        try {
+            console.readOperation(op);
+        } catch (Exception e) {
+            assertThat(e.getMessage()).isEqualTo("Please input the correct operation.");
+        }
+    }
+
 
     /**
      * test for Operation
