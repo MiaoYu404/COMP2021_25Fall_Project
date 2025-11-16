@@ -3,6 +3,9 @@ package clevis.util;
 import clevis.Application;
 import clevis.system.Console;
 
+import clevis.system.Data;
+import clevis.util.operation.OpAdd;
+import clevis.util.operation.Operation;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
@@ -69,6 +72,7 @@ public class TestConsole {
 
         op = "boundingbox G2";
         console.readOperation(op);
+
     }
 
     /**
@@ -105,5 +109,29 @@ public class TestConsole {
         console.readOperation(op);
         op = "list C";
         console.readOperation(op);
+    }
+
+
+    /**
+     * test for Operation
+     */
+    @Test
+    public void testOperation() {
+        Operation o1 = new Operation();
+        o1.call();
+        o1.print();
+        o1.redo();o1.undo();
+    }
+
+    /**
+     * test for opAdd
+     */
+    @Test
+    public void testOpAdd() {
+        Data dat = new Data();
+        String[] arg = "square Joey 0 0 5".split(" ");
+        OpAdd oa = new OpAdd(arg, dat);
+        assertThat(oa.order()).isEqualTo(0);
+
     }
 }
