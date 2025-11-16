@@ -138,19 +138,18 @@ public class Console {
      * @param name name of the group.
      */
     public void ungroup(String name) {
-        if (!exists(name))
-            throw new IllegalArgumentException(name + " not found.");
+        Operation op = new OpUngroup(name, data);
+        op.call();
+    }
 
-        Shape s = name2Shape.get(name);
-        if (s instanceof Group g) {
-            for (Shape shape : g.shapes()) {
-                removeFather(shape);
-            }
-            g.shapes().clear();
-            delete(name);
-        } else {
-            throw new IllegalArgumentException(name + " is not a Group.");
-        }
+    /**
+     * delete a shape
+     * @param args      arguments
+     */
+    public void delete(String[] args) {
+        String name = args[1];
+        if (!data.exists(name)) throw new IllegalArgumentException(name + " not exists");
+        delete(name);
     }
 
     /**
