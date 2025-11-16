@@ -157,8 +157,9 @@ public class Console {
      * @param name name of the shape
      */
     public void delete(String name) {
-        if (!exists(name))
-            throw new IllegalArgumentException(name + " does not exist.");
+        Operation op = new OpDelete(name, data);
+        op.call();
+    }
 
         if (haveFather(name))
             throw new IllegalArgumentException(name + " is inside an existing group.");
