@@ -1,6 +1,6 @@
 package clevis.sql;
 
-import clevis.util.*;
+import clevis.util.shape.*;
 
 import static clevis.sql.Geometry.sign;
 

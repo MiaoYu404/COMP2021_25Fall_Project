@@ -1,4 +1,4 @@
-package clevis.util;
+package clevis.util.shape;
 
 /**
  * class of Shape

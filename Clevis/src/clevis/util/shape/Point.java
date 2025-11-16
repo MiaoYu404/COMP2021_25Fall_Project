@@ -1,4 +1,4 @@
-package clevis.util;
+package clevis.util.shape;
 
 import clevis.sql.*;
 
