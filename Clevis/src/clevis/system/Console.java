@@ -235,9 +235,9 @@ public class Console {
         if (data.isEmpty())
             return ;
 
-        String ret = list(data.get(data.size() - 1));
-        for (int i = data.size() - 2; i >= 0; i--)
-            ret += "\n" + list(data.get(i));
+        StringBuilder ret = new StringBuilder();
+        for (int i = data.size() - 1; i >= 0; i--)
+            ret.append("\n").append(list(data.get(i)));
 
         printInfo(ret);
     }
