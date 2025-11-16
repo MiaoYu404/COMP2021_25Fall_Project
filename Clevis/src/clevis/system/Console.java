@@ -281,14 +281,7 @@ public class Console {
      */
     public void quit() { System.exit(0); }
 
-    }
-
-    /**
-     * redo an operation.
-     */
-    public void redo() {
-        // TODO: redo method.
-    }
+    /* --- helper methods --- */
 
     /**
      * @param name name of the shape
