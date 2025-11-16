@@ -18,10 +18,31 @@ public class Console {
      * construct with no para
      */
     public Console() {
-        shapes = new ArrayList<>();
-        name2Shape = new HashMap<>();
-        shape2Name = new HashMap<>();
-        ops = new Stack<>();
+        data = new Data(this);
+    }
+
+    /**
+     * read the operation throw a string
+     * @param op        operation string
+     */
+    public void readOperation(String op) {
+        String[] operation = op.split(" ");
+        String operationType = operation[0];
+        switch (operationType) {
+            // operations
+            case "rectangle", "line", "circle", "square" -> add(operation);
+            case "group" -> group(operation);
+            case "ungroup" -> ungroup(operation);
+            case "delete" -> delete(operation);
+            case "move" -> move(operation);
+            // query
+            case "boundingbox" -> boundingBox(operation);
+            case "shapeAt" -> shapeAt(operation);
+            case "intersect" -> intersects(operation);
+            case "list" -> list(operation);
+            case "listAll" -> listAll();
+            case "quit" -> quit();
+        }
     }
 
     /**
