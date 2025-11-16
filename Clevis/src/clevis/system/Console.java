@@ -174,9 +174,6 @@ public class Console {
         } else {
             printInfo(info);
         }
-        shape2Name.remove(s);
-        name2Shape.remove(name);
-        shapes.remove(name);
     }
 
     /**
