@@ -117,13 +117,14 @@ public class Console {
      * @param groupName     name of the shape
      * @param members       mamber shapes
      */
-    public void setFather(Shape shape, Shape father) {
-        shape.setFather(father);
+    public void group(String groupName, List<String> members) {
+        Operation op = new OpGroup(groupName, members, data);
+        op.call();
     }
 
     /**
-     * remove `shape`'s father
-     * @param shape shape
+     * ungroup the group
+     * @param args      arguments
      */
     public void removeFather(Shape shape) {
         if (shape == null)
