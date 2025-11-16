@@ -2,7 +2,6 @@ package clevis;
 
 import clevis.system.Console;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
