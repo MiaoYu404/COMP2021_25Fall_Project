@@ -5,6 +5,7 @@ import clevis.util.shape.*;
 import clevis.util.operation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,10 +60,10 @@ public class Console {
      */
     public void group(String[] args) {
         String groupName = args[1];
-        List<String> members = new ArrayList<>();
-        for (int i = 2; i < args.length; i++) members.add(args[i]);
+        List<String> members = new ArrayList<>(Arrays.asList(args).subList(2, args.length));
         group(groupName, members);
     }
+
     /**
      * group a list of shapes
      * @param groupName     name of the shape
@@ -120,11 +121,10 @@ public class Console {
         String shapeName = args[1];
 
         String info = boundingBox(shapeName);
-        if (info == null) {
+        if (info == null)
             printInfo("bounding box query failed.");
-        } else {
+        else
             printInfo(info);
-        }
     }
 
     /**
@@ -239,7 +239,7 @@ public class Console {
         for (int i = data.size() - 1; i >= 0; i--)
             ret.append("\n").append(list(data.get(i)));
 
-        printInfo(ret);
+        printInfo(ret.toString());
     }
 
     /**
@@ -278,7 +278,6 @@ public class Console {
      * undo an operation (if possible)
      */
     public void undo() {
-        // TODO: implement this method
         data.undo();
     }
 
@@ -286,7 +285,6 @@ public class Console {
      * redo an operation (is possible)
      */
     public void redo() {
-        // TODO: implement this method
         data.redo();
     }
 
@@ -301,7 +299,9 @@ public class Console {
      * @param name name of the shape
      * @return whether the shape exists.
      */
-    public boolean exists(String name) { return data.exists(name); }
+    public boolean exists(String name) {
+        return data.exists(name);
+    }
 
     /**
      * @param name name of the shape
