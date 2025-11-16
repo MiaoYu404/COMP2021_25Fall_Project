@@ -1,7 +1,8 @@
 package clevis.system;
 
 import clevis.sql.*;
-import clevis.util.*;
+import clevis.util.shape.*;
+import clevis.util.operation.*;
 
 import java.util.ArrayList;
 import java.util.List;
