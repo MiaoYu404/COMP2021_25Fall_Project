@@ -126,26 +126,11 @@ public class Console {
      * ungroup the group
      * @param args      arguments
      */
-    public void removeFather(Shape shape) {
-        if (shape == null)
-            throw new IllegalArgumentException("Null shape is not allowed.");
-
-        Shape newFather = shape.getFather();
-        if (newFather == null)
-            throw new IllegalArgumentException("The Shape does not have father.");
-
-        shape.setFather(newFather.getFather());
-    }
-
-    /**
-     * @param name name of the shape
-     * @return whether the shape have father
-     */
-    public boolean haveFather(String name) {
-        if (!exists(name))
-            throw new IllegalArgumentException(name + " not found");
-
-        return name2Shape.get(name).haveFather();
+    public void ungroup(String[] args) {
+        String groupName = args[1];
+        if (data.get(groupName) instanceof Group) {
+            ungroup(args[1]);
+        } else throw new IllegalArgumentException("It is not a Group.");
     }
 
     /**
