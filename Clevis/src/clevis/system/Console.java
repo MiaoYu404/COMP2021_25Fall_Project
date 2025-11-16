@@ -41,6 +41,8 @@ public class Console {
             case "intersect" -> intersects(operation);
             case "list" -> list(operation);
             case "listAll" -> listAll();
+            case "undo" -> undo();
+            case "redo" -> redo();
             case "quit" -> quit();
         }
     }
@@ -52,6 +54,7 @@ public class Console {
     public void add(String[] args) {
         Operation op = new OpAdd(args, data);
         op.call();
+        data.insertOp(op);
     }
 
     /**
@@ -72,6 +75,7 @@ public class Console {
     public void group(String groupName, List<String> members) {
         Operation op = new OpGroup(groupName, members, data);
         op.call();
+        data.insertOp(op);
     }
 
     /**
@@ -92,6 +96,7 @@ public class Console {
     public void ungroup(String name) {
         Operation op = new OpUngroup(name, data);
         op.call();
+        data.insertOp(op);
     }
 
     /**
@@ -111,6 +116,7 @@ public class Console {
     public void delete(String name) {
         Operation op = new OpDelete(name, data);
         op.call();
+        data.insertOp(op);
     }
 
     /**
@@ -213,7 +219,6 @@ public class Console {
 
         if (haveFather(name))
             throw new IllegalArgumentException(name + " is inside an existing group.");
-        System.out.println(data.get(name).toString());
         return data.get(name).toString();
     }
 
@@ -265,6 +270,7 @@ public class Console {
 
         Operation op = new OpMove(args, data);
         op.call();
+        data.insertOp(op);
     }
 
     /**
