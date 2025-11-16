@@ -114,32 +114,8 @@ public class Console {
 
     /**
      * group a list of shapes
-     * @param newName name of the shape
-     * @param names shapes
-     */
-    public void group(String newName, List<String> names) {
-        // TODO: group shapes;
-        if (exists(newName))
-            throw new IllegalArgumentException(newName + " already exists");
-
-        ArrayList<Shape> shapes = new ArrayList<>();
-        for (String name : names) {
-            if (!exists(name))
-                throw new IllegalArgumentException("Shape " + name + " not found");
-            if (name2Shape.get(name).getFather() != null)
-                throw new IllegalArgumentException(name + " already have father.");
-            shapes.add(name2Shape.get(name));
-        }
-        Group group = new Group(newName, shapes);
-        push(newName, group);
-
-        for (String name : names)
-            setFather(name2Shape.get(name), group);
-    }
-
-    /**
-     * @param shape shape
-     * @param father new father
+     * @param groupName     name of the shape
+     * @param members       mamber shapes
      */
     public void setFather(Shape shape, Shape father) {
         shape.setFather(father);
