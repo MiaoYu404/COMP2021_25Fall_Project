@@ -81,6 +81,7 @@ public class TestConsole {
     @Test
     public void testUndo() {
         Application app = new Application();
+        app.Boost(false, null);
         Console console = app.console();
         String op;
 
