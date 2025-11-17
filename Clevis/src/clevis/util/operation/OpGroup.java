@@ -31,7 +31,7 @@ public class OpGroup extends Operation{
         ArrayList<Shape> shapes = new ArrayList<>();
         for (String name : names) {
             if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist");
-            if (data.get(name).getFather() != null) throw new IllegalArgumentException(name + " already have father");
+            if (data.get(name).father() != null) throw new IllegalArgumentException(name + " already have father");
             shapes.add(data.get(name));
         }
         Group group = new Group(groupName, shapes);

@@ -77,10 +77,10 @@ public class OpUngroup extends Operation{
         if (shape == null)
             throw new IllegalArgumentException("Null shape is not allowed.");
 
-        Shape newFather = shape.getFather();
+        Shape newFather = shape.father();
         if (newFather == null)
             throw new IllegalArgumentException("The Shape does not have father.");
 
-        shape.setFather(newFather.getFather());
+        shape.setFather(newFather.father());
     }
 }
