@@ -12,12 +12,24 @@ public class Application {
     private static Console console;
     private static Logger logger;
 
+    private static String htmlPath, txtPath;
+
+    /**
+     * Boost the Application
+     * @param record        whether log files will be record
+     * @param args          arguments
+     */
+    public static void Boost(boolean record, String[] args) {
+        if (record) parseArgs(args);
+        logger = new Logger(htmlPath, txtPath);
+        console = new Console();
+    }
+
     /**
      * @param args input arguments
      */
     public static void main(String[] args){
-        parseArgs(args);
-        console = new Console();
+        Boost(true, args);
         // Initialize and utilize the system
 		Scanner scanner = new Scanner(System.in);
         try {
@@ -40,8 +52,6 @@ public class Application {
     }
 
     private static void parseArgs(String[] args) {
-        String htmlPath = null, txtPath = null;
-
         for (int i = 0; i < args.length; i++) {
             if ("-html".equalsIgnoreCase(args[i]) && i + 1 < args.length) {
                 htmlPath = args[++i];
@@ -55,8 +65,6 @@ public class Application {
                     "-html <htmlFile> -txt <txtFile>");
             System.exit(1);
         }
-
-        logger = new Logger(htmlPath, txtPath);
     }
 
     /**
