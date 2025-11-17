@@ -94,11 +94,11 @@ public class TestLine {
 
     @Test
     public void testReverse(){
-        assertEquals(l1.reverse(), new Line(p4,p3));
-        assertEquals(l4.reverse(), new Line(p5,p4));
-        assertEquals(l5.reverse(),  new Line(p3,p2));
-        assertEquals(l2.reverse(), new Line(p2,p1));
-        assertEquals(l3.reverse(), new Line(p6,p5));
+        assertEquals(l1.reverse(), new Line(p4, p3));
+        assertEquals(l4.reverse(), new Line(p5, p4));
+        assertEquals(l5.reverse(),  new Line(p3, p2));
+        assertEquals(l2.reverse(), new Line(p2, p1));
+        assertEquals(l3.reverse(), new Line(p6, p5));
     }
 
     @Test
@@ -108,7 +108,6 @@ public class TestLine {
         assertThat(l2.inside(l4)).isFalse();
         assertThat(l3.inside(l2)).isFalse();
         assertThat(l2.inside(l1)).isFalse();
-
     }
 
     @Test
