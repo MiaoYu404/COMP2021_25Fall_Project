@@ -113,14 +113,20 @@ public class Line implements Shape{
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Line l) {
-            return from.equals(l.from()) && to.equals(l.to()) && name.equals(l.name());
+            return from.equals(l.from())
+                    && to.equals(l.to());
+//                    && name.equals(l.name());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return from.toString() + " -> " + to.toString();
+        StringBuilder ret = new StringBuilder();
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Line>: ");
+        ret.append(from.toString()).append(" -> ").append(to.toString());
+        return ret.toString();
     }
 
     @Override
