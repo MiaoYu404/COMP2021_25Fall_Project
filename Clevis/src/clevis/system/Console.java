@@ -13,8 +13,14 @@ import java.util.List;
  * class of Console
  */
 public class Console {
-    private final Data data;
-    private final Logger logger;
+    /**
+     * data storage
+     */
+    protected final Data data;
+    /**
+     * logger
+     */
+    protected final Logger logger;
 
     /**
      * construct with no para
