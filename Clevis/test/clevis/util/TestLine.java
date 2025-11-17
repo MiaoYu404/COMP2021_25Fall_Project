@@ -14,18 +14,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class TestLine {
     Line l1, l2, l3, l4, l5;
-    Point p1,p2,p3,p4,p5, p6;
+    Point p1, p2, p3, p4, p5, p6;
     @Before
-    public void setUp() {
-        Point p1 = new Point(-3, -2);
-        Point p2 = new Point(6, 9);
-        Point p3 = new Point(2.0, 2.0), p4 = new Point(4.0, 0.0);
-        Point p5 = new Point(2.0, 1.0), p6 = new Point(3.9999999999, 0.0);
-        l1 = new Line(p3, p4);
-        l2 = new Line(p1, p2);
-        l3 = new Line(p5, p6);
-        l4 = new Line(p4, p5);
-        l5 = new Line(p2, p3);
+    public void setup() {
+        p1 = new Point(-3, -2);
+        p2 = new Point(6, 9);
+        p3 = new Point(2.0, 2.0);
+        p4 = new Point(4.0, 0.0);
+        p5 = new Point(2.0, 1.0);
+        p6 = new Point(3.9999999999, 0.0);
+        l1 = new Line("M&M", p3, p4);
+        l2 = new Line("2021 Go", p1, p2);
+        l3 = new Line("Love", p5, p6);
+        l4 = new Line("Cat", p4, p5);
+        l5 = new Line("Flu", p2, p3);
 
     }
     @Test
