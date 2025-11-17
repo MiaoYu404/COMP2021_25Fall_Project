@@ -85,6 +85,15 @@ public class Circle implements Shape{
         return Geometry.intersects(this, s);
     }
 
+    /**
+     * @return      short name of this Circle
+     */
+    public String shortName() {
+        StringBuilder ret = new StringBuilder();
+        ret.append(name).append(" <Circle>");
+        return ret.toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
@@ -97,12 +106,14 @@ public class Circle implements Shape{
 
     @Override
     public String toString() {
-        String ret = "";
-        if (name != null) { ret += "\"" + name + "\"";}
-        ret += "<" + this.getClass() + ">:";
+        StringBuilder ret = new StringBuilder();
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Circle>\n")
 
-        ret += "\nCenter:" + center + "\nRadius:" + r;
-        return ret;
+                .append("    ,--, \t").append("center: ").append(center).append("\n")
+                .append("   │    │\t").append("r = ").append(r).append("\n")
+                .append("    '--' \t").append("\n");
+        return ret.toString();
     }
 
     @Override
