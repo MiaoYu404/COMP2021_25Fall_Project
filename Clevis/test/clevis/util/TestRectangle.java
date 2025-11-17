@@ -374,7 +374,7 @@ public class TestRectangle {
     public void testFatherChildRelationship() {
         // Initially should have no father
         assertThat(regularRect.haveFather()).isFalse();
-        assertThat(regularRect.getFather()).isNull();
+        assertThat(regularRect.father()).isNull();
         
         // Set a father
         Shape fatherShape = namedRect; // Using another rectangle as father
@@ -382,12 +382,12 @@ public class TestRectangle {
         
         // Verify father relationship
         assertThat(regularRect.haveFather()).isTrue();
-        assertThat(regularRect.getFather()).isSameInstanceAs(fatherShape);
+        assertThat(regularRect.father()).isSameInstanceAs(fatherShape);
         
         // Remove father
         regularRect.setFather(null);
         assertThat(regularRect.haveFather()).isFalse();
-        assertThat(regularRect.getFather()).isNull();
+        assertThat(regularRect.father()).isNull();
     }
     
     // ============ 边界情况测试 ============
