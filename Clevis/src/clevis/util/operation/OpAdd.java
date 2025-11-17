@@ -32,13 +32,13 @@ public class OpAdd extends Operation{
     public OpAdd(String[] args, Data data) {
         this(data);
         this.args = args;
-
         this.type = args[0];
         this.name = args[1];
     }
 
     /**
      * Construct with exist Shape.
+     * @param name      name of the shape
      * @param shape     Shape Object
      * @param index     order
      * @param data      data storage
@@ -133,5 +133,12 @@ public class OpAdd extends Operation{
     public void redo() {
         // TODO: test this method
         call();
+    }
+
+    /**
+     * @return      shape
+     */
+    public Shape shape() {
+        return shape;
     }
 }
