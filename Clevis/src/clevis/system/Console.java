@@ -13,14 +13,8 @@ import java.util.List;
  * class of Console
  */
 public class Console {
-    /**
-     * data storage
-     */
-    protected final Data data;
-    /**
-     * logger
-     */
-    protected final Logger logger;
+    private final Data data;
+    private final Logger logger;
 
     /**
      * construct with no para
@@ -63,9 +57,9 @@ public class Console {
      */
     public void add(String[] args) {
         try {
-            Operation op = new OpAdd(args, data);
+            Operation op = new OpAdd(args, data());
             op.call();
-            data.insertOp(op);
+            data().insertOp(op);
         } catch (Exception e) {
             printInfo("Please input the correct operation.");
         }
@@ -88,9 +82,9 @@ public class Console {
      * @param members       mamber shapes
      */
     public void group(String groupName, List<String> members) {
-        Operation op = new OpGroup(groupName, members, data);
+        Operation op = new OpGroup(groupName, members, data());
         op.call();
-        data.insertOp(op);
+        data().insertOp(op);
     }
 
     /**
@@ -100,7 +94,7 @@ public class Console {
     public void ungroup(String[] args) {
         // TODO: implement Exception when argument is wrong.
         String groupName = args[1];
-        if (data.get(groupName) instanceof Group) {
+        if (data().get(groupName) instanceof Group) {
             ungroup(args[1]);
         } else printError("It is not a Group.");
     }
@@ -110,9 +104,9 @@ public class Console {
      * @param name name of the group.
      */
     public void ungroup(String name) {
-        Operation op = new OpUngroup(name, data);
+        Operation op = new OpUngroup(name, data());
         op.call();
-        data.insertOp(op);
+        data().insertOp(op);
     }
 
     /**
@@ -122,7 +116,7 @@ public class Console {
     public void delete(String[] args) {
         // TODO: implement Exception when argument is wrong.
         String name = args[1];
-        if (!data.exists(name)) {
+        if (!data().exists(name)) {
             printError(name + " not exists.");
             return ;
         }
@@ -134,9 +128,9 @@ public class Console {
      * @param name name of the shape
      */
     public void delete(String name) {
-        Operation op = new OpDelete(name, data);
+        Operation op = new OpDelete(name, data());
         op.call();
-        data.insertOp(op);
+        data().insertOp(op);
     }
 
     /**
@@ -164,7 +158,7 @@ public class Console {
             return null;
         }
 
-        Rectangle r = (Rectangle) data.get(name).boundingBox();
+        Rectangle r = (Rectangle) data().get(name).boundingBox();
         if (r == null) return null;
         return ("Bounding box: " + r.points()[0] +  ", " + r.width() + ", " + r.height() + ".");
     }
@@ -188,8 +182,8 @@ public class Console {
      * @return the front shape at this point, or null means no shape at this point.
      */
     public Shape shapeAt (double x, double y) {
-        for (int i = data.size() - 1; i >= 0; i--) {
-            Shape s = data.get(i);
+        for (int i = data().size() - 1; i >= 0; i--) {
+            Shape s = data().get(i);
             if (s.haveFather())  continue;          // if this is a group, it will not be count in shapeAt() method.
 
             Point p = new Point(x, y);
@@ -227,7 +221,7 @@ public class Console {
             return false;
         }
 
-        return Geometry.intersects(data.get(s1), data.get(s2));
+        return Geometry.intersects(data().get(s1), data().get(s2));
     }
 
     /**
@@ -260,7 +254,7 @@ public class Console {
             return null;
         }
 
-        return data.get(name).toString();
+        return data().get(name).toString();
     }
 
     /**
@@ -277,14 +271,14 @@ public class Console {
      * list all shapes
      */
     public void listAll() {
-        if (data.isEmpty()){
+        if (data().isEmpty()){
             printInfo("There is no shape.");
             return ;
         }
 
         StringBuilder ret = new StringBuilder();
-        for (int i = data.size() - 1; i >= 0; i--)
-            ret.append("\n").append(list(data.get(i)));
+        for (int i = data().size() - 1; i >= 0; i--)
+            ret.append("\n").append(list(data().get(i)));
 
         printInfo(ret.toString());
     }
@@ -311,9 +305,9 @@ public class Console {
         String[] args = new String[4];
         args[0] = "move"; args[1] = name; args[2] = String.valueOf(dx); args[3] = String.valueOf(dy);
 
-        Operation op = new OpMove(args, data);
+        Operation op = new OpMove(args, data());
         op.call();
-        data.insertOp(op);
+        data().insertOp(op);
     }
 
     /**
@@ -329,14 +323,14 @@ public class Console {
      * undo an operation (if possible)
      */
     public void undo() {
-        data.undo();
+        data().undo();
     }
 
     /**
      * redo an operation (is possible)
      */
     public void redo() {
-        data.redo();
+        data().redo();
     }
 
     /**
@@ -344,8 +338,8 @@ public class Console {
      */
     public void quit() {
         try {
-            if (logger != null) {
-                logger.close();
+            if (logger() != null) {
+                logger().close();
             }
         } finally {
             System.exit(0);
@@ -359,7 +353,7 @@ public class Console {
      * @return whether the shape exists.
      */
     public boolean exists(String name) {
-        return data.exists(name);
+        return data().exists(name);
     }
 
     /**
@@ -372,7 +366,7 @@ public class Console {
             return false;
         }
 
-        return data.name2Shape().get(name).haveFather();
+        return data().name2Shape().get(name).haveFather();
     }
 
     /**
@@ -391,5 +385,21 @@ public class Console {
     public void printError(String content) {
         // TODO: implement this method.
         System.out.println("Error: " + content);
+    }
+
+    /**
+     * data storage
+     * @return      data
+     */
+    public Data data() {
+        return data;
+    }
+
+    /**
+     * logger
+     * @return      logger
+     */
+    public Logger logger() {
+        return logger;
     }
 }
