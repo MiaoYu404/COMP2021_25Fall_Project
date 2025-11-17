@@ -2,7 +2,9 @@ package clevis;
 
 import clevis.system.Console;
 import clevis.system.Logger;
+import clevis.view.ClevisUI;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -38,17 +40,20 @@ public class Application {
     public static void main(String[] args){
         Boost(true, args);
         // Initialize and utilize the system
-		Scanner scanner = new Scanner(System.in);
-        try {
-            while (true) {
-                String inp = scanner.nextLine();
-                if (inp.isEmpty()) continue;
-                logger.log(inp);
-                console.readOperation(inp);
-            }
-        } finally {
-            console.printInfo("System ended.");
-        }
+        SwingUtilities.invokeLater(() -> {
+            new ClevisUI(htmlPath, txtPath).setVisible(true);
+        });
+//		Scanner scanner = new Scanner(System.in);
+//        try {
+//            while (true) {
+//                String inp = scanner.nextLine();
+//                if (inp.isEmpty()) continue;
+//                logger.log(inp);
+//                console.readOperation(inp);
+//            }
+//        } finally {
+//            console.printInfo("System ended.");
+//        }
     }
 
     /**
