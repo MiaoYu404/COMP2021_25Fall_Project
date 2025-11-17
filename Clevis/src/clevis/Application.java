@@ -12,7 +12,14 @@ public class Application {
     private static Console console;
     private static Logger logger;
 
-    private static String htmlPath, txtPath;
+    /**
+     * html Path
+     */
+    protected static String htmlPath;
+    /**
+     * txt Path
+     */
+    protected static String txtPath;
 
     /**
      * Boost the Application
@@ -47,7 +54,7 @@ public class Application {
     /**
      * @return              the console
      */
-    public Console console() {
+    public static Console console() {
         return console;
     }
 
