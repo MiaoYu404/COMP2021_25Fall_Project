@@ -271,9 +271,10 @@ public class Console {
      * list all shapes
      */
     public void listAll() {
-        // TODO: add "nothing" when data is empty.
-        if (data.isEmpty())
+        if (data.isEmpty()){
+            printInfo("There is no shape.");
             return ;
+        }
 
         StringBuilder ret = new StringBuilder();
         for (int i = data.size() - 1; i >= 0; i--)
