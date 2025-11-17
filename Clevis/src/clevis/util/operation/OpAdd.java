@@ -43,9 +43,10 @@ public class OpAdd extends Operation{
      * @param index     order
      * @param data      data storage
      */
-    public OpAdd(Shape shape, int index, Data data) {
+    public OpAdd(String name, Shape shape, int index, Data data) {
         this(data);
         setIndex(index);
+        this.name = name;
         this.shape = shape;
     }
 
@@ -71,7 +72,7 @@ public class OpAdd extends Operation{
             case "square" -> addSquare(args);
             default -> throw new IllegalArgumentException("Not implemented Shape type.");
         };
-        data.add(args[1], shape);
+        data.add(name, shape);
     }
 
     /**

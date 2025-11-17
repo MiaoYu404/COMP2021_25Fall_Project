@@ -35,14 +35,14 @@ public class OpDelete extends Operation{
         if (shape.haveFather())
             throw new IllegalArgumentException(name + " is inside an existing group.");
         if (shape instanceof Group g) {
-            List<String> names = new ArrayList<>();
+            List<String> members = new ArrayList<>();
             for (Shape s : g.shapes()) {
                 push(new OpDelete(s.name(), data));
-                names.add(s.name());
+                members.add(s.name());
             }
-            undoOperation = new OpGroup(name, names, data);
+            undoOperation = new OpGroup(name, members, data);
         } else {
-            undoOperation = new OpAdd(shape, index, data);
+            undoOperation = new OpAdd(name, shape, index, data);
         }
 
         data.remove(name);
@@ -54,6 +54,7 @@ public class OpDelete extends Operation{
             Undoable op = pop();
             op.undo();
         }
+        undoOperation.call();
     }
 
     @Override

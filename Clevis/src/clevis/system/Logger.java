@@ -2,11 +2,6 @@ package clevis.system;
 
 import java.io.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * class who in charge the IO
  */
@@ -14,14 +9,41 @@ public class Logger {
     private final File TXT;
     private final File HTML;
 
+    private PrintWriter txtWriter;
+    private PrintWriter htmlWriter;
+
+    private int opIndex = 0;
+
     /**
      * construct a logger with two address.
      * @param txtAddress        txt address
      * @param htmlAddress       html address
      */
-    public Logger(String txtAddress, String htmlAddress) {
-        TXT = new File(txtAddress);
+    public Logger(String htmlAddress, String txtAddress) {
         HTML = new File(htmlAddress);
+        TXT = new File(txtAddress);
+
+        try {
+            txtWriter = new PrintWriter(new BufferedWriter(new FileWriter(TXT, false)));
+            htmlWriter = new PrintWriter(new BufferedWriter(new FileWriter(HTML, false)));
+            writeHtmlHeader();
+        } catch (IOException e) {
+            throw new UncheckedIOException("Cannot create log files", e);
+        }
+    }
+
+    private void writeHtmlHeader() {
+        htmlWriter.println("<!DOCTYPE html>");
+        htmlWriter.println("<html><head><meta charset=\"UTF-8\">");
+        htmlWriter.println("<title>Clevis command log</title>");
+        htmlWriter.println("<style>table{border-collapse:collapse;} td,th{border:1px solid #999;padding:4px 8px;}</style>");
+        htmlWriter.println("</head><body>");
+        htmlWriter.println("<table>");
+        htmlWriter.println("<tr><th>#</th><th>Command</th></tr>");
+    }
+
+    private void writeHtmlFooter() {
+        htmlWriter.println("</table></body></html>");
     }
 
     /**
@@ -31,6 +53,8 @@ public class Logger {
     public void log(String content) {
         // TODO: implement this method.
         if (content == null) throw new NullPointerException("content is null");
+
+        ++opIndex;
         writeHTML(content);
         writeTXT(content);
     }
@@ -40,7 +64,8 @@ public class Logger {
      * @param content   content
      */
     public void writeTXT(String content) {
-        // TODO: implement this method.
+        txtWriter.printf("%s%n", content);
+        txtWriter.flush();
     }
 
     /**
@@ -48,6 +73,23 @@ public class Logger {
      * @param content   content
      */
     public void writeHTML(String content) {
-        // TODO: implement this method.
+        String escaped = content
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+
+        htmlWriter.printf("  <tr><td>%d</td><td>%s</td></tr>%n", opIndex, escaped);
+        htmlWriter.flush();
+    }
+
+    /**
+     * close the files cleanly.
+     */
+    public void close() {
+        writeHtmlFooter();
+        if (txtWriter != null) { txtWriter.close(); }
+        if (htmlWriter != null) { htmlWriter.close(); }
     }
 }

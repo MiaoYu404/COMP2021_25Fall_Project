@@ -22,7 +22,6 @@ public class Operation implements Undoable{
      */
     public void print() {}
 
-
     @Override
     public void undo() {}
 
