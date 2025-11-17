@@ -173,7 +173,7 @@ public class Console {
         double y = Double.parseDouble(args[2]);
         Shape res = shapeAt(x, y);
         if (res == null) System.out.println("Shape at " + x + ", " + y + " not found.");
-        else list(res.name());              // here, use name.
+        else list(new String[] {"list", res.name()});              // here, use name.
     }
 
     /**
