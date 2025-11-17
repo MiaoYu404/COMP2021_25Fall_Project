@@ -6,8 +6,8 @@ import java.io.*;
  * class who in charge the IO
  */
 public class Logger {
-    private final File TXT;
-    private final File HTML;
+    private File TXT;
+    private File HTML;
 
     private PrintWriter txtWriter;
     private PrintWriter htmlWriter;
@@ -20,15 +20,23 @@ public class Logger {
      * @param htmlAddress       html address
      */
     public Logger(String htmlAddress, String txtAddress) {
-        HTML = new File(htmlAddress);
-        TXT = new File(txtAddress);
+        if (htmlAddress != null) {
+            HTML = new File(htmlAddress);
+            try {
+                htmlWriter = new PrintWriter(new BufferedWriter(new FileWriter(HTML, false)));
+                writeHtmlHeader();
+            } catch (IOException e) {
+                throw new UncheckedIOException("Cannot create log html files", e);
+            }
+        }
 
-        try {
-            txtWriter = new PrintWriter(new BufferedWriter(new FileWriter(TXT, false)));
-            htmlWriter = new PrintWriter(new BufferedWriter(new FileWriter(HTML, false)));
-            writeHtmlHeader();
-        } catch (IOException e) {
-            throw new UncheckedIOException("Cannot create log files", e);
+        if (txtAddress != null) {
+            TXT = new File(txtAddress);
+            try {
+                txtWriter = new PrintWriter(new BufferedWriter(new FileWriter(TXT, false)));
+            } catch (IOException e) {
+                throw new UncheckedIOException("Cannot create log txt files", e);
+            }
         }
     }
 
