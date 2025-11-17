@@ -11,8 +11,14 @@ import static java.lang.Math.abs;
 public class Rectangle implements Shape{
     private String name;
     private double width, height;
-    private Point[] points;
-    private Line[] lines;
+    /**
+     * points
+     */
+    protected Point[] points;
+    /**
+     * lines
+     */
+    protected Line[] lines;
 
     private Shape father;
 
@@ -152,17 +158,12 @@ public class Rectangle implements Shape{
     // override toString function
     @Override
     public String toString() {
-        // TODO: 加入长宽
         StringBuilder ret = new StringBuilder();
-        if (name != null) { ret.append("\"").append(name).append("\"");}
-        ret.append("<").append(this.getClass()).append(">:");
-
-        ret.append("\nPoints:");
-        for (int i = 0; i < 4; i++) ret.append("\n").append(points[i].toString());
-
-        ret.append("\nLines:");
-        for (int i = 0; i < 4; i++) ret.append("\n").append(lines[i].toString());
-
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Rectangle>\n")
+                .append("\t┌──┐\t").append("top right corner: ").append(points[3]).append("\n")
+                .append("\t│  │\t").append("w = ").append(width).append("\n")
+                .append("\t└──┘\t").append("h = ").append(height).append("\n");
         return ret.toString();
     }
 

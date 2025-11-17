@@ -10,13 +10,13 @@ import java.util.Arrays;
 public class Square extends Rectangle {
     private String name;
     private double side;
-    private Point[] points;
-    private Line[] lines;
 
     /**
      * construct without parameter
      */
-    public Square() { this(new Point(0, 0), 1); }
+    public Square() {
+        this(new Point(0, 0), 1);
+    }
 
     /**
      * @param p mid-point
@@ -24,12 +24,13 @@ public class Square extends Rectangle {
      */
     public Square(Point p, double _side) {
         super(Points.add(p, new Point(_side / -2, _side / 2)), _side, _side);
+        this.side = _side;
     }
 
     /**
-     * @param _name name
-     * @param p mid-point
-     * @param _side side length
+     * @param _name     name
+     * @param p         middle
+     * @param _side     side length
      */
     public Square(String _name, Point p, double _side) {
         this(p, _side);
@@ -59,19 +60,22 @@ public class Square extends Rectangle {
      */
     public double side() { return side; }
 
+    /**
+     * @return      center of the square
+     */
+    public Point center() {
+        return new Point(points[0].x() + side / 2, points[0].y() - side / 2);
+    }
+
     @Override
     public String toString() {
         // TODO: 加入边长
-        String ret = "";
-        if (name != null) { ret += "\"" + name + "\"";}
-        ret += "<" + this.getClass() + ">:";
-
-        ret += "\nPoints:";
-        for (int i = 0; i < 4; i++) ret = ret + "\n" + points[i].toString();
-
-        ret = ret + "\nLines:";
-        for (int i = 0; i < 4; i++) ret = ret + "\n" + lines[i].toString();
-
-        return ret;
+        StringBuilder ret = new StringBuilder();
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Rectangle>\n")
+                .append("\t┌────┐\t").append("middle: ").append(center()).append("\n")
+                .append("\t│    │\t").append("side = ").append(side).append("\n")
+                .append("\t└────┘\t").append("\n");
+        return ret.toString();
     }
 }
