@@ -85,7 +85,11 @@ public class Line implements Shape{
     /**
      * @return a line in reverse direction
      */
-    public Line reverse() { return new Line(to, from); }
+    public Line reverse() {
+        // TODO: add a name.
+        String newName = "reverse of \"" + name + "\"";
+        return new Line(newName, to, from);
+    }
 
     /**
      * @param s shape
