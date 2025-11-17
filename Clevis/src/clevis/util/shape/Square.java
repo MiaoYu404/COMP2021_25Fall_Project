@@ -2,6 +2,7 @@ package clevis.util.shape;
 
 import clevis.sql.Points;
 
+import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -72,10 +73,10 @@ public class Square extends Rectangle {
         // TODO: 加入边长
         StringBuilder ret = new StringBuilder();
         if (name != null) ret.append(name).append(" ");
-        ret.append("<Rectangle>\n")
-                .append("\t┌────┐\t").append("middle: ").append(center()).append("\n")
-                .append("\t│    │\t").append("side = ").append(side).append("\n")
-                .append("\t└────┘\t").append("\n");
+        ret.append("<Square>\n")
+                .append("\t+----+\t").append("middle: ").append(center()).append("\n")
+                .append("\t|    |\t").append("side = ").append(side).append("\n")
+                .append("\t+----+\t").append("\n");
         return ret.toString();
     }
 }

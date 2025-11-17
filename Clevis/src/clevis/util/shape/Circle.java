@@ -2,6 +2,9 @@ package clevis.util.shape;
 
 import clevis.sql.*;
 
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
+
 import static clevis.sql.Geometry.sign;
 
 /**
@@ -61,7 +64,7 @@ public class Circle implements Shape{
     /**
      * @return center point.
      */
-    public Point center() { return center; }
+    public Point center() { return new Point(center); }
 
     /**
      * @return r, raidus
@@ -69,7 +72,7 @@ public class Circle implements Shape{
     public double r() { return r; }
 
     @Override
-    public Shape getFather() { return father; }
+    public Shape father() { return father; }
 
     @Override
     public void setFather(Shape _father) { father = _father; }
@@ -88,10 +91,9 @@ public class Circle implements Shape{
     /**
      * @return      short name of this Circle
      */
+    @Override
     public String shortName() {
-        StringBuilder ret = new StringBuilder();
-        ret.append(name).append(" <Circle>");
-        return ret.toString();
+        return name + " <Circle>";
     }
 
     @Override
@@ -111,7 +113,7 @@ public class Circle implements Shape{
         ret.append("<Circle>\n")
 
                 .append("    ,--, \t").append("center: ").append(center).append("\n")
-                .append("   │    │\t").append("r = ").append(r).append("\n")
+                .append("   |    |\t").append("r = ").append(r).append("\n")
                 .append("    '--' \t").append("\n");
         return ret.toString();
     }
@@ -125,5 +127,10 @@ public class Circle implements Shape{
     public Rectangle boundingBox() {
         String bbName = "Bounding Box of '" + name + "'";
         return new Rectangle(bbName, Points.add(center, new Point(r * -1, r)), r * 2, r * 2);
+    }
+
+    @Override
+    public void draw(Graphics2D graph) {
+        graph.draw(new Ellipse2D.Double(center.x() - r, center.y() - r, 2 * r, 2 * r));
     }
 }

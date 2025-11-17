@@ -2,6 +2,9 @@ package clevis.util.shape;
 
 import clevis.sql.*;
 
+import java.awt.*;
+import java.awt.geom.Line2D;
+
 /**
  * class of Line
  */
@@ -46,20 +49,26 @@ public class Line implements Shape{
      * @return name.
      */
     @Override
-    public String name() { return name; }
+    public String name() {
+        return name;
+    }
 
     /**
      * @return from point
      */
-    public Point from() { return new Point(from); }
+    public Point from() {
+        return new Point(from);
+    }
 
     /**
      * @return to point
      */
-    public Point to() { return to; }
+    public Point to() {
+        return new Point(to);
+    }
 
     @Override
-    public Shape getFather() { return father; }
+    public Shape father() { return father; }
 
     /**
      * set father shape
@@ -86,8 +95,7 @@ public class Line implements Shape{
      * @return a line in reverse direction
      */
     public Line reverse() {
-        // TODO: add a name.
-        String newName = "reverse of \"" + name + "\"";
+        String newName = "reverse of " + name;
         return new Line(newName, to, from);
     }
 
@@ -96,7 +104,6 @@ public class Line implements Shape{
      * @return whether line is inside the shape's bounding box.
      */
     public boolean inside(Shape s) {
-        // TODO line inside any Shape
         return from.inside(s) && to.inside(s);
     }
 
@@ -110,23 +117,14 @@ public class Line implements Shape{
 
     @Override
     public boolean equals(Object o) {
+        // TODO: name equal?
         if (this == o) return true;
         if (o == null) return false;
         if (o instanceof Line l) {
             return from.equals(l.from())
                     && to.equals(l.to());
-//                    && name.equals(l.name());
         }
         return false;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder ret = new StringBuilder();
-        if (name != null) ret.append(name).append(" ");
-        ret.append("<Line>: ");
-        ret.append(from.toString()).append(" -> ").append(to.toString());
-        return ret.toString();
     }
 
     @Override
@@ -141,5 +139,27 @@ public class Line implements Shape{
         double height = Math.abs(from.y() - to.y());
         String bbName = "Bounding Box of '" + name + "'";
         return new Rectangle(bbName, topLeft, width, height);
+    }
+
+    @Override
+    public void draw(Graphics2D graph) {
+        graph.draw(new Line2D.Double(from.x(), from.y(), to.x(), to.y()));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder ret = new StringBuilder();
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Line>: ");
+        ret.append(from.toString()).append(" -> ").append(to.toString());
+        return ret.toString();
+    }
+
+    @Override
+    public String shortName() {
+        StringBuilder ret = new StringBuilder();
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Line>");
+        return ret.toString();
     }
 }

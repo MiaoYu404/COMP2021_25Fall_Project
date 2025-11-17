@@ -2,6 +2,9 @@ package clevis.util.shape;
 
 import clevis.sql.*;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 import static clevis.sql.Geometry.EPS;
 import static java.lang.Math.abs;
 
@@ -102,7 +105,7 @@ public class Rectangle implements Shape{
 
 
     @Override
-    public Shape getFather() { return father; }
+    public Shape father() { return father; }
 
     /**
      * set father shape
@@ -161,9 +164,9 @@ public class Rectangle implements Shape{
         StringBuilder ret = new StringBuilder();
         if (name != null) ret.append(name).append(" ");
         ret.append("<Rectangle>\n")
-                .append("\t┌──┐\t").append("top right corner: ").append(points[3]).append("\n")
-                .append("\t│  │\t").append("w = ").append(width).append("\n")
-                .append("\t└──┘\t").append("h = ").append(height).append("\n");
+                .append("\t+--+\t").append("top right corner: ").append(points[3]).append("\n")
+                .append("\t|  |\t").append("w = ").append(width).append("\n")
+                .append("\t+--+\t").append("h = ").append(height).append("\n");
         return ret.toString();
     }
 
@@ -181,5 +184,15 @@ public class Rectangle implements Shape{
     public Rectangle boundingBox() {
         String bbName = "Bounding Box of '" + name + "'";
         return new Rectangle(this, bbName); //bounding box name 与原矩形的name一致？
+    }
+
+    @Override
+    public void draw(Graphics2D graph) {
+        graph.draw(new Rectangle2D.Double(minX(), minY(), width, height));
+    }
+
+    @Override
+    public String shortName() {
+        return name + "<rectangle>";
     }
 }

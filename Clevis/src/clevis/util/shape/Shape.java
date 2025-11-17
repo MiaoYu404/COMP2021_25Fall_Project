@@ -1,5 +1,7 @@
 package clevis.util.shape;
 
+import java.awt.*;
+
 /**
  * class of Shape
  */
@@ -12,7 +14,7 @@ public interface Shape {
     /**
      * @return father pointer
      */
-    Shape getFather();
+    Shape father();
 
     /**
      * @param _shape new father
@@ -38,9 +40,20 @@ public interface Shape {
     Shape boundingBox();
 
     /**
+     * draw the graph
+     * @param graph     graph
+     */
+    void draw(Graphics2D graph);
+
+    /**
      * print infomation about this shape.
      */
     default void printInfo() {
         System.out.println(this);
     }
+
+    /**
+     * @return      short name of the Shape
+     */
+    String shortName();
 }

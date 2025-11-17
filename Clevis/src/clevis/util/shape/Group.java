@@ -1,5 +1,6 @@
 package clevis.util.shape;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Group implements Shape{
     public String name() { return name; }
 
     @Override
-    public Shape getFather() {
+    public Shape father() {
         return father;
     }
 
@@ -69,6 +70,18 @@ public class Group implements Shape{
             // TODO: why does abs being used here?
         }
         return new Rectangle(r, "Bounding Box of \"" + name + "\"<Group>");
+    }
+
+    @Override
+    public void draw(Graphics2D graph) {
+        for (Shape s : members) {
+            s.draw(graph);
+        }
+    }
+
+    @Override
+    public String shortName() {
+        return name + "<Group>";
     }
 
     @Override
