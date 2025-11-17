@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Group implements Shape{
     private String name;
-    private List<Shape> shapes;
+    private List<Shape> members;
 
     private Shape father;
 
@@ -18,14 +18,14 @@ public class Group implements Shape{
      */
     public Group(String _name, ArrayList<Shape> _shapes) {
         name = _name;
-        shapes = new ArrayList<>(_shapes);
+        members = new ArrayList<>(_shapes);
     }
 
     /**
      * @return copy of shapes;
      */
     public List<Shape> shapes() {
-        return shapes;
+        return members;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Group implements Shape{
 
     @Override
     public void move(double dx, double dy) {
-        for (Shape s : shapes) {
+        for (Shape s : members) {
             s.move(dx, dy);
         }
     }
@@ -56,7 +56,7 @@ public class Group implements Shape{
     @Override
     public Shape boundingBox() {
         Rectangle r = null;
-        for (Shape s : shapes) {
+        for (Shape s : members) {
             Rectangle tmp = (Rectangle) s.boundingBox();
             if (tmp == null) continue;
             if (r == null) r = tmp;
@@ -75,5 +75,12 @@ public class Group implements Shape{
     public String toString() {
         // TODO: Group toString()
         return "Group";
+    }
+
+    /**
+     * @return      members
+     */
+    public List<Shape> members() {
+        return members;
     }
 }
