@@ -1,6 +1,6 @@
 package clevis.sql;
 
-import clevis.util.shape.*;
+import clevis.model.shape.*;
 
 /**
  * functions about Computing Geometry
