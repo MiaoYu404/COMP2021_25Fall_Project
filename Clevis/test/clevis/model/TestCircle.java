@@ -1,7 +1,7 @@
 package clevis.model;
 
-import clevis.util.shape.Circle;
-import clevis.util.shape.Point;
+import clevis.model.shape.Circle;
+import clevis.model.shape.Point;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

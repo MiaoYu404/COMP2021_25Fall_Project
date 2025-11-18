@@ -1,7 +1,7 @@
-package clevis.util.operation;
+package clevis.model.operation;
 
 import clevis.system.Data;
-import clevis.util.shape.*;
+import clevis.model.shape.*;
 
 import java.util.ArrayList;
 import java.util.List;

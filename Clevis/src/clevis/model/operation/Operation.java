@@ -1,4 +1,4 @@
-package clevis.util.operation;
+package clevis.model.operation;
 
 /**
  * basic Operation class

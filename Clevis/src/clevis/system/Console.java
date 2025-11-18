@@ -2,8 +2,8 @@ package clevis.system;
 
 import clevis.Application;
 import clevis.sql.*;
-import clevis.util.shape.*;
-import clevis.util.operation.*;
+import clevis.model.shape.*;
+import clevis.model.operation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -277,8 +277,10 @@ public class Console {
         }
 
         StringBuilder ret = new StringBuilder();
-        for (int i = data().size() - 1; i >= 0; i--)
-            ret.append("\n").append(list(data().get(i)));
+        for (int i = data().size() - 1; i >= 0; i--) {
+            if (i != data().size()) ret.append("\n");
+            ret.append(list(data().get(i)));
+        }
 
         printInfo(ret.toString());
     }
@@ -375,7 +377,7 @@ public class Console {
      */
     public void printInfo(String content) {
         // TODO: maybe logger or output to some terminal.
-        System.out.println("Info: " + content);
+        System.out.println("Info: \n" + content);
     }
 
     /**

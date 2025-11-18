@@ -1,7 +1,7 @@
-package clevis.util.operation;
+package clevis.model.operation;
 
 import clevis.system.Data;
-import clevis.util.shape.*;
+import clevis.model.shape.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +36,17 @@ public class OpDelete extends Operation{
             throw new IllegalArgumentException(name + " is inside an existing group.");
         if (shape instanceof Group g) {
             List<String> members = new ArrayList<>();
-            for (Shape s : g.shapes()) {
-                push(new OpDelete(s.name(), data));
-                members.add(s.name());
+            for (Shape s : g.shapes()) members.add(s.name());
+
+            Operation op = new OpUngroup(name, data);
+            op.call();
+
+            for (String s : members) {
+                op = new OpDelete(s, data);
+                op.call();
+                push(op);
             }
+
             undoOperation = new OpGroup(name, members, data);
         } else {
             undoOperation = new OpAdd(name, shape, index, data);

@@ -1,11 +1,11 @@
-package clevis.util;
+package clevis.model;
 
 import clevis.Application;
 import clevis.system.Console;
 
 import clevis.system.Data;
-import clevis.util.operation.OpAdd;
-import clevis.util.operation.Operation;
+import clevis.model.operation.OpAdd;
+import clevis.model.operation.Operation;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 

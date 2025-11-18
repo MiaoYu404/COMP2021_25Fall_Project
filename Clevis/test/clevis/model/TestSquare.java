@@ -2,8 +2,7 @@ package clevis.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import clevis.util.shape.Square;
+import clevis.model.shape.Square;
 
 public class TestSquare {
     Square s1, s2, s3, s4;

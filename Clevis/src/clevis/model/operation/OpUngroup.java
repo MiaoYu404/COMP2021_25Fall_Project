@@ -1,7 +1,7 @@
-package clevis.util.operation;
+package clevis.model.operation;
 
 import clevis.system.Data;
-import clevis.util.shape.*;
+import clevis.model.shape.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +41,13 @@ public class OpUngroup extends Operation{
         if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist.");
 
         if (shape instanceof Group group) {
-            for (Shape s : group.shapes()) {
+            if (members.isEmpty()) for (Shape s : group.shapes()) {
                 removeFather(s);
                 members.add(s.name());
             }
 
             group.shapes().clear();
-            Operation opDelete = new OpDelete(this.name, data);
-            opDelete.call();
-
+            data.remove(name);
         } else throw new IllegalArgumentException(name + " is not a Group.");
     }
 

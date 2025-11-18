@@ -1,6 +1,6 @@
 package clevis.sql;
 
-import clevis.util.shape.Point;
+import clevis.model.shape.Point;
 
 /**
  * functions between points
