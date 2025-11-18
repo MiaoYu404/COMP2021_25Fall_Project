@@ -12,18 +12,9 @@ import java.io.PrintStream;
  * Terminal Panel
  */
 public class TerminalPanel extends JPanel {
-    /**
-     * Console Font Size
-     */
-    public static final int CONSOLE_FONT_SIZE = 14;
-    /**
-     * Background Color
-     */
-    public static final Color BACKGROUND = new Color(30, 30, 30);
-    /**
-     * Foreground Color
-     */
-    public static final Color FOREGROUND = new Color(200, 255, 200);
+    private final int CONSOLE_FONT_SIZE = 14;
+    private final Color BACKGROUND = new Color(30, 30, 30);
+    private final Color FOREGROUND = new Color(200, 255, 200);
     private final JTextArea outputArea;
     private final JTextField inputField;
     private final Console console;
@@ -42,6 +33,8 @@ public class TerminalPanel extends JPanel {
 
         setLayout(new BorderLayout());
         outputArea = new JTextArea();
+        outputArea.setLineWrap(true);        // 关键：开启自动换行
+        outputArea.setWrapStyleWord(true);
         outputArea.setEditable(false);
         outputArea.setFont(new Font("Consolas", Font.PLAIN, CONSOLE_FONT_SIZE));
         outputArea.setBackground(BACKGROUND);
