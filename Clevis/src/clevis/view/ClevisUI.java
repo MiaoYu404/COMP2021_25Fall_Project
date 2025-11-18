@@ -12,9 +12,9 @@ import java.awt.*;
  * ClevisUI
  */
 public class ClevisUI extends JFrame {
-    public static final int UI_WIDTH = 1200;
-    public static final int UI_HEIGHT = 750;
-    public static final int TERNIAL_WIDTH = 450;
+    private static final int UI_WIDTH = 1200;
+    private static final int UI_HEIGHT = 750;
+    private static final int TERMINAL_WIDTH = 450;
     private final Console console;
     private final DrawingPanel drawingPanel;
     private final TerminalPanel terminalPanel;
@@ -43,7 +43,7 @@ public class ClevisUI extends JFrame {
         setLocationRelativeTo(null);
 
         // Termianl Panel on the left
-        terminalPanel.setPreferredSize(new Dimension(TERNIAL_WIDTH, 0));
+        terminalPanel.setPreferredSize(new Dimension(TERMINAL_WIDTH, 0));
         terminalPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Terminal",
                 TitledBorder.LEFT, TitledBorder.TOP));
@@ -55,7 +55,7 @@ public class ClevisUI extends JFrame {
                 TitledBorder.LEFT, TitledBorder.TOP));
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, terminalPanel, scrollPane);
-        splitPane.setDividerLocation(450);
+        splitPane.setDividerLocation(TERMINAL_WIDTH);
         add(splitPane);
 
         // press ESC to quit
