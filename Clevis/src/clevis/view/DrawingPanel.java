@@ -1,20 +1,29 @@
 package clevis.view;
 
 import clevis.system.Data;
-import clevis.util.shape.Shape;
+import clevis.model.shape.Shape;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 import static clevis.sql.Geometry.EPS;
 
+/**
+ * Drawing Panel
+ */
 public class DrawingPanel extends JPanel {
-    public static final float SHAPE_STROKE_WIDTH = .05f;
-    public static final Font TEXT_FONT = new Font("SansSerif", Font.BOLD, 14);
+    private final float AXES_STROKE = 2f;
+    private final float SHAPE_STROKE_WIDTH = .05f;
+    private final int AXES_X_XCOORDI = getWidth() - 25;
+    private final int AXES_X_YCOORDI = (int) toScreenY(0) - 8;
+    private final int AXES_Y_XCOORDI = (int) toScreenX(0) + 8;
+    private final int AXES_Y_YCOORDI = 20;
+    private final Font TEXT_FONT = new Font("SansSerif", Font.BOLD, 14);
+    private final int TEXT_SIZE = 14;
+    private final double SCALE = 50.0;
     private final Data data;
 
     // 平移偏移（单位：逻辑坐标）
@@ -22,9 +31,8 @@ public class DrawingPanel extends JPanel {
     private double offsetY = 0;
     private final Point lastDrag = new Point();
 
-    // 网格设置（固定）
-    private static final double MAJOR_GRID = 5.0;  // 大格
-    private static final double MINOR_GRID = 1.0;  // 小格
+    private static final double MAJOR_GRID = 5.0;
+    private static final double MINOR_GRID = 1.0;
 
     /**
      * Construction
@@ -35,45 +43,25 @@ public class DrawingPanel extends JPanel {
         setBackground(Color.WHITE);
 
         // 只保留拖拽平移
-        MouseAdapter drag = new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                lastDrag.setLocation(e.getX(), e.getY());
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                double dx = (e.getX() - lastDrag.getX());
-                double dy = (e.getY() - lastDrag.getY());
-                offsetX += dx / getScale();  // 像素转逻辑单位
-                offsetY -= dy / getScale();
-                lastDrag.setLocation(e.getX(), e.getY());
-                repaint();
-            }
-        };
+        MouseAdapter drag = new MouseAdapter();
         addMouseListener(drag);
         addMouseMotionListener(drag);
     }
 
-    // 像素与逻辑坐标转换（固定缩放：1 单位 ≈ 50 像素）
-    private double getScale() {
-        return 50.0;
-    }
-
     private double toScreenX(double x) {
-        return getWidth() / 2.0 + (x + offsetX) * getScale();
+        return (double) getWidth() / 2 + (x + offsetX) * SCALE;
     }
 
     private double toScreenY(double y) {
-        return getHeight() / 2.0 - (y + offsetY) * getScale();  // Y 轴向上
+        return (double) getHeight() / 2 - (y + offsetY) * SCALE;  // Y 轴向上
     }
 
     private double fromScreenX(double px) {
-        return (px - getWidth() / 2.0) / getScale() - offsetX;
+        return (px - (double) getWidth() / 2) / SCALE - offsetX;
     }
 
     private double fromScreenY(double py) {
-        return -(py - getHeight() / 2.0) / getScale() - offsetY;
+        return -(py - (double) getHeight() / 2) / SCALE - offsetY;
     }
 
     @Override
@@ -83,96 +71,75 @@ public class DrawingPanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        double scale = getScale();
-
-        // 当前视口范围（逻辑坐标）
         double left   = fromScreenX(0);
         double right  = fromScreenX(getWidth());
         double top    = fromScreenY(0);
         double bottom = fromScreenY(getHeight());
 
-        // 1. 绘制背景网格
-        drawGrid(g2, left, right, top, bottom, scale);
+        drawGrid(g2, left, right, top, bottom);
 
-        // 2. 绘制主坐标轴（始终绘制，即使在外面）
-        drawAxes(g2, scale);
+        drawAxes(g2);
 
-        // 3. 绘制边缘刻度（四边都有）
-        drawTickLabels(g2, left, right, top, bottom, scale);
+        drawTickLabels(g2, left, right, top, bottom);
 
-        // 4. 绘制原点标记
         drawOrigin(g2);
 
-        // 5. 绘制所有形状（后画的在上）
         g2.setColor(Color.BLUE);
         g2.setStroke(new BasicStroke(SHAPE_STROKE_WIDTH));
 
-        // ===== 关键修改：保存当前变换，应用我们自己的坐标系，再恢复 =====
         AffineTransform oldTransform = g2.getTransform();
 
-        g2.translate(getWidth() / 2.0, getHeight() / 2.0);
-        g2.scale(getScale(), -getScale());  // 注意 Y 轴翻转
+        g2.translate((double)getWidth() / 2, (double)getHeight() / 2);
+        g2.scale(SCALE, -SCALE);
         g2.translate(offsetX, offsetY);
 
         for (int i = data.size() - 1; i >= 0; i--) {
             Shape s = data.get(i);
             if (!s.haveFather()) {
-                s.draw(g2);  // 现在你原来的 draw() 完全兼容！
+                s.draw(g2);
             }
         }
 
-        g2.setTransform(oldTransform);  // 恢复变换，网格和刻度不受影响
+        g2.setTransform(oldTransform);
 
         g2.dispose();
     }
 
-    private void drawGrid(Graphics2D g2, double left, double right, double top, double bottom, double scale) {
-        // 计算网格起始点
+    private void drawGrid(Graphics2D g2, double left, double right, double top, double bottom) {
         double xStart = Math.floor(left / MINOR_GRID) * MINOR_GRID;
         double yStart = Math.floor(bottom / MINOR_GRID) * MINOR_GRID;
 
         g2.setStroke(new BasicStroke(1f));
         for (double x = xStart; x <= right; x += MINOR_GRID) {
             double sx = toScreenX(x);
-            if (Math.abs(x % MAJOR_GRID) < EPS) {
-                g2.setColor(new Color(200, 200, 200));
-            } else {
-                g2.setColor(new Color(240, 240, 240));
-            }
+            g2.setColor(Color.GRAY);
             g2.draw(new Line2D.Double(sx, 0, sx, getHeight()));
         }
 
         for (double y = yStart; y <= top; y += MINOR_GRID) {
             double sy = toScreenY(y);
-            if (Math.abs(y % MAJOR_GRID) < EPS) {
-                g2.setColor(new Color(200, 200, 200));
-            } else {
-                g2.setColor(new Color(240, 240, 240));
-            }
+            g2.setColor(Color.GRAY);
             g2.draw(new Line2D.Double(0, sy, getWidth(), sy));
         }
     }
 
-    private void drawAxes(Graphics2D g2, double scale) {
+    private void drawAxes(Graphics2D g2) {
         g2.setColor(Color.BLACK);
-        g2.setStroke(new BasicStroke(2f));
+        g2.setStroke(new BasicStroke(AXES_STROKE));
 
         double cx = toScreenX(0);
         double cy = toScreenY(0);
 
-        // X 轴
         g2.draw(new Line2D.Double(0, cy, getWidth(), cy));
-        // Y 轴
+
         g2.draw(new Line2D.Double(cx, 0, cx, getHeight()));
 
-        // 箭头
-        drawArrow(g2, getWidth() - 10, cy, true);   // X 轴箭头
-        drawArrow(g2, cx, 10, false);               // Y 轴箭头
+        drawArrow(g2, getWidth() - 10, cy, true);
+        drawArrow(g2, cx, 10, false);
 
-        // 轴标签
         g2.setFont(TEXT_FONT);
-        g2.drawString("X", getWidth() - 25, (int) (cy - 8));
-        g2.drawString("Y", (int) (cx + 8), 20);
+        g2.drawString("X", AXES_X_XCOORDI, AXES_X_YCOORDI);
+        g2.drawString("Y", AXES_Y_XCOORDI, AXES_Y_YCOORDI);
     }
 
     private void drawArrow(Graphics2D g2, double x, double y, boolean horizontal) {
@@ -189,9 +156,9 @@ public class DrawingPanel extends JPanel {
         g2.fill(arrow);
     }
 
-    private void drawTickLabels(Graphics2D g2, double left, double right, double top, double bottom, double scale) {
+    private void drawTickLabels(Graphics2D g2, double left, double right, double top, double bottom) {
         g2.setColor(Color.DARK_GRAY);
-        g2.setFont(new Font("Consolas", Font.PLAIN, 14));
+        g2.setFont(new Font("Consolas", Font.PLAIN, TEXT_SIZE));
 
         double x0 = Math.ceil(left / MAJOR_GRID) * MAJOR_GRID;
         double y0 = Math.ceil(bottom / MAJOR_GRID) * MAJOR_GRID;
@@ -202,7 +169,7 @@ public class DrawingPanel extends JPanel {
             double sx = toScreenX(x);
             g2.draw(new Line2D.Double(sx, getHeight() - 10, sx, getHeight()));
             String label = String.format("%.0f", x);
-            g2.drawString(label, (float)(sx - g2.getFontMetrics().stringWidth(label) / 2.0), getHeight() - 15);
+            g2.drawString(label, (float)(sx - (double) g2.getFontMetrics().stringWidth(label) / 2), getHeight() - 15);
         }
 
         // Y 轴刻度（左侧）
@@ -211,7 +178,7 @@ public class DrawingPanel extends JPanel {
             double sy = toScreenY(y);
             g2.draw(new Line2D.Double(0, sy, 10, sy));
             String label = String.format("%.0f", y);
-            g2.drawString(label, 14, (float)sy + 4);
+            g2.drawString(label, TEXT_SIZE, (float)sy + 4);
         }
     }
 
@@ -225,6 +192,23 @@ public class DrawingPanel extends JPanel {
             g2.setColor(Color.BLACK);
             g2.drawOval((int)sx - 5, (int)sy - 5, 10, 10);
             g2.drawString("(0,0)", (float)sx + 8, (float)sy - 8);
+        }
+    }
+
+    private class MouseAdapter extends java.awt.event.MouseAdapter {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            lastDrag.setLocation(e.getX(), e.getY());
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            double dx = (e.getX() - lastDrag.getX());
+            double dy = (e.getY() - lastDrag.getY());
+            offsetX += dx / SCALE;  // 像素转逻辑单位
+            offsetY -= dy / SCALE;
+            lastDrag.setLocation(e.getX(), e.getY());
+            repaint();
         }
     }
 }
