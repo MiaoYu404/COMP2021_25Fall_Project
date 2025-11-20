@@ -23,7 +23,7 @@ public class Square extends Rectangle {
      * @param _side side length
      */
     public Square(Point p, double _side) {
-        super(Points.add(p, new Point(_side / -2, _side / 2)), _side, _side);
+        super(p, _side, _side);
         this.side = _side;
     }
 
@@ -73,9 +73,14 @@ public class Square extends Rectangle {
         StringBuilder ret = new StringBuilder();
         if (name != null) ret.append(name).append(" ");
         ret.append("<Square>\n")
-                .append("\t+----+\t").append("middle: ").append(center()).append("\n")
+                .append("\t+----+\t").append("top-left: ").append(points[0]).append("\n")
                 .append("\t|    |\t").append("side = ").append(side).append("\n")
                 .append("\t+----+\t").append("\n");
         return ret.toString();
+    }
+
+    @Override
+    public String shortName() {
+        return name + " <Square>";
     }
 }
