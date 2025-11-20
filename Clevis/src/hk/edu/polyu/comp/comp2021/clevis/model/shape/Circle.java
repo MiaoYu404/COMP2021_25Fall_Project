@@ -113,9 +113,9 @@ public class Circle implements Shape{
         if (name != null) ret.append(name).append(" ");
         ret.append("<Circle>\n")
 
-                .append("    ,--, \t").append("center: ").append(center).append("\n")
-                .append("   |    |\t").append("r = ").append(r).append("\n")
-                .append("    '--' \t").append("\n");
+                .append("\t ,--, \t").append("center: ").append(center).append("\n")
+                .append("\t|    |\t").append("r = ").append(r).append("\n")
+                .append("\t '--' \t").append("\n");
         return ret.toString();
     }
 
