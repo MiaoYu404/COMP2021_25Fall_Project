@@ -1,7 +1,7 @@
-package clevis.system;
+package clevis.controller;
 
 import clevis.Application;
-import clevis.sql.*;
+import clevis.model.sql.Geometry;
 import clevis.model.shape.*;
 import clevis.model.operation.*;
 

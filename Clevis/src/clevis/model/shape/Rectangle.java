@@ -1,11 +1,13 @@
 package clevis.model.shape;
 
-import clevis.sql.*;
+import clevis.model.sql.Geometry;
+import clevis.model.sql.Lines;
+import clevis.model.sql.Points;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-import static clevis.sql.Geometry.EPS;
+import static clevis.model.sql.Geometry.EPS;
 import static java.lang.Math.abs;
 
 /**

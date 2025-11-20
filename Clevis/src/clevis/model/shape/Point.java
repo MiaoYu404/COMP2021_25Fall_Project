@@ -1,8 +1,8 @@
 package clevis.model.shape;
 
-import clevis.sql.*;
+import clevis.model.sql.Points;
 
-import static clevis.sql.Geometry.*;
+import static clevis.model.sql.Geometry.*;
 import static java.lang.Math.min;
 
 /**
@@ -227,7 +227,7 @@ public class Point {
      * @return unit vector of the this.
      */
     public Point unit() {
-        if (Geometry.sign(this.abs()) == 0) throw new IllegalArgumentException("This is a zero vector.");
+        if (sign(this.abs()) == 0) throw new IllegalArgumentException("This is a zero vector.");
         Point p = new Point(this);
         p.divide(p.abs());
         return p;

@@ -1,11 +1,12 @@
 package clevis.model.shape;
 
-import clevis.sql.*;
+import clevis.model.sql.Geometry;
+import clevis.model.sql.Points;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-import static clevis.sql.Geometry.sign;
+import static clevis.model.sql.Geometry.sign;
 
 /**
  * class of Circle.

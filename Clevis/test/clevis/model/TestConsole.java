@@ -1,9 +1,9 @@
 package clevis.model;
 
 import clevis.Application;
-import clevis.system.Console;
+import clevis.controller.Console;
 
-import clevis.system.Data;
+import clevis.controller.Data;
 import clevis.model.operation.OpAdd;
 import clevis.model.operation.Operation;
 import org.junit.Test;

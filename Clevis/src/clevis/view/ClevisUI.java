@@ -1,8 +1,8 @@
 package clevis.view;
 
 import clevis.Application;
-import clevis.system.Console;
-import clevis.system.Data;
+import clevis.controller.Console;
+import clevis.controller.Data;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

@@ -1,11 +1,10 @@
 package clevis;
 
-import clevis.system.Console;
-import clevis.system.Logger;
+import clevis.controller.Console;
+import clevis.controller.Logger;
 import clevis.view.ClevisUI;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 /**
  * reading two files

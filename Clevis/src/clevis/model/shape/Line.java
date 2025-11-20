@@ -1,6 +1,7 @@
 package clevis.model.shape;
 
-import clevis.sql.*;
+import clevis.model.sql.Geometry;
+import clevis.model.sql.Points;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

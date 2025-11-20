@@ -1,6 +1,6 @@
 package clevis.view;
 
-import clevis.system.Data;
+import clevis.controller.Data;
 import clevis.model.shape.Shape;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
-import static clevis.sql.Geometry.EPS;
+import static clevis.model.sql.Geometry.EPS;
 
 /**
  * Drawing Panel

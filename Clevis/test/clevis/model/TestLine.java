@@ -1,13 +1,13 @@
 package clevis.model;
 
-import clevis.sql.Lines;
+import clevis.model.sql.Lines;
 import clevis.model.shape.Circle;
 import clevis.model.shape.Line;
 import clevis.model.shape.Point;
 import clevis.model.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
-import static clevis.sql.Geometry.intersects;
+import static clevis.model.sql.Geometry.intersects;
 import static org.junit.Assert.*;
 
 import static com.google.common.truth.Truth.assertThat;

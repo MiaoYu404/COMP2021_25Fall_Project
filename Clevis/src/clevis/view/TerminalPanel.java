@@ -1,7 +1,7 @@
 package clevis.view;
 
-import clevis.system.Console;
-import clevis.system.Logger;
+import clevis.controller.Console;
+import clevis.controller.Logger;
 
 import javax.swing.*;
 import java.awt.*;

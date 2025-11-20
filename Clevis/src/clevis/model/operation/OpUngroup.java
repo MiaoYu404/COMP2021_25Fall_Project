@@ -1,6 +1,6 @@
 package clevis.model.operation;
 
-import clevis.system.Data;
+import clevis.controller.Data;
 import clevis.model.shape.*;
 
 import java.util.ArrayList;

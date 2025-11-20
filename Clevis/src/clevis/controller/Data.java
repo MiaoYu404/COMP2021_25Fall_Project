@@ -1,4 +1,4 @@
-package clevis.system;
+package clevis.controller;
 
 import clevis.model.operation.Operation;
 import clevis.model.shape.*;

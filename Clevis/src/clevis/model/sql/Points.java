@@ -1,4 +1,4 @@
-package clevis.sql;
+package clevis.model.sql;
 
 import clevis.model.shape.Point;
 

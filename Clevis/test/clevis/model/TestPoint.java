@@ -1,6 +1,6 @@
 package clevis.model;
 
-import clevis.sql.*;
+import clevis.model.sql.Points;
 
 import clevis.model.shape.*;
 import org.junit.Test;

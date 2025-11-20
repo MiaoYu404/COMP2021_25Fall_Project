@@ -1,8 +1,8 @@
-package clevis.sql;
+package clevis.model.sql;
 
 import clevis.model.shape.*;
 
-import static clevis.sql.Geometry.sign;
+import static clevis.model.sql.Geometry.sign;
 
 /**
  * functions between lines.

@@ -1,8 +1,7 @@
 package clevis.model.shape;
 
-import clevis.sql.Points;
+import clevis.model.sql.Points;
 
-import java.awt.*;
 import java.util.Arrays;
 
 /**
