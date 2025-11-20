@@ -8,8 +8,8 @@ import java.util.List;
  * class for Group
  */
 public class Group implements Shape{
-    private String name;
-    private List<Shape> members;
+    private final String name;
+    private final List<Shape> members;
 
     private Shape father;
 
