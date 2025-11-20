@@ -1,7 +1,6 @@
 package hk.edu.polyu.comp.comp2021.clevis.model.operation;
 
 import hk.edu.polyu.comp.comp2021.clevis.controller.Data;
-import clevis.model.shape.*;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.*;
 
 /**

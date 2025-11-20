@@ -5,7 +5,6 @@ import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Rectangle;
 import hk.edu.polyu.comp.comp2021.clevis.model.sql.Points;
 
-import clevis.model.shape.*;
 import org.junit.Test;
 import org.junit.Before;
 import static com.google.common.truth.Truth.assertThat;

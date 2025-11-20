@@ -1,6 +1,5 @@
 package hk.edu.polyu.comp.comp2021.clevis.model.sql;
 
-import clevis.model.shape.*;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Line;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 

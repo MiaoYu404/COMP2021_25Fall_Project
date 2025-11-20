@@ -7,8 +7,6 @@ import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Rectangle;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Shape;
 import hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry;
-import clevis.model.shape.*;
-import clevis.model.operation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
