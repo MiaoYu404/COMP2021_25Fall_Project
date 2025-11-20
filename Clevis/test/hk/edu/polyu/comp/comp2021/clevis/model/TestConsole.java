@@ -19,6 +19,7 @@ public class TestConsole {
     @Test
     public void test() {
         Application app = new Application();
+        app.Boost(false, null);
         Console console = app.console();
 
         String op;
@@ -133,7 +134,7 @@ public class TestConsole {
         String[] arg = "square Joey 0 0 5".split(" ");
         OpAdd oa = new OpAdd(arg, dat);
         oa.call();
-        assertThat(oa.order()).isEqualTo(0);
+        assertThat(oa.index()).isEqualTo(0);
         System.out.println(oa.shape());
     }
 }

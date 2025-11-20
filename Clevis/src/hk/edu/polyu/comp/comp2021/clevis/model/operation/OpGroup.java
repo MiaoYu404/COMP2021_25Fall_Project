@@ -13,6 +13,9 @@ public class OpGroup extends Operation{
     private final String groupName;
     private final List<String> names;
     private final Data data;
+
+    private int index;
+
     /**
      * Construction
      * @param groupName     name of the Group
@@ -23,6 +26,25 @@ public class OpGroup extends Operation{
         this.groupName = groupName;
         this.names = names;
         this.data = data;
+    }
+
+    /**
+     * Construct with given index
+     * @param groupName     name of the Group
+     * @param names         name of the member shapes
+     * @param data          data storage
+     * @param index         index of this Group among all shapes.
+     */
+    public OpGroup(String groupName, List<String> names, Data data, int index) {
+        this(groupName, names, data);
+        setIndex(index);
+    }
+
+    /**
+     * @param index         new index
+     */
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     @Override

@@ -42,9 +42,9 @@ public class OpUngroup extends Operation{
         if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist.");
 
         if (shape instanceof Group group) {
-            if (members.isEmpty()) for (Shape s : group.shapes()) {
+            for (Shape s : group.shapes()) {
                 removeFather(s);
-                members.add(s.name());
+                if (members.isEmpty()) members.add(s.name());
             }
 
             group.shapes().clear();
