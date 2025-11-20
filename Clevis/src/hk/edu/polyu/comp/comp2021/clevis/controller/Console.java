@@ -63,8 +63,11 @@ public class Console {
             Operation op = new OpAdd(args, data());
             op.call();
             data().insertOp(op);
+        } catch (IllegalArgumentException e) {
+            // TODO: provide more information about the error.
+            printError("Please input the correct operation.");
         } catch (Exception e) {
-            printInfo("Please input the correct operation.");
+            printError("Not implemented Exception" + e.getMessage());
         }
     }
 

@@ -59,12 +59,12 @@ public class Logger {
      * @param content   content
      */
     public void log(String content) {
-        // TODO: implement this method.
-        if (content == null) throw new NullPointerException("content is null");
+        if (content == null)
+            throw new NullPointerException("content is null");
 
         ++opIndex;
-        writeHTML(content);
-        writeTXT(content);
+        if (htmlWriter != null) writeHTML(content);
+        if (txtWriter != null) writeTXT(content);
     }
 
     /**
@@ -96,8 +96,11 @@ public class Logger {
      * close the files cleanly.
      */
     public void close() {
-        writeHtmlFooter();
-        if (txtWriter != null) { txtWriter.close(); }
-        if (htmlWriter != null) { htmlWriter.close(); }
+        if (txtWriter != null)
+            txtWriter.close();
+        if (htmlWriter != null) {
+            writeHtmlFooter();
+            htmlWriter.close();
+        }
     }
 }
