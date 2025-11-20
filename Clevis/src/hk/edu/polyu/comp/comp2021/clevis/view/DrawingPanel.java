@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
-import static hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry.EPS;
+import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.EPS;
 
 /**
  * Drawing Panel

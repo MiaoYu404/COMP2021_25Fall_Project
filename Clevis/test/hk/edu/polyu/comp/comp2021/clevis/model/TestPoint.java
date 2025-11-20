@@ -3,7 +3,7 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Line;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Rectangle;
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Points;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Points;
 
 import org.junit.Test;
 import org.junit.Before;

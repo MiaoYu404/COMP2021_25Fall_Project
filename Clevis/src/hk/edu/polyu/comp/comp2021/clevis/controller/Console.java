@@ -6,7 +6,7 @@ import hk.edu.polyu.comp.comp2021.clevis.model.shape.Group;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Rectangle;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Shape;
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry;
 
 import java.util.ArrayList;
 import java.util.Arrays;

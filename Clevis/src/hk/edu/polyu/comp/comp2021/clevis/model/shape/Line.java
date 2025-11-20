@@ -1,7 +1,7 @@
 package hk.edu.polyu.comp.comp2021.clevis.model.shape;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry;
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Points;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Points;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

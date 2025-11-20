@@ -1,13 +1,13 @@
 package hk.edu.polyu.comp.comp2021.clevis.model;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Lines;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Lines;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Circle;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Line;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
-import static hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry.intersects;
+import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.intersects;
 import static org.junit.Assert.*;
 
 import static com.google.common.truth.Truth.assertThat;

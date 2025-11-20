@@ -1,9 +1,9 @@
-package hk.edu.polyu.comp.comp2021.clevis.model.sql;
+package hk.edu.polyu.comp.comp2021.clevis.model.util;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Line;
 import hk.edu.polyu.comp.comp2021.clevis.model.shape.Point;
 
-import static hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry.sign;
+import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.sign;
 
 /**
  * functions between lines.

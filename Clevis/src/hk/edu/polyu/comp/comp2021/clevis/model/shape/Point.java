@@ -1,8 +1,8 @@
 package hk.edu.polyu.comp.comp2021.clevis.model.shape;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Points;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Points;
 
-import static hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry.*;
+import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.*;
 import static java.lang.Math.min;
 
 /**

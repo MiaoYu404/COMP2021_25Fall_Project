@@ -1,13 +1,13 @@
 package hk.edu.polyu.comp.comp2021.clevis.model.shape;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry;
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Lines;
-import hk.edu.polyu.comp.comp2021.clevis.model.sql.Points;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Lines;
+import hk.edu.polyu.comp.comp2021.clevis.model.util.Points;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-import static hk.edu.polyu.comp.comp2021.clevis.model.sql.Geometry.EPS;
+import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.EPS;
 import static java.lang.Math.abs;
 
 /**
