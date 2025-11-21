@@ -11,8 +11,6 @@ import java.util.List;
  * ungroup Operation
  */
 public class OpUngroup extends Operation{
-    private final Data data;
-
     private String name;
     private Shape shape;
     private List<String> members;
@@ -22,8 +20,9 @@ public class OpUngroup extends Operation{
      * @param data      data storage
      */
     public OpUngroup(Data data) {
-        this.data = data;
         this.members = new ArrayList<>();
+        setData(data);
+        setConsole(console());
     }
 
     /**
@@ -39,7 +38,7 @@ public class OpUngroup extends Operation{
 
     @Override
     public void call() {
-        if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist.");
+        if (!data().exists(name)) throw new IllegalArgumentException(name + " does not exist.");
 
         if (shape instanceof Group group) {
             for (Shape s : group.shapes()) {
@@ -48,14 +47,14 @@ public class OpUngroup extends Operation{
             }
 
             group.shapes().clear();
-            data.remove(name);
+            data().remove(name);
         } else throw new IllegalArgumentException(name + " is not a Group.");
     }
 
     @Override
     public void undo() {
         if (members.isEmpty()) return;
-        Operation opGroup = new OpGroup(name, members, data);
+        Operation opGroup = new OpGroup(name, members, data());
         opGroup.call();
     }
 

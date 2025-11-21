@@ -149,6 +149,7 @@ public class Data {
         operationHistory.add(op);
     }
 
+    // my helper functions
 
     /**
      *
@@ -177,4 +178,9 @@ public class Data {
      * @return      reference of redoStack;
      */
     public Stack<Operation> undoHistory() { return undoHistory; }
+
+    /**
+     * @return      the console;
+     */
+    public Console console() { return this.console; }
 }

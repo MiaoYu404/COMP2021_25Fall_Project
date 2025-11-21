@@ -8,7 +8,6 @@ import hk.edu.polyu.comp.comp2021.clevis.model.shape.*;
  */
 public class OpAdd extends Operation{
     private String[] args;
-    private final Data data;
 
     private String type;
     private String name;
@@ -22,8 +21,10 @@ public class OpAdd extends Operation{
      */
     public OpAdd(Data data) {
         super();
-        this.data = data;
+        super.setData(data);
+        super.setConsole(data.console());
     }
+
     /**
      * Construct with arguments.
      * @param args      arguements
@@ -72,7 +73,7 @@ public class OpAdd extends Operation{
 
     @Override
     public void call() {
-        if (data.exists(name))
+        if (data().exists(name))
             throw new IllegalStateException("The Shape with name <" + name + "> already exists");
         try {
             if (shape == null) shape = switch (type) {              // in case of shape is not generated.
@@ -87,11 +88,11 @@ public class OpAdd extends Operation{
         }
 
         if (index == -1) {
-            data.add(name, shape);
-            setIndex(data.getIndex(name));
+            data().add(name, shape);
+            setIndex(data().getIndex(name));
         }
         else
-            data.insertShape(name, shape, index);
+            data().insertShape(name, shape, index);
     }
 
     /**
@@ -149,7 +150,7 @@ public class OpAdd extends Operation{
     @Override
     public void undo() {
         // TODO: test this method
-        Operation opDelete = new OpDelete(name, data);
+        Operation opDelete = new OpDelete(name, data());
         opDelete.call();
     }
 

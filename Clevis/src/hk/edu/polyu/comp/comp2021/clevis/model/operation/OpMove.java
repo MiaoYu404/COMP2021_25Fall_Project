@@ -6,7 +6,6 @@ import hk.edu.polyu.comp.comp2021.clevis.controller.Data;
  * move Operation
  */
 public class OpMove extends Operation{
-    private final Data data;
     private String[] args;
 
     private String name;
@@ -17,7 +16,8 @@ public class OpMove extends Operation{
      * @param data      data storage
      */
     public OpMove(Data data) {
-        this.data = data;
+        setData(data);
+        setConsole(data.console());
     }
 
     /**
@@ -34,17 +34,17 @@ public class OpMove extends Operation{
 
     @Override
     public void call() {
-        if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist.");
-        if (data.get(name).haveFather()) throw new IllegalArgumentException(name + " is inside an existing group.");
+        if (!data().exists(name)) throw new IllegalArgumentException(name + " does not exist.");
+        if (data().get(name).haveFather()) throw new IllegalArgumentException(name + " is inside an existing group.");
 
-        data.get(name).move(dx, dy);
+        data().get(name).move(dx, dy);
     }
     @Override
     public void undo() {
-        if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist.");
-        if (data.get(name).haveFather()) throw new IllegalArgumentException(name + " is inside an existing group.");
+        if (!data().exists(name)) throw new IllegalArgumentException(name + " does not exist.");
+        if (data().get(name).haveFather()) throw new IllegalArgumentException(name + " is inside an existing group.");
 
-        data.get(name).move(-dx, -dy);
+        data().get(name).move(-dx, -dy);
     }
 
     @Override

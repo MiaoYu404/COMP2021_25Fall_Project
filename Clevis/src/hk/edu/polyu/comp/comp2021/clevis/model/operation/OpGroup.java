@@ -12,7 +12,6 @@ import java.util.List;
 public class OpGroup extends Operation{
     private final String groupName;
     private final List<String> names;
-    private final Data data;
 
     private int index;
 
@@ -25,7 +24,8 @@ public class OpGroup extends Operation{
     public OpGroup(String groupName, List<String> names, Data data) {
         this.groupName = groupName;
         this.names = names;
-        this.data = data;
+        setData(data);
+        setConsole(data.console());
     }
 
     /**
@@ -49,25 +49,25 @@ public class OpGroup extends Operation{
 
     @Override
     public void call() {
-        if (data.exists(groupName)) throw new IllegalArgumentException(groupName + " already exists");
+        if (data().exists(groupName)) throw new IllegalArgumentException(groupName + " already exists");
 
         ArrayList<Shape> shapes = new ArrayList<>();
         for (String name : names) {
-            if (!data.exists(name)) throw new IllegalArgumentException(name + " does not exist");
-            if (data.get(name).father() != null) throw new IllegalArgumentException(name + " already have father");
-            shapes.add(data.get(name));
+            if (!data().exists(name)) throw new IllegalArgumentException(name + " does not exist");
+            if (data().get(name).father() != null) throw new IllegalArgumentException(name + " already have father");
+            shapes.add(data().get(name));
         }
         Group group = new Group(groupName, shapes);
-        data.add(groupName, group);
+        data().add(groupName, group);
 
         for (String name : names)
-            setFather(data.get(name), group);
+            setFather(data().get(name), group);
     }
 
     @Override
     public void undo() {
         // TODO: test this method
-        Operation opUngroup = new OpUngroup(groupName, data);
+        Operation opUngroup = new OpUngroup(groupName, data());
         opUngroup.call();
     }
 

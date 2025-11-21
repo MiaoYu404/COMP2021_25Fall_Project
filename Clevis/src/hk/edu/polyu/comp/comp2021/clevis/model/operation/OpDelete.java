@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class OpDelete extends Operation{
     private final String name;
-    private final Data data;
     private Operation undoOperation;
 
     /**
@@ -22,16 +21,17 @@ public class OpDelete extends Operation{
      */
     public OpDelete(String name, Data data) {
         this.name = name;
-        this.data = data;
+        setData(data);
+        setConsole(data.console());
     }
 
     @Override
     public void call() {
-        if (data == null) throw new NullPointerException();
-        if (!data.exists(name)) throw new IllegalArgumentException();
+        if (data() == null) throw new NullPointerException();
+        if (!data().exists(name)) throw new IllegalArgumentException();
 
-        Shape shape = data.get(name);
-        int index = data.getIndex(name);
+        Shape shape = data().get(name);
+        int index = data().getIndex(name);
 
         if (shape.haveFather())
             throw new IllegalArgumentException(name + " is inside an existing group.");
@@ -39,21 +39,21 @@ public class OpDelete extends Operation{
             List<String> members = new ArrayList<>();
             for (Shape s : g.shapes()) members.add(s.name());
 
-            Operation op = new OpUngroup(name, data);
+            Operation op = new OpUngroup(name, data());
             op.call();
 
             for (String s : members) {
-                op = new OpDelete(s, data);
+                op = new OpDelete(s, data());
                 op.call();
                 push(op);
             }
 
-            undoOperation = new OpGroup(name, members, data);
+            undoOperation = new OpGroup(name, members, data());
         } else {
-            undoOperation = new OpAdd(name, shape, index, data);
+            undoOperation = new OpAdd(name, shape, index, data());
         }
 
-        data.remove(name);
+        data().remove(name);
     }
 
     @Override
