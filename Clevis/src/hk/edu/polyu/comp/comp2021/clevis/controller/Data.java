@@ -162,7 +162,7 @@ public class Data {
     /**
      * @return      reference of shapes
      */
-    public List<String> shapes() { return shapes; };
+    public List<String> shapes() { return shapes; }
 
     /**
      * @return      reference of name2Shape
