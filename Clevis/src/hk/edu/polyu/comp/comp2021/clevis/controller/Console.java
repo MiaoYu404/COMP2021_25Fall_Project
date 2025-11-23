@@ -166,7 +166,7 @@ public class Console {
 
         Rectangle r = (Rectangle) data().get(name).boundingBox();
         if (r == null) return null;
-        return ("Bounding box: " + r.points()[0] +  ", " + r.width() + ", " + r.height() + ".");
+        return ("Bounding box: " + r.points()[0].x() +  " " + r.points()[0].y() + " " + r.width() + " " + r.height());
     }
 
     /**

@@ -18,6 +18,7 @@ public class TestConsole {
      */
     @Test
     public void test() {
+        // TODO: shapeAt() group
         Application app = new Application();
         app.Boost(false, null);
         Console console = app.console();
@@ -64,6 +65,7 @@ public class TestConsole {
         op = "group G2 A C";
         console.readOperation(op);
         assertThat(console.shapeAt(3, 4.8).name()).isEqualTo("G2");
+
 
         op = "boundingbox G2";
         console.readOperation(op);
