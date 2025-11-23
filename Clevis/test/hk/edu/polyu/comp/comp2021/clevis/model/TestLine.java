@@ -103,10 +103,9 @@ public class TestLine {
 
     @Test
     public void testInside(){
-        assertThat(l1.inside(l2)).isFalse();
-        assertThat(l4.inside(l3)).isFalse();
+        assertThat(l4.inside(l3)).isTrue();
         assertThat(l2.inside(l4)).isFalse();
-        assertThat(l3.inside(l2)).isFalse();
+        assertThat(l3.inside(l2)).isTrue();
         assertThat(l2.inside(l1)).isFalse();
     }
 

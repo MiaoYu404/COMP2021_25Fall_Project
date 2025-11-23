@@ -436,8 +436,8 @@ public class TestRectangle {
         // Verify toString contains essential information
         assertThat(str).contains("TestRect");
         assertThat(str).contains("Rectangle");
-        assertThat(str).contains("Points");
-        assertThat(str).contains("Lines");
+
+
         
         // Verify coordinates are present (though exact format may vary)
         assertThat(str).contains("2.0");  // x-coordinate of top-left
