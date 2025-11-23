@@ -166,7 +166,7 @@ public class Rectangle implements Shape{
         StringBuilder ret = new StringBuilder();
         if (name != null) ret.append(name).append(" ");
         ret.append("<Rectangle>\n")
-                .append("\t +--+\t").append("top right corner: ").append(points[3]).append("\n")
+                .append("\t +--+\t").append("top-left: ").append(points[0]).append("\n")
                 .append("\t |  |\t").append("w = ").append(width).append("\n")
                 .append("\t +--+\t").append("h = ").append(height).append("\n");
         return ret.toString();
