@@ -36,7 +36,7 @@ public class TerminalPanel extends JPanel {
         outputArea.setLineWrap(true);        // 关键：开启自动换行
         outputArea.setWrapStyleWord(true);
         outputArea.setEditable(false);
-        outputArea.setFont(new Font("Consolas", Font.PLAIN, CONSOLE_FONT_SIZE));
+        outputArea.setFont(new Font("Monospaced", Font.PLAIN, CONSOLE_FONT_SIZE));
         outputArea.setBackground(BACKGROUND);
         outputArea.setForeground(FOREGROUND);
 
@@ -47,7 +47,7 @@ public class TerminalPanel extends JPanel {
 
         JScrollPane scroll = new JScrollPane(outputArea);
         inputField = new JTextField();
-        inputField.setFont(new Font("Consolas", Font.PLAIN, CONSOLE_FONT_SIZE));
+        inputField.setFont(new Font("Monospaced", Font.PLAIN, CONSOLE_FONT_SIZE));
         inputField.addActionListener(e -> processCommand());
 
         add(scroll, BorderLayout.CENTER);
