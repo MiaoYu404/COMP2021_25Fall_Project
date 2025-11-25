@@ -6,6 +6,7 @@ import hk.edu.polyu.comp.comp2021.clevis.model.shape.Shape;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
@@ -15,6 +16,10 @@ import static hk.edu.polyu.comp.comp2021.clevis.model.util.Geometry.EPS;
  * Drawing Panel
  */
 public class DrawingPanel extends JPanel {
+    private static final double MIN_SCALE = 5.0;
+    private static final double MAX_SCALE = 50.0;
+    private static final double ZOOM_FACTOR = 1.2;
+    private static final int DEFAULT_SCALE = 25;
     private final Color LIGHTGRAY = new Color(240, 240, 240);
     private final Color GRAY = new Color(200, 200, 200);
     private final float AXES_STROKE = 1f;
@@ -22,7 +27,7 @@ public class DrawingPanel extends JPanel {
     private final Font CONSOLE_FONT = new Font("SansSerif", Font.BOLD, 14);
     private final int TEXT_SIZE = 12;
     private final int AXES_GAP = 15;
-    private final double SCALE = 25;
+    private double scale = DEFAULT_SCALE;
     private final Data data;
 
     private double offsetX = 0;
@@ -41,25 +46,26 @@ public class DrawingPanel extends JPanel {
         setBackground(Color.WHITE);
 
         // 只保留拖拽平移
-        MouseAdapter drag = new MouseAdapter();
-        addMouseListener(drag);
-        addMouseMotionListener(drag);
+        MouseAdapter mouseHandler = new MouseAdapter();
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
+        addMouseWheelListener(mouseHandler);
     }
 
     private double toScreenX(double x) {
-        return (double) getWidth() / 2 + (x + offsetX) * SCALE;
+        return (double) getWidth() / 2 + (x + offsetX) * scale;
     }
 
     private double toScreenY(double y) {
-        return (double) getHeight() / 2 - (y + offsetY) * SCALE;  // Y 轴向上
+        return (double) getHeight() / 2 - (y + offsetY) * scale;  // Y 轴向上
     }
 
     private double fromScreenX(double px) {
-        return (px - (double) getWidth() / 2) / SCALE - offsetX;
+        return (px - (double) getWidth() / 2) / scale - offsetX;
     }
 
     private double fromScreenY(double py) {
-        return -(py - (double) getHeight() / 2) / SCALE - offsetY;
+        return -(py - (double) getHeight() / 2) / scale - offsetY;
     }
 
     @Override
@@ -83,12 +89,12 @@ public class DrawingPanel extends JPanel {
         drawOrigin(g2);
 
         g2.setColor(Color.BLUE);
-        g2.setStroke(new BasicStroke(SHAPE_STROKE_WIDTH));
+        g2.setStroke(new BasicStroke((float)(SHAPE_STROKE_WIDTH / scale * DEFAULT_SCALE)));
 
         AffineTransform oldTransform = g2.getTransform();
 
         g2.translate((double)getWidth() / 2, (double)getHeight() / 2);
-        g2.scale(SCALE, -SCALE);
+        g2.scale(scale, -scale);
         g2.translate(offsetX, offsetY);
 
         for (int i = data.size() - 1; i >= 0; i--) {
@@ -201,6 +207,23 @@ public class DrawingPanel extends JPanel {
         }
     }
 
+    private void zoomAtPoint(double zoomFactor, int mouseX, int mouseY) {
+        double worldXBefore = fromScreenX(mouseX);
+        double worldYBefore = fromScreenY(mouseY);
+
+        double oldScale = scale;
+        scale = scale * zoomFactor;
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale));
+
+        double worldXAfter = fromScreenX(mouseX);
+        double worldYAfter = fromScreenY(mouseY);
+
+        offsetX -= (worldXBefore - worldXAfter);
+        offsetY -= (worldYBefore - worldYAfter);
+
+        repaint();
+    }
+
     private class MouseAdapter extends java.awt.event.MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
@@ -211,10 +234,16 @@ public class DrawingPanel extends JPanel {
         public void mouseDragged(MouseEvent e) {
             double dx = (e.getX() - lastDrag.getX());
             double dy = (e.getY() - lastDrag.getY());
-            offsetX += dx / SCALE;  // 像素转逻辑单位
-            offsetY -= dy / SCALE;
+            offsetX += dx / scale;  // 像素转逻辑单位
+            offsetY -= dy / scale;
             lastDrag.setLocation(e.getX(), e.getY());
             repaint();
+        }
+
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            double zoomFactor = (e.getWheelRotation() < 0) ? ZOOM_FACTOR : 1.0 / ZOOM_FACTOR;
+            zoomAtPoint(zoomFactor, e.getX(), e.getY());
         }
     }
 }
