@@ -45,12 +45,12 @@ public interface Shape {
      */
     void draw(Graphics2D graph);
 
-    /**
-     * print infomation about this shape.
-     */
-    default void printInfo() {
-        System.out.println(this);
-    }
+//    /**
+//     * print infomation about this shape.
+//     */
+//    default void printInfo() {
+//        System.out.println(this);
+//    }
 
     /**
      * @return      short name of the Shape

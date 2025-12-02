@@ -78,7 +78,13 @@ public class Console {
     public void group(String[] args) {
         // TODO: implement Exception when argument is wrong.
         String groupName = args[1];
-        List<String> members = new ArrayList<>(Arrays.asList(args).subList(2, args.length));
+        List<String> members;
+        try {
+            members = new ArrayList<>(Arrays.asList(args).subList(2, args.length));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Please input the correct arguments.");
+        }
+
         group(groupName, members);
     }
 
@@ -89,8 +95,12 @@ public class Console {
      */
     public void group(String groupName, List<String> members) {
         Operation op = new OpGroup(groupName, members, data());
-        op.call();
-        data().insertOp(op);
+        try {
+            op.call();
+            data().insertOp(op);
+        } catch (Exception e) {
+            printError(e.getMessage());
+        }
     }
 
     /**
@@ -99,7 +109,13 @@ public class Console {
      */
     public void ungroup(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String groupName = args[1];
+        String groupName;
+        try {
+            groupName = args[1];
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         if (data().get(groupName) instanceof Group) {
             ungroup(args[1]);
         } else printError("It is not a Group.");
@@ -121,7 +137,13 @@ public class Console {
      */
     public void delete(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String name = args[1];
+        String name;
+        try {
+            name = args[1];
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         if (!data().exists(name)) {
             printError(name + " not exists.");
             return ;
@@ -145,8 +167,13 @@ public class Console {
      */
     public void boundingBox(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String shapeName = args[1];
-
+        String shapeName;
+        try {
+            shapeName = args[1];
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         String info = boundingBox(shapeName);
         if (info == null)
             printError("Bounding box query failed.");
@@ -175,8 +202,14 @@ public class Console {
      */
     public void shapeAt (String[] args) {
         // TODO: implement Exception when argument is wrong.
-        double x = Double.parseDouble(args[1]);
-        double y = Double.parseDouble(args[2]);
+        double x, y;
+        try {
+            x = Double.parseDouble(args[1]);
+            y = Double.parseDouble(args[2]);
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         Shape res = shapeAt(x, y);
         if (res == null) System.out.println("Shape at " + x + ", " + y + " not found.");
         else list(new String[] {"list", res.name()});              // here, use name.
@@ -203,8 +236,14 @@ public class Console {
      */
     public void intersects(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String shape1 = args[1];
-        String shape2 = args[2];
+        String shape1, shape2;
+        try {
+            shape1 = args[1];
+            shape2 = args[2];
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         if (intersects(shape1, shape2))
             printInfo(shape1 + " intersects " + shape2 + ".");
         else
@@ -236,8 +275,14 @@ public class Console {
      */
     public void list(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String shapeName = args[1];
-        String res = list(shapeName);
+        String shapeName, res;
+        try {
+            shapeName = args[1];
+            res = list(shapeName);
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         if (res == null)
             printError("list operation failed.");
         else
@@ -297,9 +342,16 @@ public class Console {
      */
     public void move(String[] args) {
         // TODO: implement Exception when argument is wrong.
-        String name = args[1];
-        double dx = Double.parseDouble(args[2]);
-        double dy = Double.parseDouble(args[3]);
+        String name;
+        double dx, dy;
+        name = args[1];
+        try {
+            dx = Double.parseDouble(args[2]);
+            dy = Double.parseDouble(args[3]);
+        } catch (Exception e) {
+            printError("Please input the correct arguments.");
+            return ;
+        }
         move(name, dx, dy);
     }
 

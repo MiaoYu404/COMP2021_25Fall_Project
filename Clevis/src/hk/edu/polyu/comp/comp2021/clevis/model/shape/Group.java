@@ -81,31 +81,24 @@ public class Group implements Shape{
 
     @Override
     public String shortName() {
-        StringBuilder ret = new StringBuilder();
-        ret.append(name).append(" <Group>\n");
-
-        String[] memberToString = new String[members.size()];
-        for (int i = 0; i < members.size(); i++)
-            memberToString[i] = members.get(i).shortName();
-
-        for (String line : memberToString)
-            ret.append("\t").append(line).append("\n");
-
-        return ret.toString();
+        return toString();
     }
 
     @Override
     public String toString() {
         // TODO: Group toString()
-        String[] memberToString = new String[members.size()];
-        for (int i = 0; i < members.size(); i++)
-            memberToString[i] = members.get(i).shortName();
-
         StringBuilder ret = new StringBuilder();
-        ret.append(name).append(" <Group>:\n");
-        for (String line : memberToString)
-            ret.append("\t").append(line).append("\n");
-
+        if (name != null) ret.append(name).append(" ");
+        ret.append("<Group>:\n");
+        List<String> memberNames = new ArrayList<>(this.members.size());
+        for (Shape s : members) {
+            memberNames.add(s.shortName());
+        }
+        for (String nameBlock : memberNames) {
+            // since group contains multiple lines.
+            String[] lines = nameBlock.split("\n");
+            for (String line : lines) ret.append("\t").append(line).append("\n");
+        }
         return ret.toString();
     }
 

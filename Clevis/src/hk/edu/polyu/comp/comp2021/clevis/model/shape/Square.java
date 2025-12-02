@@ -49,11 +49,11 @@ public class Square extends Rectangle {
         lines = Arrays.copyOf(o.lines(), 4);
     }
 
-    /**
-     * @param o square need to be copied
-     * @param _name name
-     */
-    public Square(Square o, String _name) { this(o); name = _name; }
+//    /**
+//     * @param o square need to be copied
+//     * @param _name name
+//     */
+//    public Square(Square o, String _name) { this(o); name = _name; }
 
     /**
      * @return side;

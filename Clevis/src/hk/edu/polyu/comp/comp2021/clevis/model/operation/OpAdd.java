@@ -104,6 +104,7 @@ public class OpAdd extends Operation{
         try {
             x = Double.parseDouble(args[2]); y = Double.parseDouble(args[3]);
             w = Double.parseDouble(args[4]); h = Double.parseDouble(args[5]);
+            if (w <= 0 || h <= 0) throw new IllegalArgumentException("Negative width or height");
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
@@ -116,9 +117,10 @@ public class OpAdd extends Operation{
      * @return a Line.
      */
     public Shape addLine(String[] args) {
+        double x1, x2, y1, y2;
         String name = args[1];
-        double x1 =  Double.parseDouble(args[2]), y1 = Double.parseDouble(args[3]);
-        double x2 =  Double.parseDouble(args[4]), y2 = Double.parseDouble(args[5]);
+        x1 =  Double.parseDouble(args[2]); y1 = Double.parseDouble(args[3]);
+        x2 =  Double.parseDouble(args[4]); y2 = Double.parseDouble(args[5]);
         Point from = new Point(x1, y1);
         Point to = new Point(x2, y2);
         return new Line(name, from, to);
@@ -129,8 +131,14 @@ public class OpAdd extends Operation{
      * @return a Circle.
      */
     public Shape addCircle(String[] args) {
-        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
-        double r = Double.parseDouble(args[4]);
+        double x, y, r;
+        try {
+            x = Double.parseDouble(args[2]); y = Double.parseDouble(args[3]);
+            r = Double.parseDouble(args[4]);
+            if (r <= 0) throw new IllegalArgumentException("Negative radius");
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
         Point center = new Point(x, y);
         return new Circle(name, center, r);
     }
@@ -141,8 +149,14 @@ public class OpAdd extends Operation{
      */
     public Shape addSquare(String[] args) {
         String name = args[1];
-        double x = Double.parseDouble(args[2]), y = Double.parseDouble(args[3]);
-        double side = Double.parseDouble(args[4]);
+        double x, y, side;
+        try {
+            x = Double.parseDouble(args[2]); y = Double.parseDouble(args[3]);
+            side = Double.parseDouble(args[4]);
+            if (side <= 0) throw new IllegalArgumentException("Negative side");
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
         Point midPoint = new Point(x, y);
         return new Square(name, midPoint, side);
     }

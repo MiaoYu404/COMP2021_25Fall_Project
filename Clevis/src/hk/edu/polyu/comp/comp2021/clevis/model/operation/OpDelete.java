@@ -33,6 +33,7 @@ public class OpDelete extends Operation{
         Shape shape = data().get(name);
         int index = data().getIndex(name);
 
+
         if (shape.haveFather())
             throw new IllegalArgumentException(name + " is inside an existing group.");
         if (shape instanceof Group g) {

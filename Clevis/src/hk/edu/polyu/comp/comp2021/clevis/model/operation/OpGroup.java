@@ -66,14 +66,12 @@ public class OpGroup extends Operation{
 
     @Override
     public void undo() {
-        // TODO: test this method
         Operation opUngroup = new OpUngroup(groupName, data());
         opUngroup.call();
     }
 
     @Override
     public void redo() {
-        // TODO: test this method
         call();
     }
 

@@ -218,10 +218,10 @@ public class Point {
         return "(" +  x + "," + y + ")";
     }
 
-    /**
-     * @return return a point which can be got from rotate this point by 90 degree anticlockwise.
-     */
-    public Point rot90() { return new Point(-y, x); }
+//    /**
+//     * @return return a point which can be got from rotate this point by 90 degree anticlockwise.
+//     */
+//    public Point rot90() { return new Point(-y, x); }
 
     /**
      * @return unit vector of the this.
